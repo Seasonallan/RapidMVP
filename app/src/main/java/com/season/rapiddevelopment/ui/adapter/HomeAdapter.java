@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.season.rapiddevelopment.R;
-import com.season.rapiddevelopment.ui.base.BaseRecycleAdapter;
 
 import java.util.List;
 

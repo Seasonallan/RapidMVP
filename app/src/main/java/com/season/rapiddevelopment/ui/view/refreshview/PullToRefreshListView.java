@@ -6,8 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.season.rapiddevelopment.ui.base.BaseRecycleAdapter;
+import com.season.rapiddevelopment.ui.adapter.BaseRecycleAdapter;
 
+/**
+ * 下拉刷新，滑动自动加载更多或点击加载更多
+ */
 public class PullToRefreshListView extends PullToRefreshBase<RecyclerView> {
 
 	public PullToRefreshListView(Context context) {

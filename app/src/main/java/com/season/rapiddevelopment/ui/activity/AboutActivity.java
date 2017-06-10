@@ -3,7 +3,6 @@ package com.season.rapiddevelopment.ui.activity;
 import android.os.Bundle;
 
 import com.season.rapiddevelopment.R;
-import com.season.rapiddevelopment.ui.base.BaseActivity;
 
 /**
  * Disc: 关于页面

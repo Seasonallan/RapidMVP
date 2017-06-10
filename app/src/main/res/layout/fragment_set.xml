@@ -26,4 +26,6 @@
 
     </RelativeLayout>
 
+    <include layout="@layout/inc_common_loading" />
+
 </RelativeLayout>

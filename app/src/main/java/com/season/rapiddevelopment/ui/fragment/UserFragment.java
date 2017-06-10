@@ -5,7 +5,6 @@ import android.widget.Button;
 
 import com.season.rapiddevelopment.R;
 import com.season.rapiddevelopment.ui.activity.AboutActivity;
-import com.season.rapiddevelopment.ui.base.BaseFragment;
 
 /**
  * Disc:

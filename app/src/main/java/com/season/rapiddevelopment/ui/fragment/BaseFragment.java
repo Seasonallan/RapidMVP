@@ -1,4 +1,4 @@
-package com.season.rapiddevelopment.ui.base;
+package com.season.rapiddevelopment.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,12 +7,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.season.rapiddevelopment.ui.activity.loading.ILoadingAction;
+import com.season.rapiddevelopment.ui.activity.loading.ILoadingView;
+import com.season.rapiddevelopment.ui.activity.loading.LoadingImpl;
+import com.season.rapiddevelopment.ui.activity.titlebar.ITitleBar;
+import com.season.rapiddevelopment.ui.activity.titlebar.ITitleBarAction;
+import com.season.rapiddevelopment.ui.activity.titlebar.TitleBarImpl;
+
 /**
  * Disc:
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-10 15:25
  */
-public abstract class BaseFragment extends Fragment implements ITitleBarAction {
+public abstract class BaseFragment extends Fragment implements ITitleBarAction, ILoadingAction {
 
     // 设计模式 - 模板方法(Template Method)模式
     /**
@@ -38,6 +45,21 @@ public abstract class BaseFragment extends Fragment implements ITitleBarAction {
         }
         return mTitleBar;
     }
+
+
+    ILoadingView mLoadingView;
+
+    /**
+     * 控制加载中的显示与消失
+     * @return
+     */
+    protected ILoadingView getLoadingView(){
+        if (mLoadingView == null){
+            mLoadingView = new LoadingImpl(this);
+        }
+        return mLoadingView;
+    }
+
 
     private View mView;
     @Override

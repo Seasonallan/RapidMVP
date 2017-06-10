@@ -1,15 +1,10 @@
 package com.season.rapiddevelopment.ui.fragment;
 
 import android.os.AsyncTask;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.OrientationHelper;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.season.rapiddevelopment.R;
 import com.season.rapiddevelopment.ui.adapter.HomeAdapter;
-import com.season.rapiddevelopment.ui.base.BaseFragment;
 import com.season.rapiddevelopment.ui.view.refreshview.PullToRefreshBase;
 import com.season.rapiddevelopment.ui.view.refreshview.PullToRefreshListView;
 
@@ -35,7 +30,7 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
         getTitleBar().setTopTile("Home");
 
         mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.pull_to_refresh_view);
-        mPullToRefreshListView.disableFooterView();
+        mPullToRefreshListView.enableAutoLoadingMore();
         mPullToRefreshListView.setOnRefreshListener(this);
 
         findViewById(R.id.loading_container).setVisibility(View.VISIBLE);

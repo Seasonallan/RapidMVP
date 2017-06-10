@@ -1,4 +1,4 @@
-package com.season.rapiddevelopment.ui.base;
+package com.season.rapiddevelopment.ui.activity.titlebar;
 
 import android.view.View;
 
