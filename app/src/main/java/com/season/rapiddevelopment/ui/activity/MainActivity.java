@@ -33,7 +33,7 @@ public class MainActivity extends FragmentActivity {
             TabHost.TabSpec spec = mTabHost.newTabSpec(mTabDescription[i]).setIndicator(getView(i));
             mTabHost.addTab(spec, mTabFragment[i], null);
         }
-        mTabHost.setCurrentTab(2);
+        mTabHost.setCurrentTab(0);
 
     }
 

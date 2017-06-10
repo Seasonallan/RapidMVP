@@ -9,4 +9,20 @@ public class Configure {
 
     public static final int PAGE_SIZE = 15;
 
+    private static int sScreenWidth, sScreenHeight;
+    public static int getScreenWidth(){
+        if (sScreenWidth <= 0){
+            sScreenWidth = BaseApplication.sContext.getResources().getDisplayMetrics().widthPixels;
+            sScreenHeight = BaseApplication.sContext.getResources().getDisplayMetrics().heightPixels;
+        }
+        return sScreenWidth;
+    }
+    public static int getScreenHeight(){
+        if (sScreenHeight <= 0){
+            sScreenWidth = BaseApplication.sContext.getResources().getDisplayMetrics().widthPixels;
+            sScreenHeight = BaseApplication.sContext.getResources().getDisplayMetrics().heightPixels;
+        }
+        return sScreenHeight;
+    }
+
 }

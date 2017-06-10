@@ -14,4 +14,8 @@
     <color name="orange">#fe7418</color>
     <color name="red">#ff2711</color>
 
+    <color name="item_video_image">#ffe3e3e3</color>
+    <color name="item_video_title">#4c4c4c</color>
+    <color name="item_video_content">#c9c9c9</color>
+
 </resources>
