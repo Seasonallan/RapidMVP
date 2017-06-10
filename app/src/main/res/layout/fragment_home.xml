@@ -20,11 +20,13 @@
         <com.season.rapiddevelopment.ui.view.refreshview.PullToRefreshListView
             android:id="@+id/pull_to_refresh_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"/>
 
 
     </RelativeLayout>
 
-    <include layout="@layout/inc_common_loading" />
+    <include layout="@layout/inc_common_loading"/>
+
+    <include layout="@layout/inc_common_empty"/>
 
 </RelativeLayout>

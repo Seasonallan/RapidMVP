@@ -144,6 +144,10 @@ public abstract class BaseRecycleAdapter<T> extends RecyclerView.Adapter<Recycle
     public abstract void onBindHolder(RecyclerView.ViewHolder holder, int position);
 
 
+    public int getCount() {
+        return mList.size();
+    }
+
     @Override
     public int getItemCount() {
         if (mFooterStatus != DISABLE) {

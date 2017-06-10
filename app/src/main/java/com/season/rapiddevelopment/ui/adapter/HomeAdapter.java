@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.season.rapiddevelopment.R;
+import com.season.rapiddevelopment.model.entry.VideoItem;
 
 import java.util.List;
 
@@ -15,9 +16,9 @@ import java.util.List;
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-10 17:14
  */
-public class HomeAdapter extends BaseRecycleAdapter<String> {
+public class HomeAdapter extends BaseRecycleAdapter<VideoItem> {
 
-    public HomeAdapter(Context context, List<String> lists) {
+    public HomeAdapter(Context context, List<VideoItem> lists) {
         super(context, lists);
     }
 
@@ -31,7 +32,7 @@ public class HomeAdapter extends BaseRecycleAdapter<String> {
     @Override
     public void onBindHolder(RecyclerView.ViewHolder holder, int position) {
         HomeViewHolder homeHolder = (HomeViewHolder) holder;
-        homeHolder.tv.setText(getItem(position));
+        homeHolder.tv.setText(getItem(position).intro);
     }
 
     public class HomeViewHolder extends RecyclerView.ViewHolder {

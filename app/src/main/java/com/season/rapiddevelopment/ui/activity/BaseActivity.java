@@ -5,39 +5,73 @@ import android.content.Context;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.season.rapiddevelopment.ui.IView;
+import com.season.rapiddevelopment.ui.activity.empty.EmptyImpl;
+import com.season.rapiddevelopment.ui.activity.empty.IEmptyAction;
+import com.season.rapiddevelopment.ui.activity.empty.IEmptyView;
 import com.season.rapiddevelopment.ui.activity.loading.ILoadingAction;
 import com.season.rapiddevelopment.ui.activity.loading.ILoadingView;
 import com.season.rapiddevelopment.ui.activity.loading.LoadingImpl;
 import com.season.rapiddevelopment.ui.activity.titlebar.ITitleBar;
 import com.season.rapiddevelopment.ui.activity.titlebar.ITitleBarAction;
 import com.season.rapiddevelopment.ui.activity.titlebar.TitleBarImpl;
+import com.season.rapiddevelopment.ui.adapter.BaseRecycleAdapter;
 
 /**
  * Disc:
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-10 14:37
  */
-public abstract class BaseActivity extends Activity implements ITitleBarAction, ILoadingAction {
+public class BaseActivity extends Activity implements ITitleBarAction, ILoadingAction, IEmptyAction, IView {
 
     ITitleBar mTitleBar;
     ILoadingView mLoadingView;
+    IEmptyView mEmptyView;
 
     /**
      * 顶部标题控制栏
      * @return
      */
-    protected ITitleBar getTitleBar(){
+    public ITitleBar getTitleBar(){
         if (mTitleBar == null){
             mTitleBar = new TitleBarImpl(this);
         }
         return mTitleBar;
     }
 
+    @Override
+    public IEmptyView getEmptyView() {
+        if (mEmptyView == null){
+            mEmptyView = new EmptyImpl(this);
+        }
+        return mEmptyView;
+    }
+
+    @Override
+    public void onEmptyViewClick() {
+
+    }
+
+    @Override
+    public <T> void onResponse(int type, T result) {
+
+    }
+
+    @Override
+    public BaseRecycleAdapter getAdapter() {
+        return null;
+    }
+
+    @Override
+    public void onError(int type, String errorMessage) {
+
+    }
+
     /**
      * 控制加载中的显示与消失
      * @return
      */
-    protected ILoadingView getLoadingView(){
+    public ILoadingView getLoadingView(){
         if (mLoadingView == null){
             mLoadingView = new LoadingImpl(this);
         }

@@ -6,6 +6,14 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:progressBarStyle">@style/MyProgressBar</item>
+
+
+    </style>
+    <style name="MyProgressBar" parent="Base.Widget.AppCompat.ProgressBar">
+        <item name="android:indeterminateTint">@color/colorPrimary</item>
+        <item name="android:indeterminateTintMode">src_atop</item>
     </style>
 
 </resources>

@@ -23,9 +23,15 @@
             android:layout_centerInParent="true"
             android:text="Goto AboutActivity"/>
 
+        <TextView
+            android:id="@+id/tv_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btn_set"
+            android:layout_centerHorizontal="true"/>
 
     </RelativeLayout>
 
-    <include layout="@layout/inc_common_loading" />
+    <include layout="@layout/inc_common_loading"/>
 
 </RelativeLayout>

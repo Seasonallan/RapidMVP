@@ -22,26 +22,32 @@ public class ClientKey implements Serializable {
 
     @Override
     public String toString() {
-        return "client_id="+client_id +"  key="+ key;
+        return "client_id=" + client_id + "  key=" + key;
     }
 
-    public boolean isSign(){
+    public boolean isSign() {
         return !TextUtils.isEmpty(client_id) && !client_id.equals("102");
     }
 
     private static ClientKey sKeyItemData;
-    public static ClientKey getClientKey(){
-        if (sKeyItemData == null){
+
+    public static ClientKey getClientKey() {
+        if (sKeyItemData == null) {
             sKeyItemData = new ClientKey();
         }
         return sKeyItemData;
     }
 
-    public static void resetKeyDate(){
+    public static void resetKeyDate() {
         sKeyItemData = new ClientKey();
     }
 
-    public static void initKeyData(){
+    public static void saveKeyData(ClientKey key) {
+        FilePrefrences.saveObject("keyData", key);
+        sKeyItemData = key;
+    }
+
+    public static void initKeyData() {
         sKeyItemData = new ClientKey();
         Object key = FilePrefrences.getObject("keyData");
         if (key != null && key instanceof ClientKey) {

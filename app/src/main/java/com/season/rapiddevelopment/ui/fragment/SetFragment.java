@@ -2,6 +2,7 @@ package com.season.rapiddevelopment.ui.fragment;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.season.rapiddevelopment.BaseApplication;
 import com.season.rapiddevelopment.R;
@@ -10,6 +11,7 @@ import com.season.rapiddevelopment.model.FilePrefrences;
 import com.season.rapiddevelopment.model.NetModel;
 import com.season.rapiddevelopment.model.entry.BaseEntry;
 import com.season.rapiddevelopment.model.entry.ClientKey;
+import com.season.rapiddevelopment.presenter.SetPresenter;
 import com.season.rapiddevelopment.tools.Console;
 
 import retrofit2.Call;
@@ -22,47 +24,33 @@ import retrofit2.Response;
  * Time: 2017-06-10 15:27
  */
 public class SetFragment extends BaseFragment {
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_set;
     }
 
+    TextView mTextView;
+
+    SetPresenter mSetPresenter;
     @Override
     protected void onViewCreated() {
+        mSetPresenter = new SetPresenter(this);
         getTitleBar().setTopTile("Set");
         Button btn = (Button) findViewById(R.id.btn_set);
+        mTextView = (TextView) findViewById(R.id.tv_result);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getLoadingView().showLoadingView();
-                NetModel.getInstance().getClientKey(new Callback<BaseEntry<ClientKey>>() {
-                    @Override
-                    public void onResponse(Call<BaseEntry<ClientKey>> call, Response<BaseEntry<ClientKey>> response) {
-                        //4.处理结果
-                        if (response.isSuccessful()) {
-                            getLoadingView().dismissLoadingView();
-                            BaseApplication.showToast(R.mipmap.emoticon_cool, "获取成功");
-                            ClientKey result = response.body().data;
-                            if (result != null) {
-                                if (response.body().isClientIdInvalid()) {
-                                    ClientKey.resetKeyDate();
-                                }else{
-                                    FilePrefrences.saveObject("keyData", result);
-                                    ClientKey.initKeyData();
-                                    Console.log(result);
-                                }
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<BaseEntry<ClientKey>> call, Throwable t) {
-                        getLoadingView().dismissLoadingView();
-                        BaseApplication.showToast(R.mipmap.emoticon_sad, "获取失败");
-
-                    }
-                });
+                mSetPresenter.getKey();
             }
         });
+    }
+
+    @Override
+    public <T> void onResponse(int type, T result) {
+        super.onResponse(type, result);
+        ClientKey clientKey = (ClientKey) result;
+        mTextView.setText(clientKey.toString());
     }
 }
