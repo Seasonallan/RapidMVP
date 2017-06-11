@@ -24,10 +24,27 @@ public abstract class BaseLocalModel {
         mContext = BaseApplication.sContext;
     }
 
+    /**
+     * 直接获取数据
+     * @param key
+     * @return
+     */
     public abstract Object getValueImmediately(String key);
 
+    /**
+     * 直接设置数据
+     * @param key
+     * @param value
+     * @return
+     */
     public abstract boolean setValueImmediately(String key, Object value);
 
+    /**
+     * 使用RxJava响应式获取数据
+     * @param fileName
+     * @param observer
+     * @param <T>
+     */
     public <T> void getValue(String fileName, Observer<T> observer) {
         Observable.just(fileName)
                 .subscribeOn(Schedulers.io())
@@ -42,11 +59,17 @@ public abstract class BaseLocalModel {
 
     }
 
-    public class KeyValue {
+    class KeyValue {
         String key;
         Object value;
     }
 
+    /**
+     * 使用RxJava响应式设置数据
+     * @param fileName
+     * @param item
+     * @param observer
+     */
     public void setValue(String fileName, Object item, Observer<Boolean> observer) {
         KeyValue keyMaps = new KeyValue();
         keyMaps.key = fileName;

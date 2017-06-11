@@ -29,10 +29,18 @@ public class CommentPresenter extends BasePresenter {
         }
     }
 
+    /**
+     * 发送评论
+     * @param comment
+     */
     public void sendComment(String comment){
         ModelFactory.net().video().sentComment(vid, comment, new HttpCallback<String>(11));
     }
 
+    /**
+     * 获取列表数据
+     * @param callType
+     */
     public void loadList(int callType) {
         if (callType == CREATE){
             getView().getLoadingView().showLoadingView();
