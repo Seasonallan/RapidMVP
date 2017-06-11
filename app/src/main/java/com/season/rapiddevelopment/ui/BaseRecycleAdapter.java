@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.season.example.ui.dialog.LogoutDialog;
 import com.season.rapiddevelopment.R;
 
 import java.util.ArrayList;
@@ -100,7 +101,7 @@ public abstract class BaseRecycleAdapter<T> extends RecyclerView.Adapter<Recycle
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (isFooterView(position)) {
             FooterViewHolder viewHolder = (FooterViewHolder) holder;
             switch (mFooterStatus) {
@@ -122,8 +123,19 @@ public abstract class BaseRecycleAdapter<T> extends RecyclerView.Adapter<Recycle
                     break;
             }
         } else {
+            holder.itemView.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View v) {
+                    onItemClick(getItem(position));
+                }
+            });
             onBindHolder(holder, position);
         }
+    }
+
+    public void onItemClick(T item){
+
     }
 
     /**

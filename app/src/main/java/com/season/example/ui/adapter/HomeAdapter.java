@@ -8,10 +8,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.season.example.entry.VideoItem;
 import com.season.rapiddevelopment.Configure;
 import com.season.rapiddevelopment.R;
 import com.season.rapiddevelopment.model.ImageModel;
-import com.season.example.entry.VideoItem;
 import com.season.rapiddevelopment.ui.BaseRecycleAdapter;
 import com.season.rapiddevelopment.ui.view.AlignTextView;
 
@@ -44,14 +44,6 @@ public class HomeAdapter extends BaseRecycleAdapter<VideoItem> {
         homeHolder.mContentView.recalculate();
 
         ImageModel.bindImage2View(homeHolder.mImageView, item.cover_url);
-
-        homeHolder.itemView.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
     public class HomeViewHolder extends RecyclerView.ViewHolder {

@@ -10,7 +10,7 @@ import com.season.rapiddevelopment.ui.view.ToastView;
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-10 14:34
  */
-public class BaseApplication extends Application{
+public class BaseApplication extends Application {
 
     public static Context sContext;
 
@@ -21,11 +21,20 @@ public class BaseApplication extends Application{
     }
 
     private static ToastView mToastView;
+
+    public static void showToast(String txt) {
+        showToast(R.mipmap.emoticon_cool, txt);
+    }
+
+    public static void showToastError(String txt) {
+        showToast(R.mipmap.emoticon_sad, txt);
+    }
+
     public static void showToast(int id, String txt) {
         try {//解决友盟后台出现的错误
             if (mToastView == null) {
                 mToastView = new ToastView(sContext);
-            }else{
+            } else {
 
             }
             mToastView.show(id, txt);

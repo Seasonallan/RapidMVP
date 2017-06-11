@@ -11,9 +11,25 @@
 
 
     </style>
+
     <style name="MyProgressBar" parent="Base.Widget.AppCompat.ProgressBar">
         <item name="android:indeterminateTint">@color/colorPrimary</item>
         <item name="android:indeterminateTintMode">src_atop</item>
+    </style>
+
+
+    <!-- 升级框顶部的蓝色线-->
+    <style name="divider_horizontal_dialog_top">
+        <item name="android:background">@color/blue</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">6dip</item>
+    </style>
+
+
+    <!-- Dialog的弹出动画 -->
+    <style name="dialogWindowAnim" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/push_up_in</item>
+        <item name="android:windowExitAnimation">@anim/push_down_out</item>
     </style>
 
 </resources>

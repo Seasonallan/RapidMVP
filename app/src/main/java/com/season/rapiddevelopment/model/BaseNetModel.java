@@ -7,6 +7,7 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.season.example.entry.ClientKey;
 import com.season.rapiddevelopment.BaseApplication;
+import com.season.rapiddevelopment.DNS;
 import com.season.rapiddevelopment.tools.Console;
 import com.season.rapiddevelopment.tools.PkgManagerUtil;
 
@@ -42,8 +43,6 @@ import retrofit2.Retrofit;
  */
 public class BaseNetModel {
 
-    private static final String BASE_URL = "http://www.kuaifang.tv/api/v2/";
-
     private Context mContext;
     protected Retrofit mRetrofit;
 
@@ -56,8 +55,8 @@ public class BaseNetModel {
         mRetrofit = new Retrofit.Builder()
                 .client(client)
                 .addConverterFactory(ConverterAesJsonFactory.create())//解析方法
-                //.addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl(BASE_URL)//主机地址
+                        //.addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .baseUrl(DNS.BASE_URL)//主机地址
                 .build();
     }
 
@@ -171,9 +170,9 @@ public class BaseNetModel {
                     String[] keys = new String[body.size()];
                     int position = 0;
                     Set<Map.Entry<String, String>> set = params.entrySet();
-                    for (Map.Entry<String, String> entry: set){
+                    for (Map.Entry<String, String> entry : set) {
                         keys[position] = entry.getKey();
-                        position ++;
+                        position++;
                     }
                     Arrays.sort(keys);
                     StringBuffer sigBuffer = new StringBuffer();
@@ -182,7 +181,7 @@ public class BaseNetModel {
                         sigBuffer.append("=");
                         sigBuffer.append(params.get(keys[i]));
                     }
-                    String sig =  MD5(ClientKey.getClientKey().key + sigBuffer.toString()).substring(5, 21).toLowerCase();
+                    String sig = MD5(ClientKey.getClientKey().key + sigBuffer.toString()).substring(5, 21).toLowerCase();
 
                     builder.add("sig", sig);
 
@@ -207,10 +206,10 @@ public class BaseNetModel {
                 Set<String> keySet = httpUrl.queryParameterNames();
 
                 int position = 0;
-                String[] keys = new String[keySet.size()];  
+                String[] keys = new String[keySet.size()];
                 for (String str : keySet) {
                     keys[position] = str;
-                    position ++;
+                    position++;
                 }
                 Arrays.sort(keys);
                 StringBuffer sigBuffer = new StringBuffer();
@@ -236,7 +235,7 @@ public class BaseNetModel {
 
 
     public final static String MD5(String s) {
-        char hexDigits[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+        char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
         try {
             byte[] btInput = s.getBytes();
             // 获得MD5摘要算法的 MessageDigest 对象

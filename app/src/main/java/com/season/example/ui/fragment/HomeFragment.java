@@ -2,6 +2,9 @@ package com.season.example.ui.fragment;
 
 import android.view.View;
 
+import com.season.example.entry.VideoItem;
+import com.season.example.ui.dialog.LogoutDialog;
+import com.season.rapiddevelopment.BaseApplication;
 import com.season.rapiddevelopment.Configure;
 import com.season.rapiddevelopment.R;
 import com.season.example.entry.VideoList;
@@ -62,7 +65,18 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
             mPullToRefreshListView.onRefreshComplete();
             getEmptyView().dismissEmptyView();
             if (type == BasePresenter.REFRESH || mHomeAdapter == null) {
-                mHomeAdapter = new HomeAdapter(getContext(), videoLists.movies);
+                mHomeAdapter = new HomeAdapter(getContext(), videoLists.movies){
+
+                    public void onItemClick(VideoItem item){
+                        new LogoutDialog(getActivity()){
+                            @Override
+                            protected void onConfirm() {
+                                super.onConfirm();
+                                BaseApplication.showToast("success");
+                            }
+                        }.show();
+                    }
+                };
                 mPullToRefreshListView.setAdapter(mHomeAdapter);
             } else {
                 mHomeAdapter.append(videoLists.movies);
