@@ -5,8 +5,8 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
+import com.season.example.entry.ClientKey;
 import com.season.rapiddevelopment.BaseApplication;
-import com.season.rapiddevelopment.model.entry.ClientKey;
 import com.season.rapiddevelopment.tools.Console;
 import com.season.rapiddevelopment.tools.PkgManagerUtil;
 
@@ -47,7 +47,7 @@ public class BaseNetModel {
     private Context mContext;
     protected Retrofit mRetrofit;
 
-    BaseNetModel() {
+    public BaseNetModel() {
         mContext = BaseApplication.sContext;
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(new ParamsInterceptor())
@@ -56,6 +56,7 @@ public class BaseNetModel {
         mRetrofit = new Retrofit.Builder()
                 .client(client)
                 .addConverterFactory(ConverterAesJsonFactory.create())//解析方法
+                //.addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .baseUrl(BASE_URL)//主机地址
                 .build();
     }

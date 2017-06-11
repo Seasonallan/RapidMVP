@@ -1,8 +1,11 @@
 package com.season.rapiddevelopment.presenter;
 
-import com.season.rapiddevelopment.model.entry.BaseEntry;
+import com.season.rapiddevelopment.model.BaseEntry;
+import com.season.rapiddevelopment.tools.Console;
 import com.season.rapiddevelopment.ui.IView;
 
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -21,7 +24,7 @@ public class BasePresenter {
 
     IView mView;
 
-    BasePresenter(IView view) {
+    public BasePresenter(IView view) {
         this.mView = view;
     }
 
@@ -29,26 +32,50 @@ public class BasePresenter {
         return mView;
     }
 
-    class HttpCallback<T> implements Callback<BaseEntry<T>> {
+
+    public class LocalObserver<T> implements Observer<T> {
+        @Override
+        public void onSubscribe(Disposable d) {
+            Console.log(Thread.currentThread().getName() + " onSubscribe ");
+        }
+
+        @Override
+        public void onNext(T t) {
+            Console.log(Thread.currentThread().getName() + " onNext ");
+            onResponse2UI(t);
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            Console.log(Thread.currentThread().getName() + " onError ");
+            onError2UI(e.getMessage());
+        }
+
+        @Override
+        public void onComplete() {
+            Console.log(Thread.currentThread().getName() + " onComplete ");
+        }
+    }
+
+    public class HttpCallback<T> implements Callback<BaseEntry<T>> {
 
         int type = -1;
 
-        HttpCallback(int type) {
+        public HttpCallback(int type) {
             this.type = type;
         }
 
         @Override
         public void onResponse(Call<BaseEntry<T>> call, Response<BaseEntry<T>> response) {
-            getView().getLoadingView().dismissLoadingView();
             if (response.isSuccessful()) {
                 T result = response.body().data;
                 if (result != null) {
                     afterResponse(result);
-                    getView().onResponse(type, result);
+                    onResponse2UI(type, result);
                     return;
                 }
             }
-            getView().onError(type, "数据错误");
+            onError2UI(type, "数据错误");
         }
 
         protected void afterResponse(T result) {
@@ -57,8 +84,26 @@ public class BasePresenter {
 
         @Override
         public void onFailure(Call<BaseEntry<T>> call, Throwable t) {
-            getView().onError(type, "连接失败");
+            onError2UI(type, "连接失败");
         }
+    }
+
+    protected void onError2UI(String errorMessage) {
+        onError2UI(-1, errorMessage);
+    }
+
+    protected void onError2UI(int type, String errorMessage) {
+        getView().getLoadingView().dismissLoadingView();
+        getView().onError(type, errorMessage);
+    }
+
+    protected <T> void onResponse2UI(int type, T result) {
+        getView().getLoadingView().dismissLoadingView();
+        getView().onResponse(type, result);
+    }
+
+    protected <T> void onResponse2UI(T result) {
+        onResponse2UI(-1, result);
     }
 
 

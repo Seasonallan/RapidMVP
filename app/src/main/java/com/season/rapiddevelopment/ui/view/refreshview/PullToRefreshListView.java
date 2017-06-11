@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.season.rapiddevelopment.ui.adapter.BaseRecycleAdapter;
+import com.season.rapiddevelopment.ui.BaseRecycleAdapter;
 
 /**
  * 下拉刷新，滑动自动加载更多或点击加载更多
@@ -113,7 +113,7 @@ public class PullToRefreshListView extends PullToRefreshBase<RecyclerView> {
 	public void setAdapter(BaseRecycleAdapter adapter) {
 		this.mRecycleAdapter = adapter;
 		this.mRecycleAdapter.setFooterEnabled(enableFooterView, enableAutoLoading);
-		this.mRecycleAdapter.mOnClickListener = new View.OnClickListener(){
+		this.mRecycleAdapter.mOnClickListener = new OnClickListener(){
 
 			@Override
 			public void onClick(View v) {

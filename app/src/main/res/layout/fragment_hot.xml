@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.season.example.ui.activity.MainActivity">
+    tools:context="com.season.example.ui.fragment.HotFragment">
+
 
     <include
         android:id="@+id/common_top"
@@ -15,13 +16,23 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/common_top">
 
-        <TextView
+        <Button
+            android:id="@+id/btn_set"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="example"/>
+            android:textAllCaps="false"
+            android:text="get Client-Server key"/>
 
+        <TextView
+            android:id="@+id/tv_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btn_set"
+            android:layout_centerHorizontal="true"/>
 
     </RelativeLayout>
+
+    <include layout="@layout/inc_common_loading"/>
 
 </RelativeLayout>

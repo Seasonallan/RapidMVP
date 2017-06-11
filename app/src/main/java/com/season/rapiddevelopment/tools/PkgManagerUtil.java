@@ -1,7 +1,5 @@
 package com.season.rapiddevelopment.tools;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -9,6 +7,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.text.TextUtils;
+
+import java.util.List;
 
 public class PkgManagerUtil {
 	

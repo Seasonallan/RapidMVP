@@ -1,9 +1,8 @@
 package com.season.rapiddevelopment.ui;
 
-import com.season.rapiddevelopment.ui.activity.empty.IEmptyView;
-import com.season.rapiddevelopment.ui.activity.loading.ILoadingView;
-import com.season.rapiddevelopment.ui.activity.titlebar.ITitleBar;
-import com.season.rapiddevelopment.ui.adapter.BaseRecycleAdapter;
+import com.season.rapiddevelopment.ui.empty.IEmptyView;
+import com.season.rapiddevelopment.ui.loading.ILoadingView;
+import com.season.rapiddevelopment.ui.titlebar.ITitleBar;
 
 /**
  * Disc:
