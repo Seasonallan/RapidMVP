@@ -23,14 +23,14 @@ public class HomePresenter extends BasePresenter {
     protected <T> void onResponse2UI(int type, T result) {
         super.onResponse2UI(type, result);
         if (type == REFRESH){
-            ModelFactory.local().file().setValue("HomeVideo", result, null);
+            ModelFactory.local().file().setValueImmediately("HomeVideo", result, null);
         }
     }
 
     public void loadList(int callType) {
         if (callType == CREATE){
             Console.log("check local cache");
-            ModelFactory.local().file().getValue("HomeVideo", new LocalObserver<VideoList>(){
+            ModelFactory.local().file().getValueImmediately("HomeVideo", new LocalObserver<VideoList>() {
                 @Override
                 public void onError(Throwable e) {
                     Console.log("empty local cache, load from net");

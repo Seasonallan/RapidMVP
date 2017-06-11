@@ -24,12 +24,12 @@ public class FileModel extends BaseLocalModel {
     }
 
     @Override
-    protected Object getValue(String key) {
+    public Object getValueImmediately(String key) {
         return FileUtil.getObject(mFileDir, key);
     }
 
     @Override
-    protected boolean setValue(String key, Object value) {
+    public boolean setValueImmediately(String key, Object value) {
         return FileUtil.saveObject(mFileDir, key, value);
     }
 

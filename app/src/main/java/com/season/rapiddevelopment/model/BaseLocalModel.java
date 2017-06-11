@@ -24,17 +24,17 @@ public abstract class BaseLocalModel {
         mContext = BaseApplication.sContext;
     }
 
-    protected abstract Object getValue(String key);
+    public abstract Object getValueImmediately(String key);
 
-    protected abstract boolean setValue(String key, Object value);
+    public abstract boolean setValueImmediately(String key, Object value);
 
-    public <T> void getValue(String fileName, Observer<T> observer) {
+    public <T> void getValueImmediately(String fileName, Observer<T> observer) {
         Observable.just(fileName)
                 .subscribeOn(Schedulers.io())
                 .map(new Function<String, T>() {
                     @Override
                     public T apply(String s) throws Exception {
-                        return (T) getValue(s);
+                        return (T) getValueImmediately(s);
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
@@ -47,7 +47,7 @@ public abstract class BaseLocalModel {
         Object value;
     }
 
-    public void setValue(String fileName, Object item, Observer<Boolean> observer) {
+    public void setValueImmediately(String fileName, Object item, Observer<Boolean> observer) {
         KeyValue keyMaps = new KeyValue();
         keyMaps.key = fileName;
         keyMaps.value = item;
@@ -56,8 +56,8 @@ public abstract class BaseLocalModel {
                 .map(new Function<KeyValue, Boolean>() {
                     @Override
                     public Boolean apply(KeyValue s) throws Exception {
-                        Console.log(Thread.currentThread().getName() + " setValue " + s);
-                        return setValue(s.key, s.value);
+                        Console.log(Thread.currentThread().getName() + " setValueImmediately " + s);
+                        return setValueImmediately(s.key, s.value);
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread());

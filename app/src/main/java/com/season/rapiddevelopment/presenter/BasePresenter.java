@@ -34,6 +34,11 @@ public class BasePresenter {
 
 
     public class LocalObserver<T> implements Observer<T> {
+
+        public LocalObserver(){
+
+        }
+
         @Override
         public void onSubscribe(Disposable d) {
             Console.log(Thread.currentThread().getName() + " onSubscribe ");
