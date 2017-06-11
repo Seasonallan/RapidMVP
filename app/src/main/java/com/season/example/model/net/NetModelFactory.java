@@ -1,7 +1,7 @@
 package com.season.example.model.net;
 
-import com.season.example.model.net.NetKeyModel;
-import com.season.example.model.net.NetVideoModel;
+import com.season.example.model.net.kuaifang.NetKeyModel;
+import com.season.example.model.net.kuaifang.NetVideoModel;
 import com.season.rapiddevelopment.model.BaseNetModel;
 
 import java.util.HashMap;
