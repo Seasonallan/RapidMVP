@@ -5,27 +5,29 @@ import com.season.example.entry.VideoList;
 import com.season.example.presenter.HomePresenter;
 import com.season.example.ui.activity.CommentActivity;
 import com.season.example.ui.adapter.HomeAdapter;
-import com.season.rapiddevelopment.Configure;
 import com.season.rapiddevelopment.R;
 import com.season.rapiddevelopment.presenter.BasePresenter;
 import com.season.rapiddevelopment.ui.BaseFragment;
 import com.season.rapiddevelopment.ui.BaseRecycleAdapter;
-import com.season.rapiddevelopment.ui.view.refreshview.PullToRefreshBase;
-import com.season.rapiddevelopment.ui.view.refreshview.PullToRefreshListView;
+import com.season.rapiddevelopment.ui.pulltorefresh.IPull2RefreshAction;
+import com.season.rapiddevelopment.ui.pulltorefresh.IPull2RefreshView;
+import com.season.rapiddevelopment.ui.pulltorefresh.Pull2RefreshImpl;
+
+import java.util.List;
 
 /**
  * Disc:
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-10 15:27
  */
-public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRefreshListener {
+public class HomeFragment extends BaseFragment implements IPull2RefreshAction {
 
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_home;
     }
 
-    PullToRefreshListView mPullToRefreshListView;
+    IPull2RefreshView mPull2RefreshView;
     HomeAdapter mHomeAdapter;
 
     HomePresenter mHomePresenter;
@@ -35,53 +37,27 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
         mHomePresenter = new HomePresenter(this);
         getTitleBar().setTopTile("Home");
 
-        mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.pull_to_refresh_view);
-        mPullToRefreshListView.enableAutoLoadingMore();
-        mPullToRefreshListView.setOnRefreshListener(this); 
+        mPull2RefreshView = new Pull2RefreshImpl(this) {
+
+            @Override
+            public void onRefresh() {
+                mHomePresenter.loadList(BasePresenter.REFRESH);
+            }
+
+            @Override
+            public void onLoadingMore() {
+                mHomePresenter.loadList(BasePresenter.MORE);
+            }
+        };
 
         mHomePresenter.loadList(BasePresenter.CREATE);
     }
 
-
-    @Override
-    public void onRefresh() {
-        mHomePresenter.loadList(BasePresenter.REFRESH);
-    }
-
-    @Override
-    public void onLoadingMore() {
-        mHomePresenter.loadList(BasePresenter.MORE);
-    }
-
     @Override
     public <T> void onResponse(int type, T result) {
-        if (result instanceof  VideoList){
+        if (result instanceof VideoList) {
             VideoList videoLists = (VideoList) result;
-            mPullToRefreshListView.onRefreshComplete();
-            getEmptyView().dismissEmptyView();
-            if (type == BasePresenter.REFRESH || mHomeAdapter == null) {
-                mHomeAdapter = new HomeAdapter(getContext(), videoLists.movies){
-
-                    public void onItemClick(VideoItem item){
-                        CommentActivity.show(getContext(), item);
-                    }
-                };
-                mPullToRefreshListView.setAdapter(mHomeAdapter);
-            } else {
-                mHomeAdapter.append(videoLists.movies);
-                mHomeAdapter.notifyDataSetChanged();
-            }
-            if (mHomeAdapter == null || mHomeAdapter.getCount() <= 0){
-                getEmptyView().showEmptyView();
-            }else if (videoLists.movies.size() < Configure.PAGE_SIZE){
-                mPullToRefreshListView.noMore();
-            }
-            if ((mHomeAdapter == null || mHomeAdapter.getCount() <= 0) && videoLists.movies == null){
-                getEmptyView().showEmptyView();
-            }
-            if (videoLists.movies != null && videoLists.movies.size() < Configure.PAGE_SIZE){
-                mPullToRefreshListView.noMore();
-            }
+            mPull2RefreshView.onSuccess(type, videoLists.movies);
         }
     }
 
@@ -93,6 +69,17 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
     }
 
     @Override
+    public BaseRecycleAdapter initAdapter(List result) {
+        mHomeAdapter = new HomeAdapter(getContext(), result) {
+
+            public void onItemClick(VideoItem item) {
+                CommentActivity.show(getContext(), item);
+            }
+        };
+        return mHomeAdapter;
+    }
+
+    @Override
     public BaseRecycleAdapter getAdapter() {
         return mHomeAdapter;
     }
@@ -100,10 +87,6 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
     @Override
     public void onError(int type, String errorMessage) {
         super.onError(type, errorMessage);
-        mPullToRefreshListView.onRefreshComplete();
-        mPullToRefreshListView.errorLoadingMore();
-        if (mHomeAdapter == null || mHomeAdapter.getCount() <= 0){
-            getEmptyView().showEmptyView();
-        }
+        mPull2RefreshView.onError();
     }
 }
