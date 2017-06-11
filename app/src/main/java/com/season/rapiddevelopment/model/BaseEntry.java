@@ -3,7 +3,7 @@ package com.season.rapiddevelopment.model;
 import android.text.TextUtils;
 
 /**
- * Disc:
+ * Disc: 数据解析基类
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-10 21:22
  */

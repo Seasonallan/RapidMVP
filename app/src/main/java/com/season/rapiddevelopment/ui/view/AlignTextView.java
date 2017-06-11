@@ -13,9 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 两端对齐的text view，可以设置最后一行靠左，靠右，居中对齐
- *
- * @author YD
+ * Disc: 两端对齐的text view，可以设置最后一行靠左，靠右，居中对齐
+ * User: SeasonAllan(451360508@qq.com)
+ * Time: 2017-06-10 16:22
  */
 public class AlignTextView extends TextView {
 	private float textHeight; // 单行文字高度

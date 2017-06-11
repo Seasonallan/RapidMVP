@@ -78,9 +78,9 @@ public class KuaifangNetModel extends BaseNetModel{
         @Override
         public T convert(ResponseBody responseBody) throws IOException {
             String response = responseBody.string();
-            Console.log("服务器数据：" + response);
+            Console.logNetMessage("服务器数据：" + response);
             String result = Crypto.desEncrypt(response);//解密
-            Console.log("解密的服务器数据：" + result);
+            Console.logNetMessage("解密的服务器数据：" + result);
             if (result == null){
                 return null;
             }
@@ -139,7 +139,7 @@ public class KuaifangNetModel extends BaseNetModel{
 
                     builder.add("sig", sig);
 
-                    Console.log(builder);
+                    Console.logNetMessage(builder);
                     RequestBody newBody = builder.build();
 
 
@@ -175,7 +175,7 @@ public class KuaifangNetModel extends BaseNetModel{
                 String sig = Crypto.MD5(ClientKey.getClientKey().key + sigBuffer.toString()).substring(5, 21).toLowerCase();
                 url.addQueryParameter("sig", sig);
 
-                Console.log(url);
+                Console.logNetMessage(url);
                 Request newRequest = orgRequest.newBuilder()
                         .url(url.build())
                         .build();

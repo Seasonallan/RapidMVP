@@ -9,7 +9,9 @@ import android.view.View;
 import com.season.rapiddevelopment.ui.BaseRecycleAdapter;
 
 /**
- * 下拉刷新，滑动自动加载更多或点击加载更多
+ * Disc: 下拉刷新，滑动自动加载更多或点击加载更多
+ * User: SeasonAllan(451360508@qq.com)
+ * Time: 2017-06-10 16:22
  */
 public class PullToRefreshListView extends PullToRefreshBase<RecyclerView> {
 

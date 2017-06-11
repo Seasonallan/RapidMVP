@@ -17,7 +17,7 @@ import com.season.rapiddevelopment.ui.titlebar.ITitleBarAction;
 import com.season.rapiddevelopment.ui.titlebar.TitleBarImpl;
 
 /**
- * Disc:
+ * Disc:Activity 基类
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-10 14:37
  */

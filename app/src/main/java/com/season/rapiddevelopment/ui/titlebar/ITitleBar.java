@@ -3,7 +3,7 @@ package com.season.rapiddevelopment.ui.titlebar;
 import android.view.View;
 
 /**
- * Disc:
+ * Disc: 通用标题栏组件
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-10 16:22
  */

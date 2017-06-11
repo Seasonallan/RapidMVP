@@ -44,17 +44,17 @@ public class CommentPresenter extends BasePresenter {
     public void loadList(int callType) {
         if (callType == CREATE){
             getView().getLoadingView().showLoadingView();
-            Console.log("check local cache");
+            Console.logNetMessage("check local cache");
             ModelFactory.local().file().getValue("DetailView" + vid, new LocalObserver<CommentList>() {
                 @Override
                 public void onError(Throwable e) {
-                    Console.log("empty local cache, load from net");
+                    Console.logNetMessage("empty local cache, load from net");
                     loadList(REFRESH);
                 }
 
                 @Override
                 public void onNext(CommentList o) {
-                    Console.log("local cache");
+                    Console.logNetMessage("local cache");
                     super.onNext(o);
                 }
             });

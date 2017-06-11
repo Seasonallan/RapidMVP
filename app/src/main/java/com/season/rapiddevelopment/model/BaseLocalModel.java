@@ -12,7 +12,7 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Disc:
+ * Disc: 本地数据Model基类
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-11 16:27
  */
@@ -26,6 +26,7 @@ public abstract class BaseLocalModel {
 
     /**
      * 直接获取数据
+     *
      * @param key
      * @return
      */
@@ -33,6 +34,7 @@ public abstract class BaseLocalModel {
 
     /**
      * 直接设置数据
+     *
      * @param key
      * @param value
      * @return
@@ -41,6 +43,7 @@ public abstract class BaseLocalModel {
 
     /**
      * 使用RxJava响应式获取数据
+     *
      * @param fileName
      * @param observer
      * @param <T>
@@ -66,6 +69,7 @@ public abstract class BaseLocalModel {
 
     /**
      * 使用RxJava响应式设置数据
+     *
      * @param fileName
      * @param item
      * @param observer
@@ -79,14 +83,14 @@ public abstract class BaseLocalModel {
                 .map(new Function<KeyValue, Boolean>() {
                     @Override
                     public Boolean apply(KeyValue s) throws Exception {
-                        Console.log(Thread.currentThread().getName() + " setValue " + s);
+                        Console.logNetMessage(Thread.currentThread().getName() + " setValue " + s);
                         return setValueImmediately(s.key, s.value);
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread());
-        if (observer == null){
+        if (observer == null) {
             observable.subscribe();
-        }else {
+        } else {
             observable.subscribe(observer);
         }
 

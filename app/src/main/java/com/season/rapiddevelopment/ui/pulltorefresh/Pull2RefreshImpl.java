@@ -9,21 +9,25 @@ import com.season.rapiddevelopment.ui.view.refreshview.PullToRefreshListView;
 import java.util.List;
 
 /**
- * Disc:
+ * Disc: 下拉刷新组件
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-12 02:14
  */
 public abstract class Pull2RefreshImpl<T> implements IPull2RefreshView<T> , PullToRefreshBase.OnRefreshListener {
 
+
+    private PullToRefreshListView mPullToRefreshListView;
     private IPull2RefreshAction mAction;
     public Pull2RefreshImpl(IPull2RefreshAction action){
         this.mAction = action;
         mPullToRefreshListView = (PullToRefreshListView) mAction.findViewById(R.id.pull_to_refresh_view);
-        mPullToRefreshListView.enableAutoLoadingMore();
-        mPullToRefreshListView.setOnRefreshListener(this);
+        if (mPullToRefreshListView == null){
+            throw new RuntimeException("please add PullToRefreshListView to your layout");
+        }else{
+            mPullToRefreshListView.enableAutoLoadingMore();
+            mPullToRefreshListView.setOnRefreshListener(this);
+        }
     }
-
-    PullToRefreshListView mPullToRefreshListView;
 
     @Override
     public void onSuccess(int type, List<T> result) {

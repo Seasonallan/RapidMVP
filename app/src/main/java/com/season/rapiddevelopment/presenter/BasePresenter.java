@@ -41,24 +41,24 @@ public class BasePresenter {
 
         @Override
         public void onSubscribe(Disposable d) {
-            Console.log(Thread.currentThread().getName() + " onSubscribe ");
+            Console.logNetMessage(Thread.currentThread().getName() + " onSubscribe ");
         }
 
         @Override
         public void onNext(T t) {
-            Console.log(Thread.currentThread().getName() + " onNext ");
+            Console.logNetMessage(Thread.currentThread().getName() + " onNext ");
             onResponse2UI(t);
         }
 
         @Override
         public void onError(Throwable e) {
-            Console.log(Thread.currentThread().getName() + " onError ");
+            Console.logNetMessage(Thread.currentThread().getName() + " onError ");
             onError2UI(e.getMessage());
         }
 
         @Override
         public void onComplete() {
-            Console.log(Thread.currentThread().getName() + " onComplete ");
+            Console.logNetMessage(Thread.currentThread().getName() + " onComplete ");
         }
     }
 
@@ -72,7 +72,7 @@ public class BasePresenter {
         public void onResponse(Call<BaseEntry<T>> call, Response<BaseEntry<T>> response) {
             if (response.isSuccessful()) {
                 T result = response.body().data;
-                Console.log(Thread.currentThread().getName() + " onResponse result=" +result);
+                Console.logNetMessage(Thread.currentThread().getName() + " onResponse result=" + result);
                 if (result != null) {
                     afterResponse(result);
                     onResponse2UI(type, result);

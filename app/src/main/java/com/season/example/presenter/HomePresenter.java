@@ -29,17 +29,17 @@ public class HomePresenter extends BasePresenter {
 
     public void loadList(int callType) {
         if (callType == CREATE){
-            Console.log("check local cache");
+            Console.logNetMessage("check local cache");
             ModelFactory.local().file().getValue("HomeVideo", new LocalObserver<VideoList>() {
                 @Override
                 public void onError(Throwable e) {
-                    Console.log("empty local cache, load from net");
+                    Console.logNetMessage("empty local cache, load from net");
                     loadList(REFRESH);
                 }
 
                 @Override
                 public void onNext(VideoList o) {
-                    Console.log("local cache");
+                    Console.logNetMessage("local cache");
                     super.onNext(o);
                 }
             });

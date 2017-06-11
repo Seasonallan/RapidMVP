@@ -7,42 +7,45 @@ import android.widget.TextView;
 import com.season.rapiddevelopment.R;
 
 /**
- * Disc: 加载中
+ * Disc: 加载失败或为空组件
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-11 00:00
  */
 public class EmptyImpl implements IEmptyView {
 
     private IEmptyAction mAction;
-    public EmptyImpl(IEmptyAction action){
-        this.mAction = action;
-    }
+    private View mEmptyContainerView;
+    private ImageView mEmptyIconView;
+    private TextView mEmptyDescriptionView;
 
-    private boolean checkLoadingImage() {
-        if (mEmptyContainerView != null) {
-            return true;
-        }
+    public EmptyImpl(IEmptyAction action) {
+        this.mAction = action;
         mEmptyContainerView = mAction.findViewById(R.id.empty_container);
         if (mEmptyContainerView != null) {
+            mEmptyIconView = (ImageView) mAction.findViewById(R.id.empty_iv);
+            mEmptyDescriptionView = (TextView) mAction.findViewById(R.id.empty_tv_desc);
             mEmptyContainerView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mAction.onEmptyViewClick();
                 }
             });
-            return true;
+        } else {
+            throw new RuntimeException("please add inc_common_empty.xml to your layout");
         }
-        return false;
     }
-
-    private View mEmptyContainerView;
 
     @Override
     public void showEmptyView() {
-        if (checkLoadingImage()) {
-            if (mEmptyContainerView.getVisibility() == View.GONE) {
-                mEmptyContainerView.setVisibility(View.VISIBLE);
-            }
+        if (mEmptyContainerView.getVisibility() == View.GONE) {
+            mEmptyContainerView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void dismissEmptyView() {
+        if (mEmptyContainerView.getVisibility() == View.VISIBLE) {
+            mEmptyContainerView.setVisibility(View.GONE);
         }
     }
 
@@ -53,25 +56,12 @@ public class EmptyImpl implements IEmptyView {
 
     @Override
     public void showEmptyView(int id, String txt) {
-        if (checkLoadingImage()) {
-            mEmptyContainerView.setVisibility(View.VISIBLE);
-            ImageView imageView = (ImageView) mAction.findViewById(R.id.empty_iv);
-            if (id > 0 && imageView != null)
-                imageView.setImageResource(id);
-            TextView contentView = (TextView) mAction.findViewById(R.id.empty_tv_desc);
-            if (contentView != null && txt != null) {
-                contentView.setText(txt);
-            }
+        mEmptyContainerView.setVisibility(View.VISIBLE);
+        if (id > 0)
+            mEmptyIconView.setImageResource(id);
+        if (txt != null) {
+            mEmptyDescriptionView.setText(txt);
         }
     }
 
-
-    @Override
-    public void dismissEmptyView(){
-        if (checkLoadingImage()) {
-            if (mEmptyContainerView.getVisibility() == View.VISIBLE) {
-                mEmptyContainerView.setVisibility(View.GONE);
-            }
-        }
-    }
 }

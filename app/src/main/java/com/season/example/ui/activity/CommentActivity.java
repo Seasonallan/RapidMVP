@@ -88,7 +88,7 @@ public class CommentActivity extends BaseActivity implements IPull2RefreshAction
 
     @Override
     public <T> void onResponse(int type, T result) {
-        Console.log(Thread.currentThread().getName() + " onResponseUI result=" + result);
+        Console.logNetMessage(Thread.currentThread().getName() + " onResponseUI result=" + result);
         super.onResponse(type, result);
         if (result instanceof CommentList){
             CommentList commentList = (CommentList) result;

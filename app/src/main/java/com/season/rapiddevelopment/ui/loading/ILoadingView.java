@@ -1,7 +1,7 @@
 package com.season.rapiddevelopment.ui.loading;
 
 /**
- * Disc:
+ * Disc: 加载中状态组件
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-11 00:04
  */

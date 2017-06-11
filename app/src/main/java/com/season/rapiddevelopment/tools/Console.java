@@ -9,11 +9,8 @@ import android.util.Log;
  */
 public class Console {
 
-    private static final String LOG = "SEASON";
-
-
-    public static void log(Object log){
-        Log.e(LOG, log.toString());
+    public static void logNetMessage(Object log){
+        Log.e("NetLogCat", log.toString());
     }
 
 }
