@@ -22,7 +22,8 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:textAllCaps="false"
-            android:text="get Client-Server key"/>
+            android:text="get Client-Server key"
+            tools:ignore="HardcodedText"/>
 
         <TextView
             android:id="@+id/tv_result"

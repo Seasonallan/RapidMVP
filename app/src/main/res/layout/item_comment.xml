@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:orientation="vertical"
@@ -19,7 +20,8 @@
             android:layout_alignParentLeft="true"
             android:layout_marginRight="10dp"
             android:scaleType="fitXY"
-            android:src="@mipmap/head_default"/>
+            android:src="@mipmap/head_default"
+            tools:ignore="ContentDescription"/>
 
         <TextView
             android:id="@+id/comment_tv_nickname"
@@ -29,7 +31,8 @@
             android:layout_toRightOf="@+id/comment_iv_head"
             android:text="勇敢的心"
             android:textColor="@color/blue"
-            android:textSize="14dp"/>
+            android:textSize="14dp"
+            tools:ignore="HardcodedText"/>
 
         <TextView
             android:id="@+id/comment_tv_time"
@@ -39,7 +42,8 @@
             android:layout_toRightOf="@+id/comment_iv_head"
             android:text="1月1日  08:00"
             android:textColor="@color/gray"
-            android:textSize="11dp"/>
+            android:textSize="11dp"
+            tools:ignore="HardcodedText"/>
 
         <ImageView
             android:id="@+id/comment_iv_praise"
@@ -49,7 +53,8 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="8dp"
             android:scaleType="fitXY"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            tools:ignore="ContentDescription"/>
     </RelativeLayout>
 
     <com.season.rapiddevelopment.tools.emoji.view.EmojiconTextView
@@ -63,7 +68,6 @@
         android:textSize="16dp"/>
 
     <View
-        style="@style/divider_horizontal"
-        android:layout_alignParentBottom="true"/>
+        style="@style/divider_horizontal"/>
 
 </LinearLayout>

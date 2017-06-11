@@ -31,8 +31,7 @@ public class HomeAdapter extends BaseRecycleAdapter<VideoItem> {
     @Override
     public RecyclerView.ViewHolder onCreateHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.item_home, parent, false);
-        HomeViewHolder holder = new HomeViewHolder(view);
-        return holder;
+        return new HomeViewHolder(view);
     }
 
     @Override

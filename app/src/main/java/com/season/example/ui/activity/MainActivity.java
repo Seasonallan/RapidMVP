@@ -16,7 +16,6 @@ import com.season.example.ui.fragment.UserFragment;
 
 public class MainActivity extends FragmentActivity {
 
-    private FragmentTabHost mTabHost;
     private String mTabDescription[] = {"Home", "Category", "Hot", "User"};
     private int mTabIcon[] = {R.drawable.icon_home, R.drawable.icon_category, R.drawable.icon_hot, R.drawable.icon_user};
     private Class mTabFragment[] = {HomeFragment.class, CategoryFragment.class, HotFragment.class, UserFragment.class};
@@ -26,7 +25,7 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTabHost = (FragmentTabHost) findViewById(R.id.main_bottom_bar);
+        FragmentTabHost mTabHost = (FragmentTabHost) findViewById(R.id.main_bottom_bar);
         mTabHost.setup(this, getSupportFragmentManager(), R.id.main_fragment);
 
         for (int i = 0; i < mTabDescription.length; i++) {

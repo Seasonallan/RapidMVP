@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="48dp">
 
@@ -38,7 +39,8 @@
         android:paddingRight="8dp"
         android:paddingTop="12dp"
         android:src="@mipmap/back_white"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        tools:ignore="ContentDescription"/>
 
     <TextView
         android:id="@+id/titlebar_tv_right"
@@ -62,6 +64,7 @@
         android:layout_centerVertical="true"
         android:padding="12dp"
         android:src="@drawable/icon_category"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        tools:ignore="ContentDescription"/>
 
 </RelativeLayout>

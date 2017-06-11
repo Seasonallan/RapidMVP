@@ -1,5 +1,6 @@
 package com.season.rapiddevelopment.ui.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ public class ToastView {
     private ImageView mToastImageView;
     private ProgressBar mToastProgressbar;
 
+    @SuppressLint("InflateParams")
     public ToastView(Context context) {
         mToast = new Toast(context);
         mView = LayoutInflater.from(context).inflate(R.layout.inc_common_toast, null);

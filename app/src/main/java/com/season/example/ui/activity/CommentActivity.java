@@ -10,7 +10,6 @@ import com.season.example.entry.CommentList;
 import com.season.example.entry.VideoItem;
 import com.season.example.presenter.CommentPresenter;
 import com.season.example.ui.adapter.CommentAdapter;
-import com.season.example.ui.adapter.HomeAdapter;
 import com.season.example.ui.dialog.CommentDialog;
 import com.season.rapiddevelopment.Configure;
 import com.season.rapiddevelopment.R;

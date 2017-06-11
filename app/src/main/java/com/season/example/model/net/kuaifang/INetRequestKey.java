@@ -16,7 +16,7 @@ public interface INetRequestKey {
 
     /**
      * 获取网络通讯密钥
-     * @return
+     * @return Call<BaseEntry<ClientKey>>
      */
     @GET("wskey/get")
     Call<BaseEntry<ClientKey>> getClientKey(@Query("imei") String imei, @Query("name") String name, @Query("app_version_name") String app_version_name);

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="fill_parent"
     android:layout_height="60dp"
     android:layout_gravity="center_horizontal"
     android:gravity="center"
@@ -15,7 +16,8 @@
             android:layout_width="24dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@mipmap/arrow_up" />
+            android:src="@mipmap/arrow_up"
+            tools:ignore="ContentDescription"/>
 
         <ProgressBar
             android:id="@+id/pull_to_refresh_progress"
@@ -41,7 +43,8 @@
             android:layout_height="wrap_content"
             android:text="下拉刷新"
             android:textColor="#969696"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            tools:ignore="HardcodedText"/>
 
     </LinearLayout>
 

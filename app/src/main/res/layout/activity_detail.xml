@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content">
 
@@ -33,7 +34,8 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="18dp"
             android:scaleType="centerInside"
-            android:src="@mipmap/icon_share"/>
+            android:src="@mipmap/icon_share"
+            tools:ignore="ContentDescription"/>
 
         <LinearLayout
             android:id="@+id/videodetail_bottombar_comment"
@@ -49,7 +51,8 @@
                 android:layout_height="30dp"
                 android:layout_marginLeft="10dp"
                 android:scaleType="centerInside"
-                android:src="@mipmap/icon_comment"/>
+                android:src="@mipmap/icon_comment"
+                tools:ignore="ContentDescription"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -57,7 +60,8 @@
                 android:layout_marginLeft="4dp"
                 android:text="写评论..."
                 android:textColor="#969696"
-                android:textSize="14dp"/>
+                android:textSize="14dp"
+                tools:ignore="HardcodedText"/>
         </LinearLayout>
     </RelativeLayout>
 

@@ -4,7 +4,7 @@
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:layout_alignParentBottom="true"
-              android:background="#fafafa"
+              android:background="@color/white"
               android:orientation="vertical" >
 
     <View style="@style/divider_horizontal" />
@@ -29,7 +29,8 @@
         android:maxLines="4"
         android:minLines="4"
         android:textColorHint="#ffc5c5c5"
-        android:textSize="16dp" />
+        android:textSize="16dp"
+        tools:ignore="HardcodedText"/>
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -48,7 +49,8 @@
             android:paddingLeft="0dp"
             android:paddingRight="12dp"
             android:layout_centerVertical="true"
-            android:src="@mipmap/input_biaoqing" />
+            android:src="@mipmap/input_biaoqing"
+            tools:ignore="ContentDescription"/>
 
         <TextView
             android:id="@+id/commentdialog_tv_comment"
@@ -63,7 +65,8 @@
             android:paddingBottom="4dp"
             android:text="发送"
             android:textColor="@color/white"
-            android:textSize="14dp" />
+            android:textSize="14dp"
+            tools:ignore="HardcodedText"/>
     </RelativeLayout>
 
     <LinearLayout

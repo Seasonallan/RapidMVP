@@ -55,7 +55,6 @@ public class CommentDialog extends Dialog {
     }
 
     private View bottomView;
-    private ViewPager viewPager;
     private EditText editView;
     private EmojiDotView emojiDotView;
     private ImageView functionView;
@@ -70,11 +69,11 @@ public class CommentDialog extends Dialog {
         emojiDotView = (EmojiDotView) findViewById(R.id.commentdialog_emojidot);
         editView = (EditText) findViewById(R.id.commentdialog_et_content);
         functionView = (ImageView) findViewById(R.id.commentdialog_tv_cancel);
-        viewPager = (ViewPager) findViewById(R.id.commentdialog_viewpager);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.commentdialog_viewpager);
         MyPagerAdapter adapter = new MyPagerAdapter(getContext());
         viewPager.setAdapter(adapter);
         emojiDotView.setCount(adapter.getCount());
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
             @Override
             public void onPageSelected(int arg0) {
@@ -167,7 +166,7 @@ public class CommentDialog extends Dialog {
         }
 
         @Override
-        public Object instantiateItem(View arg0, int position) {
+        public Object instantiateItem(ViewGroup arg0, int position) {
             ViewPager pViewPager = ((ViewPager) arg0);
             FullGridView fullGridView = new FullGridView(context);
             fullGridView.setNumColumns(7);
@@ -242,10 +241,6 @@ public class CommentDialog extends Dialog {
         @Override
         public Parcelable saveState() {
             return null;
-        }
-
-        @Override
-        public void startUpdate(View arg0) {
         }
 
     }

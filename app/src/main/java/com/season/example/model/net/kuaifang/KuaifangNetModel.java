@@ -81,6 +81,9 @@ public class KuaifangNetModel extends BaseNetModel{
             Console.log("服务器数据：" + response);
             String result = Crypto.desEncrypt(response);//解密
             Console.log("解密的服务器数据：" + result);
+            if (result == null){
+                return null;
+            }
             return adapter.fromJson(result);
         }
     }

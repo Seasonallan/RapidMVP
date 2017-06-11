@@ -21,7 +21,7 @@ import com.season.rapiddevelopment.ui.titlebar.TitleBarImpl;
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-10 14:37
  */
-public class BaseActivity extends Activity implements ITitleBarAction, ILoadingAction, IEmptyAction, IView {
+public abstract class BaseActivity extends Activity implements ITitleBarAction, ILoadingAction, IEmptyAction, IView {
 
     ITitleBar mTitleBar;
     ILoadingView mLoadingView;
