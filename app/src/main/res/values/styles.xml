@@ -25,6 +25,13 @@
         <item name="android:layout_height">6dip</item>
     </style>
 
+    <!-- 分割线-->
+    <style name="divider_horizontal">
+        <item name="android:background">@color/grayHit</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">0.5dip</item>
+    </style>
+
 
     <!-- Dialog的弹出动画 -->
     <style name="dialogWindowAnim" mce_bogus="1" parent="android:Animation">

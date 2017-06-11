@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"
+              android:background="#fafafa"
+              android:orientation="vertical" >
+
+    <View style="@style/divider_horizontal" />
+
+    <com.season.rapiddevelopment.tools.emoji.view.EmojiconEditText
+        android:id="@+id/commentdialog_et_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:padding="8dp"
+        android:background="@drawable/shape_cornerstoke_gray"
+        android:gravity="left|top"
+        android:hint="期待你的评论 ^_^"
+        android:lineSpacingExtra="3dp"
+        android:maxLength="140"
+        android:minHeight="32dp"
+        android:maxLines="4"
+        android:minLines="4"
+        android:textColorHint="#ffc5c5c5"
+        android:textSize="16dp" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="12dp"
+        android:paddingLeft="6dp"
+        android:paddingTop="0dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="0dp" >
+
+        <ImageView
+            android:id="@+id/commentdialog_tv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="12dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/input_biaoqing" />
+
+        <TextView
+            android:id="@+id/commentdialog_tv_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/shape_corner_blue"
+            android:paddingLeft="14dp"
+            android:paddingTop="4dp"
+            android:paddingRight="14dp"
+            android:paddingBottom="4dp"
+            android:text="发送"
+            android:textColor="@color/white"
+            android:textSize="14dp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/commentdialog_viewpagerc"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:background="#88c9c9c9"
+        android:orientation="vertical"
+        android:paddingTop="4dp"
+        android:visibility="gone" >
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/commentdialog_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="178dp" />
+
+        <com.season.rapiddevelopment.tools.emoji.view.EmojiDotView
+            android:id="@+id/commentdialog_emojidot"
+            android:layout_width="fill_parent"
+            android:layout_height="18dp"
+            android:layout_gravity="center" />
+    </LinearLayout>
+
+</LinearLayout>

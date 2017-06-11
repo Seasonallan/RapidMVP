@@ -17,7 +17,7 @@ public class CategoryPresenter extends BasePresenter {
     }
 
     public void getKey() {
-        ModelFactory.local().file().getValueImmediately("keyData", new LocalObserver<ClientKey>());
+        ModelFactory.local().file().getValue("keyData", new LocalObserver<ClientKey>());
     }
 
 }

@@ -2,6 +2,7 @@ package com.season.rapiddevelopment.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
@@ -99,6 +100,12 @@ public class BaseActivity extends Activity implements ITitleBarAction, ILoadingA
     }
 
 
+    protected Intent getIntent(Class cls){
+        Intent intent = new Intent();
+        intent.setClass(this, cls);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return intent;
+    }
 
 
 }

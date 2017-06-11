@@ -198,7 +198,7 @@ public abstract class BaseRecycleAdapter<T> extends RecyclerView.Adapter<Recycle
         }
 
         public void noMore() {
-            headerText.setText("没有更多");
+            headerText.setText("没有数据");
             headerProgress.setVisibility(View.GONE);
         }
 

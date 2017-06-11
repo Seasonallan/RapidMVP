@@ -10,6 +10,11 @@ import android.text.TextUtils;
 
 import java.util.List;
 
+/**
+ * Disc: 包信息工具
+ * User: SeasonAllan(451360508@qq.com)
+ * Time: 2017-06-11 21:26
+ */
 public class PkgManagerUtil {
 	
 	/**
@@ -124,69 +129,6 @@ public class PkgManagerUtil {
 
 		return false;
 	}
-	
-	/**
-	 * 获取友盟的渠道标识和key 组成的字符串
-	 * @param context
-	 * @return
-	 */
-	public static String getUmengMetaDataValue(Activity context){
-		ApplicationInfo appInfo;
-		String channelId = null,umengKey = null;
-		try {
-		     appInfo = context.getPackageManager()
-                    .getApplicationInfo(context.getPackageName(),
-            PackageManager.GET_META_DATA);
-			if (appInfo.metaData!=null) {
-				channelId =appInfo.metaData.getString("UMENG_CHANNEL");
-				umengKey =appInfo.metaData.getString("UMENG_APPKEY");
-			}
-		} catch (NameNotFoundException e) {
-			e.printStackTrace();
-		}
-		return " 渠道标识 = "+channelId+",友盟key = "+umengKey;
-	}
-	
-	/**
-	 * 获取友盟的渠道标�?
-	 * @param context
-	 * @return
-	 */
-	public static String getUmengChannelId(Context context){
-		ApplicationInfo appInfo;
-		String channelId = null;
-		try {
-			appInfo = context.getPackageManager()
-					.getApplicationInfo(context.getPackageName(),
-							PackageManager.GET_META_DATA);
-			if (appInfo.metaData!=null) {
-				channelId =appInfo.metaData.getString("UMENG_CHANNEL");
-			}
-		} catch (NameNotFoundException e) {
-			e.printStackTrace();
-		}
-		return channelId;
-	}
-	
-	/**
-	 * 获取友盟的渠道标�?
-	 * @param context
-	 * @return
-	 */
-	public static String getSaleChannelId(Context context){
-		ApplicationInfo appInfo;
-		String channelId = null;
-		try {
-			appInfo = context.getPackageManager()
-					.getApplicationInfo(context.getPackageName(),
-							PackageManager.GET_META_DATA);
-			if (appInfo.metaData!=null) {
-				channelId =appInfo.metaData.getString("SALE_CHANNEL");
-			}
-		} catch (NameNotFoundException e) {
-			e.printStackTrace();
-		}
-		return channelId;
-	}
+
 	 
 }

@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.season.rapiddevelopment.R;
 
 /**
- * Disc:
+ * Disc: 弹窗基类
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-11 18:27
  */
@@ -32,12 +32,22 @@ public abstract class BaseDialog extends Dialog {
         return Gravity.CENTER;
     }
 
+    /**
+     * 点击确定事件
+     */
     protected abstract void onConfirm();
 
+    /**
+     * 返回弹窗提示内容
+     * @return
+     */
     protected abstract String getTip();
 
+    /**
+     * 点击取消按钮事件， 默认直接dismiss
+     */
     protected void onCancel(){
-
+        dismiss();
     }
 
     @Override
@@ -66,7 +76,6 @@ public abstract class BaseDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 onCancel();
-                dismiss();
             }
         });
 

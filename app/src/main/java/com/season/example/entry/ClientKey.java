@@ -36,6 +36,10 @@ public class ClientKey implements Serializable {
         return sKeyItemData;
     }
 
+    public static void resetClientKey() {
+        sKeyItemData = new ClientKey();
+    }
+
     public static void saveKeyData(ClientKey key) {
         sKeyItemData = key;
     }

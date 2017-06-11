@@ -11,11 +11,11 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+
 /**
- * @author Allan-Jp
- * @ClassName: FileUtil
- * @Description: 缓存数据
- * @date 2015-6-23 下午1:49:07
+ * Disc: 缓存文件工具
+ * User: SeasonAllan(451360508@qq.com)
+ * Time: 2017-06-11 21:26
  */
 public class FileUtil {
 
@@ -121,7 +121,7 @@ public class FileUtil {
             oos = new ObjectOutputStream(fos);
             oos.writeObject(sod);
         } catch (Exception e) {
-            e.printStackTrace();
+           // e.printStackTrace();
             return false;
         } finally {
             if (fos != null) {

@@ -57,9 +57,11 @@ public class ImageModel {
             int y = (source.getHeight() - size) / 2;
 
             Bitmap squaredBitmap = Bitmap.createBitmap(source, x, y, size, size);
-            source.recycle();
 
             Bitmap bitmap = Bitmap.createBitmap(size, size, source.getConfig());
+            if (source != squaredBitmap){
+                //source.recycle();
+            }
             Canvas canvas = new Canvas(bitmap);
             Paint paint = new Paint();
 

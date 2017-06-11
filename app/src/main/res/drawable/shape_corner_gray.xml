@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item>
+        <shape>
+
+            <!-- 圆角 -->
+            <corners android:radius="18dp" />
+
+            <!-- 填充 -->
+            <solid android:color="#e8e8e8" />
+
+            <!-- 描边 -->
+            <stroke
+                android:dashGap="0dp"
+                android:dashWidth="0dp"
+                android:width="0.6dp"
+                android:color="#e8e8e8" />
+
+        </shape>
+    </item>
+
+</layer-list>

@@ -6,6 +6,8 @@ import android.widget.TextView;
 
 import com.season.example.entry.ClientKey;
 import com.season.example.presenter.CategoryPresenter;
+import com.season.example.ui.dialog.LogoutDialog;
+import com.season.rapiddevelopment.BaseApplication;
 import com.season.rapiddevelopment.R;
 import com.season.rapiddevelopment.ui.BaseFragment;
 
@@ -34,6 +36,13 @@ public class CategoryFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 mCategoryPresenter.getKey();
+                new LogoutDialog(getActivity()){
+                    @Override
+                    protected void onConfirm() {
+                        super.onConfirm();
+                        BaseApplication.showToast("success");
+                    }
+                }.show();
             }
         });
     }

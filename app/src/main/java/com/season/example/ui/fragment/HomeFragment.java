@@ -1,18 +1,15 @@
 package com.season.example.ui.fragment;
 
-import android.view.View;
-
 import com.season.example.entry.VideoItem;
-import com.season.example.ui.dialog.LogoutDialog;
-import com.season.rapiddevelopment.BaseApplication;
+import com.season.example.entry.VideoList;
+import com.season.example.presenter.HomePresenter;
+import com.season.example.ui.activity.CommentActivity;
+import com.season.example.ui.adapter.HomeAdapter;
 import com.season.rapiddevelopment.Configure;
 import com.season.rapiddevelopment.R;
-import com.season.example.entry.VideoList;
 import com.season.rapiddevelopment.presenter.BasePresenter;
-import com.season.example.presenter.HomePresenter;
-import com.season.rapiddevelopment.ui.BaseRecycleAdapter;
-import com.season.example.ui.adapter.HomeAdapter;
 import com.season.rapiddevelopment.ui.BaseFragment;
+import com.season.rapiddevelopment.ui.BaseRecycleAdapter;
 import com.season.rapiddevelopment.ui.view.refreshview.PullToRefreshBase;
 import com.season.rapiddevelopment.ui.view.refreshview.PullToRefreshListView;
 
@@ -42,8 +39,6 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
         mPullToRefreshListView.enableAutoLoadingMore();
         mPullToRefreshListView.setOnRefreshListener(this); 
 
-        findViewById(R.id.loading_container).setVisibility(View.VISIBLE);
-
         mHomePresenter.loadList(BasePresenter.CREATE);
     }
 
@@ -68,13 +63,7 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
                 mHomeAdapter = new HomeAdapter(getContext(), videoLists.movies){
 
                     public void onItemClick(VideoItem item){
-                        new LogoutDialog(getActivity()){
-                            @Override
-                            protected void onConfirm() {
-                                super.onConfirm();
-                                BaseApplication.showToast("success");
-                            }
-                        }.show();
+                        CommentActivity.show(getContext(), item);
                     }
                 };
                 mPullToRefreshListView.setAdapter(mHomeAdapter);
@@ -85,6 +74,12 @@ public class HomeFragment extends BaseFragment implements PullToRefreshBase.OnRe
             if (mHomeAdapter == null || mHomeAdapter.getCount() <= 0){
                 getEmptyView().showEmptyView();
             }else if (videoLists.movies.size() < Configure.PAGE_SIZE){
+                mPullToRefreshListView.noMore();
+            }
+            if ((mHomeAdapter == null || mHomeAdapter.getCount() <= 0) && videoLists.movies == null){
+                getEmptyView().showEmptyView();
+            }
+            if (videoLists.movies != null && videoLists.movies.size() < Configure.PAGE_SIZE){
                 mPullToRefreshListView.noMore();
             }
         }

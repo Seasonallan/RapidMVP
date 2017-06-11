@@ -63,9 +63,7 @@ public class BasePresenter {
     }
 
     public class HttpCallback<T> implements Callback<BaseEntry<T>> {
-
         int type = -1;
-
         public HttpCallback(int type) {
             this.type = type;
         }
@@ -74,6 +72,7 @@ public class BasePresenter {
         public void onResponse(Call<BaseEntry<T>> call, Response<BaseEntry<T>> response) {
             if (response.isSuccessful()) {
                 T result = response.body().data;
+                Console.log(Thread.currentThread().getName() + " onResponse result=" +result);
                 if (result != null) {
                     afterResponse(result);
                     onResponse2UI(type, result);

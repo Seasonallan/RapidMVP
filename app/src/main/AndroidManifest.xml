@@ -24,7 +24,7 @@
 
         <activity android:name="com.season.example.ui.activity.AboutActivity"/>
 
-        <activity android:name="com.season.example.ui.activity.DetailActivity"/>
+        <activity android:name="com.season.example.ui.activity.CommentActivity"/>
     </application>
 
 </manifest>
