@@ -7,7 +7,6 @@ import com.season.example.ExampleApplication;
 
 /**
  * 数据库生成 升级 更新帮助
- * @author ziv
  *
  */
 public abstract class BaseSQLiteOpenHelper<T extends BaseDao> extends SQLiteOpenHelper {

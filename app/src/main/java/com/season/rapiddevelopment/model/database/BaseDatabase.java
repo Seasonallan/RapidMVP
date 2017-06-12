@@ -71,7 +71,7 @@ public class BaseDatabase<T extends BaseDao>{
 	
 
     /**
-     * 获取�?��数据
+     * 获取  数据
      * @return
      */
 	public List<T> get(String limit) {
@@ -152,7 +152,7 @@ public class BaseDatabase<T extends BaseDao>{
 
     /**
      * 根据条件删除
-     * @param whereClause 条件，为空则为清空表�?
+     * @param whereClause 条件，为空则为清空表
      */
 	public int delete(String whereClause) {
         return mDbHelper.getDatabase().delete(mTableName, whereClause, null);
@@ -178,7 +178,7 @@ public class BaseDatabase<T extends BaseDao>{
 	}
 
 	/**
-	 * 通过键�?对获取条�?
+	 *
 	 * @param params
 	 * @return
 	 */
@@ -227,28 +227,28 @@ public class BaseDatabase<T extends BaseDao>{
 	}
 	
     /**
-     * 根据主键值更新数�?
+     * 根据主键值更新数
      */
 	public int update(T model) {
 		return update(model, getPrimaryKeyWhereClause(model));
 	}
 
     /**
-     * 根据主键值删除数�?
+     * 根据主键值删除数
      */
 	public int deleteItem(T model) {
 		return delete(getPrimaryKeyWhereClause(model));
 	}
 
     /**
-     * 清空数据�?
+     * 清空数据
      */
 	public int clearAll() {
 		return delete(null);
 	}
 	
     /**
-     * 获取�?��数据
+     * 获取 数据
      * @return
      */
 	public List<T> getAll() {
@@ -286,7 +286,7 @@ public class BaseDatabase<T extends BaseDao>{
     }
 
     /**
-     * 智能插入，有则更�?
+     * 智能插入
      * @param model
      * @return
      */
@@ -299,7 +299,7 @@ public class BaseDatabase<T extends BaseDao>{
     }
 
     /**
-     * 智能删除[通过伪主�?索引删除]
+     * 智能删除
      * @param model
      * @return
      */

@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /** 
- *  实体基类, �?��存在默认构�?函数 用以反射
+ *  数据库实体基类,   用以反射
  * @author laijp
  * @date 2014-6-13
  * @email 451360508@qq.com
@@ -81,7 +81,7 @@ public abstract class BaseDao {
     }
 
     /**
-     * 数据库更新操�?
+     * 数据库更新操
      * @param db 可操作数据库
      * @param oldVersion 旧版本号
      * @param newVersion 新版本号
@@ -92,7 +92,7 @@ public abstract class BaseDao {
     }
 
 	/**
-	 * 获取唯一�?
+	 * 获取唯一
 	 * @return
 	 */
 	public List<String> getPrimaryKeyColumnName() {
@@ -153,7 +153,7 @@ public abstract class BaseDao {
 	}
 	
 	/**
-	 * 获取�?��列名称数组，可用于更新所有数�?
+	 * 获取 列名称数组，可用于更新所有数�?
 	 * @return
 	 */
 	@Deprecated
@@ -199,7 +199,7 @@ public abstract class BaseDao {
 	}
 
 	/**
-	 * 转换为可用于数据库操作的键�?�?
+	 * 转换为可用于数据库操作的键
 	 * @return
 	 * @throws IllegalAccessException
 	 */
@@ -222,7 +222,7 @@ public abstract class BaseDao {
 	}
 
 	/**
-	 * 获取某个键的�?
+	 * 获取某个键的
 	 * @param key
 	 * @return
 	 */
@@ -243,7 +243,7 @@ public abstract class BaseDao {
 	}
 
     /**
-     * 存储某一对键�?
+     * 存储某一对键
      * @param contentValues
      * @throws IllegalAccessException
      */
@@ -354,15 +354,3 @@ public abstract class BaseDao {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
