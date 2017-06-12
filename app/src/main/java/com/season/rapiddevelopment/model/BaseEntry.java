@@ -2,12 +2,16 @@ package com.season.rapiddevelopment.model;
 
 import android.text.TextUtils;
 
+import java.io.Serializable;
+
 /**
  * Disc: 数据解析基类
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-10 21:22
  */
-public class BaseEntry<T> {
+public class BaseEntry<T> implements Serializable{
+
+    private static final long serialVersionUID = -2682442639740365254L;
 
     public boolean isTrue(String name) {
         if (TextUtils.isEmpty(name)) {
