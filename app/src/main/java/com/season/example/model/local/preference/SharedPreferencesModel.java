@@ -1,11 +1,10 @@
-package com.season.example.model.local;
+package com.season.example.model.local.preference;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.season.rapiddevelopment.model.BaseLocalModel;
 
-import java.util.Objects;
 
 /**
  * Disc: SharedPreferences 存储
@@ -15,12 +14,12 @@ import java.util.Objects;
 public class SharedPreferencesModel extends BaseLocalModel {
 
     private SharedPreferences mSharedPreferences;
-    private final String mFileName = "FileName";
 
-    public SharedPreferencesModel() {
+    public SharedPreferencesModel(String spName) {
         super();
-        mSharedPreferences = mContext.getSharedPreferences(mFileName, Context.MODE_PRIVATE);
+        mSharedPreferences = mContext.getSharedPreferences(spName, Context.MODE_PRIVATE);
     }
+
 
     @Override
     public String getValueImmediately(String key) {

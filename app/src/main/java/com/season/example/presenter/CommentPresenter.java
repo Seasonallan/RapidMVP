@@ -25,7 +25,7 @@ public class CommentPresenter extends BasePresenter {
     protected <T> void onResponse2UI(int type, T result) {
         super.onResponse2UI(type, result);
         if (type == REFRESH){
-            ModelFactory.local().file().setValue("DetailView" + vid, result, null);
+            ModelFactory.local().file().commcon().setValue("DetailView" + vid, result, null);
         }
     }
 
@@ -34,7 +34,7 @@ public class CommentPresenter extends BasePresenter {
      * @param comment
      */
     public void sendComment(String comment){
-        ModelFactory.net().video().sentComment(vid, comment, new HttpCallback<String>(11));
+        ModelFactory.net().kuaifang().video().sentComment(vid, comment, new HttpCallback<String>(11));
     }
 
     /**
@@ -45,7 +45,7 @@ public class CommentPresenter extends BasePresenter {
         if (callType == CREATE){
             getView().getLoadingView().showLoadingView();
             Console.logNetMessage("check local cache");
-            ModelFactory.local().file().getValue("DetailView" + vid, new LocalObserver<CommentList>() {
+            ModelFactory.local().file().commcon().getValue("DetailView" + vid, new LocalObserver<CommentList>() {
                 @Override
                 public void onError(Throwable e) {
                     Console.logNetMessage("empty local cache, load from net");
@@ -69,7 +69,7 @@ public class CommentPresenter extends BasePresenter {
                 maxId = ((CommentItem)adapter.getItem(adapter.getCount() - 1)).id;
             }
         }
-        ModelFactory.net().video().getComment(Configure.PAGE_SIZE, maxId, vid, new HttpCallback<CommentList>(callType));
+        ModelFactory.net().kuaifang().video().getComment(Configure.PAGE_SIZE, maxId, vid, new HttpCallback<CommentList>(callType));
 
     }
 

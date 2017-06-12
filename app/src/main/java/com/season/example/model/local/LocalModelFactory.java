@@ -1,43 +1,26 @@
 package com.season.example.model.local;
 
-import com.season.example.model.local.FileModel;
-import com.season.example.model.local.SharedPreferencesModel;
-import com.season.rapiddevelopment.model.BaseLocalModel;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.season.example.model.local.database.DBLocalModelFactory;
+import com.season.example.model.local.file.FileLocalModelFactory;
+import com.season.example.model.local.preference.SPLocalModelFactory;
 
 /**
- * Disc:
+ * Disc: 本地数据工厂
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-11 21:01
  */
 public class LocalModelFactory {
 
-    private Map<String, BaseLocalModel> map = new HashMap<>();
-
-    private <T extends BaseLocalModel> T generateLocalModel(Class<T> clazz) {
-        try {
-            if (map.containsKey(clazz.getName()))
-                return (T) map.get(clazz.getName());
-            else {
-                T res = clazz.newInstance();
-                map.put(clazz.getName(), res);
-                return res;
-            }
-        } catch (Exception e) {
-            throw new RuntimeException();
-        }
+    public SPLocalModelFactory sharedPreferences() {
+        return new SPLocalModelFactory();
     }
 
-    public BaseLocalModel sharedPreferences() {
-        return generateLocalModel(SharedPreferencesModel.class);
-        //return new SharedPreferencesModel();
+    public FileLocalModelFactory file() {
+        return new FileLocalModelFactory();
     }
 
-    public BaseLocalModel file() {
-        return generateLocalModel(FileModel.class);
-        // return new FileModel();
+    public DBLocalModelFactory database() {
+        return new DBLocalModelFactory();
     }
 
 }

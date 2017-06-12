@@ -11,9 +11,9 @@ import retrofit2.Callback;
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-10 23:46
  */
-public class NetVideoModel extends KuaifangNetModel {
+public class KuaifangRequestVideo extends KuaifangNetModel {
 
-    public NetVideoModel() {
+    public KuaifangRequestVideo() {
         super();
         mApi = getHttpClient().create(INetRequestVideo.class);
     }

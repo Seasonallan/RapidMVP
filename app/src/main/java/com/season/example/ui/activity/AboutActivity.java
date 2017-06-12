@@ -3,7 +3,6 @@ package com.season.example.ui.activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.season.example.model.ModelFactory;
 import com.season.rapiddevelopment.R;
 import com.season.rapiddevelopment.ui.BaseActivity;
 
@@ -22,7 +21,6 @@ public class AboutActivity extends BaseActivity {
         getTitleBar().enableLeftButton();
 
         TextView textView = (TextView) findViewById(R.id.about_tv_name);
-        Object testItem = ModelFactory.local().sharedPreferences().getValueImmediately("testx");
-        textView.setText("get=" + testItem);
+        textView.setText("get=");
     }
 }

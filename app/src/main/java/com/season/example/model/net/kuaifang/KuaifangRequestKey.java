@@ -13,9 +13,9 @@ import retrofit2.Callback;
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-10 23:46
  */
-public class NetKeyModel extends KuaifangNetModel {
+public class KuaifangRequestKey extends KuaifangNetModel {
 
-    public NetKeyModel() {
+    public KuaifangRequestKey() {
         super();
         mApi = getHttpClient().create(INetRequestKey.class);
     }

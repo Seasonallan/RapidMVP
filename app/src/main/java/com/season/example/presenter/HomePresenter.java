@@ -23,14 +23,14 @@ public class HomePresenter extends BasePresenter {
     protected <T> void onResponse2UI(int type, T result) {
         super.onResponse2UI(type, result);
         if (type == REFRESH){
-            ModelFactory.local().file().setValue("HomeVideo", result, null);
+            ModelFactory.local().file().commcon().setValue("HomeVideo", result, null);
         }
     }
 
     public void loadList(int callType) {
         if (callType == CREATE){
             Console.logNetMessage("check local cache");
-            ModelFactory.local().file().getValue("HomeVideo", new LocalObserver<VideoList>() {
+            ModelFactory.local().file().commcon().getValue("HomeVideo", new LocalObserver<VideoList>() {
                 @Override
                 public void onError(Throwable e) {
                     Console.logNetMessage("empty local cache, load from net");
@@ -62,7 +62,7 @@ public class HomePresenter extends BasePresenter {
         }else{
             getView().getLoadingView().showLoadingView();
         }
-        ModelFactory.net().video().getVideo(Configure.PAGE_SIZE, action, maxId, new HttpCallback<VideoList>(callType));
+        ModelFactory.net().kuaifang().video().getVideo(Configure.PAGE_SIZE, action, maxId, new HttpCallback<VideoList>(callType));
 
     }
 

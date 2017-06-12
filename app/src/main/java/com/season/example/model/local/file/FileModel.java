@@ -1,4 +1,4 @@
-package com.season.example.model.local;
+package com.season.example.model.local.file;
 
 import com.season.rapiddevelopment.model.BaseLocalModel;
 import com.season.rapiddevelopment.tools.FileUtil;
@@ -12,15 +12,11 @@ import java.io.File;
  */
 public class FileModel extends BaseLocalModel {
 
-    /**
-     * 缓存文件目录
-     */
-    public static final String sCacheFileName = "CacheFile";
     public File mFileDir;
 
-    public FileModel() {
+    public FileModel(String fileName) {
         super();
-        mFileDir = FileUtil.getCacheDir(mContext, false, sCacheFileName);
+        mFileDir = FileUtil.getCacheDir(mContext, false, fileName);
     }
 
     @Override

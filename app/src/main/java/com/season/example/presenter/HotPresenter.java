@@ -19,11 +19,11 @@ public class HotPresenter extends BasePresenter {
     public void getKey() {
         getView().getLoadingView().showLoadingView();
         ClientKey.resetClientKey();
-        ModelFactory.net().key().getClientKey(new HttpCallback<ClientKey>(BasePresenter.GET_KEY) {
+        ModelFactory.net().kuaifang().key().getClientKey(new HttpCallback<ClientKey>(BasePresenter.GET_KEY) {
             protected void afterResponse(ClientKey result) {
                 ClientKey.saveKeyData(result);
                 onResponse2UI(result);
-                ModelFactory.local().file().setValue("keyData", result, new LocalObserver<Boolean>());
+                ModelFactory.local().file().key().setValue("keyData", result, new LocalObserver<Boolean>());
             }
         });
     }

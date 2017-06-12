@@ -33,7 +33,7 @@ import retrofit2.Retrofit;
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-11 21:29
  */
-public class KuaifangNetModel extends BaseNetModel{
+public abstract class KuaifangNetModel extends BaseNetModel{
 
 
     private Gson gson = new Gson();

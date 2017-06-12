@@ -1,6 +1,13 @@
 package com.season.example.entry;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
+
+import com.season.rapiddevelopment.model.database.BaseDao;
+import com.season.rapiddevelopment.model.database.BaseSQLiteOpenHelper;
+import com.season.rapiddevelopment.model.database.iterface.IDbHelper;
+import com.season.rapiddevelopment.model.database.iterface.Column;
+import com.season.rapiddevelopment.model.database.iterface.Table;
 
 import java.io.Serializable;
 
@@ -9,11 +16,40 @@ import java.io.Serializable;
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-11 00:21
  */
-public class VideoItem implements Serializable {
+
+@Table(name = "VideoItem", isOrderBy = true)
+public class VideoItem extends BaseDao implements Serializable {
 
     private static final long serialVersionUID = -2702279901753042304L;
 
+
+    /**
+     * 可用于装饰数据库
+     * @return
+     */
+    public IDbHelper newDatabaseHelper(){
+        return new IDbHelper() {
+            @Override
+            public SQLiteDatabase getDatabase() {
+
+                return new BaseSQLiteOpenHelper("VideoItemDatabase", getDatabaseVersion()){
+                    @Override
+                    public void onCreate(SQLiteDatabase db) {
+                        createTable(db);
+                    }
+
+                    @Override
+                    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+                        dropTable(db);
+                        createTable(db);
+                    }
+                }.getWritableDatabase();
+            }
+        };
+    }
+
     public String groupName;
+
     public String groupTime;
 
     public String id;
@@ -30,8 +66,10 @@ public class VideoItem implements Serializable {
 
     public String duration;
 
+    @Column(name = "vid", isPrimaryKey = true, isOrderDesc = true)
     public String vid;
 
+    @Column(name = "pub_id")
     public String pub_id;
 
     public String web_url;

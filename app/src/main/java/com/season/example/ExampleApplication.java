@@ -18,7 +18,7 @@ public class ExampleApplication extends BaseApplication{
     public void onCreate() {
         super.onCreate();
 
-        ModelFactory.local().file().getValue("keyData", new Observer<ClientKey>() {
+        ModelFactory.local().file().key().getValue("keyData", new Observer<ClientKey>() {
             @Override
             public void onSubscribe(Disposable d) {
 
