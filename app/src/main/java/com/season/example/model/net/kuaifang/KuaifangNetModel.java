@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.season.example.entry.ClientKey;
-import com.season.rapiddevelopment.DNS;
+import com.season.example.model.DNS;
 import com.season.rapiddevelopment.model.BaseNetModel;
 import com.season.rapiddevelopment.tools.Console;
 import com.season.rapiddevelopment.tools.Crypto;
