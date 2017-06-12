@@ -17,7 +17,7 @@ import retrofit2.Retrofit;
 public abstract class BaseNetModel {
 
     protected Context mContext;
-    protected Retrofit mRetrofit;
+    private Retrofit mRetrofit;
 
     public BaseNetModel() {
         mContext = BaseApplication.sContext;
@@ -31,6 +31,14 @@ public abstract class BaseNetModel {
                         //.addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .baseUrl(getBaseUrl())//主机地址
                 .build();
+    }
+
+    /**
+     * 获取服务器请求
+     * @return
+     */
+    protected Retrofit getHttpClient(){
+        return mRetrofit;
     }
 
     /**

@@ -6,7 +6,6 @@ import com.season.rapiddevelopment.model.BaseEntry;
 import com.season.rapiddevelopment.tools.PkgManagerUtil;
 import com.season.rapiddevelopment.tools.UniqueIdUtil;
 
-import retrofit2.Call;
 import retrofit2.Callback;
 
 /**
@@ -18,13 +17,15 @@ public class NetKeyModel extends KuaifangNetModel {
 
     public NetKeyModel() {
         super();
+        mApi = getHttpClient().create(INetRequestKey.class);
     }
 
+    private INetRequestKey mApi;
+
     public void getClientKey(Callback<BaseEntry<ClientKey>> callback) {
-        INetRequestKey service = mRetrofit.create(INetRequestKey.class);
-        Call<BaseEntry<ClientKey>> call = service.getClientKey(UniqueIdUtil.getDeviceId(BaseApplication.sContext),
-                UniqueIdUtil.getDeviceInfo(BaseApplication.sContext), PkgManagerUtil.getApkVersionName(BaseApplication.sContext));
-        call.enqueue(callback);
+        mApi.getClientKey(UniqueIdUtil.getDeviceId(BaseApplication.sContext),
+                UniqueIdUtil.getDeviceInfo(BaseApplication.sContext), PkgManagerUtil.getApkVersionName(BaseApplication.sContext))
+                .enqueue(callback);
     }
 
 }
