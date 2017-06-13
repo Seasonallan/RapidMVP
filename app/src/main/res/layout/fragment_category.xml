@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,31 +8,95 @@
 
     <include
         android:id="@+id/common_top"
-        layout="@layout/inc_common_titlebar"/>
+        layout="@layout/inc_common_titlebar" />
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/common_top">
+        android:layout_below="@+id/common_top"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_set"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <com.season.rapiddevelopment.ui.view.ReboundScrollView
+            android:id="@+id/sv_top"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:textAllCaps="false"
+            android:background="@color/red"
+            android:fillViewport="true"
             android:text="RxJava"
-            tools:ignore="HardcodedText"/>
+            android:textAllCaps="false"
+            tools:ignore="HardcodedText">
 
-        <TextView
-            android:id="@+id/tv_result"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/grayHit"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:padding="124dp"
+                    android:text="pull up"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="300dp"
+                    android:background="@color/black"
+                    android:gravity="center"
+                    android:padding="124dp"
+                    android:text="pull up"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+        </com.season.rapiddevelopment.ui.view.ReboundScrollView>
+
+        <com.season.rapiddevelopment.ui.view.ReboundScrollView
+            android:id="@+id/sv_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_above="@+id/btn_set"
-            android:layout_centerHorizontal="true"/>
 
-    </RelativeLayout>
+            android:background="@color/gray">
 
-    <include layout="@layout/inc_common_loading"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/grayHit"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:gravity="center"
+                    android:padding="124dp"
+                    android:text="pull up"
+                    android:textColor="@color/blue" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="300dp"
+                    android:gravity="center"
+                    android:padding="124dp"
+                    android:text="pull up"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+        </com.season.rapiddevelopment.ui.view.ReboundScrollView>
+
+    </LinearLayout>
+
+    <include layout="@layout/inc_common_loading" />
 
 </RelativeLayout>
