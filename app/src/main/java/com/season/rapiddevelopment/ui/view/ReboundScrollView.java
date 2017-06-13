@@ -1,30 +1,20 @@
 package com.season.rapiddevelopment.ui.view;
 
-import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
-import com.season.rapiddevelopment.tools.Console;
-
 /**
- * 有弹性的ScrollView
- * 实现下拉弹回和上拉弹回
+ * 智能下滑切换scrollview，只需配置上级
  *
  * @author zhangjg
  * @date Feb 13, 2014 6:11:33 PM
  */
 public class ReboundScrollView extends ScrollView {
-
-    private static final String TAG = "ElasticScrollView";
 
     //移动因子, 是一个百分比, 比如手指移动了100px, 那么View就只移动50px
     //目的是达到一个延迟的效果
@@ -33,15 +23,9 @@ public class ReboundScrollView extends ScrollView {
     //松开手指后, 界面回到正常位置需要的动画时间
     private static final int ANIM_TIME = 300;
 
-    //ScrollView的子View， 也是ScrollView的唯一一个子View
-    private View contentView;
-
     //手指按下时的Y值, 用于在移动时计算移动距离
     //如果按下时不能上拉和下拉， 会在手指移动时更新为当前手指的Y值
     private float startY;
-
-    //用于记录正常的布局位置
-    private Rect originalRect = new Rect();
 
     //手指按下时记录是否可以继续下拉
     private boolean canPullDown = false;
@@ -60,40 +44,23 @@ public class ReboundScrollView extends ScrollView {
         super(context, attrs);
     }
 
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
-        if (getChildCount() > 0) {
-            contentView = getChildAt(0);
-        }
-    }
 
-    @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        super.onLayout(changed, l, t, r, b);
+    //scrollview都高度，非内容高度
+    private int height;
+    //上级
+    private ReboundScrollView bindScrollView;
 
-        if (contentView == null) return;
-        if (height <= 0) {
-            //ScrollView中的唯一子控件的位置信息, 这个位置信息在整个控件的生命周期中保持不变
-            originalRect.set(contentView.getLeft(), contentView.getTop(), contentView
-                    .getRight(), contentView.getBottom());
-            height = getBottom();
-            Console.logNetMessage(height + ">>>" + getLayoutParams().height + ">>>" + getMeasuredHeight());
-            Console.logNetMessage(">>" + getResources().getDisplayMetrics().heightPixels);
-        }
-
-    }
-
-    int height;
-    ReboundScrollView bindScrollView;
-    public void setTopView(ReboundScrollView topView){
+    //设置上级
+    public void setTopView(ReboundScrollView topView) {
         isTop = false;
         bindScrollView = topView;
     }
 
-    boolean isTop = true;
+    //是否是上级
+    private boolean isTop = true;
 
-    public void moveBack(){
+    //下啦返回上级，上级弹性向下显示
+    public void moveBack(final View.OnClickListener callback) {
         ValueAnimator animator = ValueAnimator.ofFloat(height, 0);
         animator.setDuration(ANIM_TIME).start();
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -101,51 +68,70 @@ public class ReboundScrollView extends ScrollView {
             public void onAnimationUpdate(ValueAnimator animation) {
                 float topMoveF = (float) animation.getAnimatedValue();
                 int topMove = (int) topMoveF;
-                LinearLayout.LayoutParams param = (LinearLayout.LayoutParams) getLayoutParams();
-                param.height = height;
-                param.topMargin = -topMove;
-                setLayoutParams(param);
+                params.height = height;
+                params.topMargin = -topMove;
+                setLayoutParams(params);
+                if (topMoveF <= 0) {
+                    callback.onClick(null);
+                }
             }
         });
     }
 
+    //触发上级显示
     public boolean reset() {
         if (bindScrollView != null) {
-            bindScrollView.moveBack();
+            bindScrollView.moveBack(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    params.height = height;
+                    params.topMargin = 0;
+                    setLayoutParams(params);
+                }
+            });
             return true;
         }
         return false;
     }
 
 
-    /**
-     * 回弹
-     */
+    //弹性重置高度
     private void reboundView() {
-        TranslateAnimation anim = new TranslateAnimation(0, 0, contentView.getTop(),
-                originalRect.top);
-        anim.setDuration(ANIM_TIME);
-        contentView.startAnimation(anim);
-        // 设置回到正常的布局位置
-        contentView.layout(originalRect.left, originalRect.top,
-                originalRect.right, originalRect.bottom);
+        ValueAnimator animator = ValueAnimator.ofFloat(currentMarginTop, 0);
+        animator.setDuration(ANIM_TIME).start();
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float topMoveF = (float) animation.getAnimatedValue();
+                int topMove = (int) topMoveF;
+                params.height = height;
+                params.topMargin = topMove;
+                setLayoutParams(params);
+            }
+        });
     }
 
-    /**
-     * 在触摸事件中, 处理上拉和下拉的逻辑
-     */
+    private int currentMarginTop = 0;
+    LinearLayout.LayoutParams params;
+
+    private void initHeight() {
+        if (height <= 0) {
+            //ScrollView中的唯一子控件的位置信息, 这个位置信息在整个控件的生命周期中保持不变
+            params = (LinearLayout.LayoutParams) getLayoutParams();
+            height = getHeight();
+        }
+    }
+
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-
-        if (contentView == null) {
-            return super.dispatchTouchEvent(ev);
-        }
 
         int action = ev.getAction();
 
         switch (action) {
             case MotionEvent.ACTION_DOWN:
-
+                initHeight();
                 //判断是否可以上拉和下拉
                 canPullDown = isCanPullDown();
                 canPullUp = isCanPullUp();
@@ -159,33 +145,26 @@ public class ReboundScrollView extends ScrollView {
                 if (!isMoved) break;  //如果没有移动布局， 则跳过执行
 
                 if (isTop) {
-                    if (originalRect.top - contentView.getTop() > 200) {
-                        ValueAnimator animator = ValueAnimator.ofFloat(0, height);
+                    if (currentMarginTop < -200) {
+                        ValueAnimator animator = ValueAnimator.ofFloat(currentMarginTop, -height);
                         animator.setDuration(ANIM_TIME).start();
                         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                             @Override
                             public void onAnimationUpdate(ValueAnimator animation) {
                                 float topMoveF = (float) animation.getAnimatedValue();
                                 int topMove = (int) topMoveF;
-                                LinearLayout.LayoutParams param = (LinearLayout.LayoutParams) getLayoutParams();
-                                param.height = height;
-                                param.topMargin = -topMove;
-                                setLayoutParams(param);
-                                if (topMoveF >= height) {
-                                    //设置回到正常的布局位置
-                                 //   contentView.layout(originalRect.left, originalRect.top,
-                                 //           originalRect.right, originalRect.bottom);
-                                    Console.logNetMessage("resetContent");
-                                }
+                                params.height = height;
+                                params.topMargin = topMove;
+                                setLayoutParams(params);
                             }
                         });
                     } else {
                         reboundView();
                     }
                 } else {
-                    if (originalRect.top - contentView.getTop() < -200) {
-                        if (reset()){
-                        }else{
+                    if (currentMarginTop > 200) {
+                        if (reset()) {
+                        } else {
                             reboundView();
                         }
                     } else {
@@ -223,10 +202,10 @@ public class ReboundScrollView extends ScrollView {
 
                 if (shouldMove) {
                     //计算偏移量
-                    int offset = (int) (deltaY * MOVE_FACTOR);
-                    //随着手指的移动而移动布局
-                    contentView.layout(originalRect.left, originalRect.top + offset,
-                            originalRect.right, originalRect.bottom + offset);
+                    currentMarginTop = (int) (deltaY * MOVE_FACTOR);
+                    params.height = height;
+                    params.topMargin = currentMarginTop;
+                    setLayoutParams(params);
                     isMoved = true;  //记录移动了布局
                 }
 
@@ -244,14 +223,14 @@ public class ReboundScrollView extends ScrollView {
      */
     private boolean isCanPullDown() {
         return getScrollY() == 0 ||
-                contentView.getHeight() < getHeight() + getScrollY();
+                getChildAt(0).getHeight() < getHeight() + getScrollY();
     }
 
     /**
      * 判断是否滚动到底部
      */
     private boolean isCanPullUp() {
-        return contentView.getHeight() <= getHeight() + getScrollY();
+        return getChildAt(0).getHeight() <= getHeight() + getScrollY();
     }
 
 }

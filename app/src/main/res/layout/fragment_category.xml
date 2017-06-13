@@ -58,6 +58,17 @@
 
         </com.season.rapiddevelopment.ui.view.ReboundScrollView>
 
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:background="@color/blue"
+            android:padding="24dp"
+            android:text="center"
+            android:textColor="@color/white" />
+
         <com.season.rapiddevelopment.ui.view.ReboundScrollView
             android:id="@+id/sv_bottom"
             android:layout_width="match_parent"
@@ -77,6 +88,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:gravity="center"
+                    android:background="@color/white"
                     android:padding="124dp"
                     android:text="pull up"
                     android:textColor="@color/blue" />
@@ -86,6 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:layout_marginTop="300dp"
+                    android:background="@color/orange"
                     android:gravity="center"
                     android:padding="124dp"
                     android:text="pull up"
