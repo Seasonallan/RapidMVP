@@ -38,8 +38,8 @@ public abstract class BaseRecycleAdapter<T> extends RecyclerView.Adapter<Recycle
     }
 
 
-    public void addFootView(HeadFootView headerViewLayout) {
-        mFootViewLayouts.add(headerViewLayout);
+    public void addFootView(HeadFootView footView) {
+        mFootViewLayouts.add(0, footView);
         notifyDataSetChanged();
     }
 
