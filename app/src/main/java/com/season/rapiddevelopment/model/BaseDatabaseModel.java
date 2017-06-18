@@ -18,6 +18,12 @@ import io.reactivex.schedulers.Schedulers;
  */
 public abstract class BaseDatabaseModel {
 
+    public static final int ADD_ITEM = 0x01;
+    public static final int ADD_List   = 0x05;
+    public static final int DELETE = 0x02;
+    public static final int UPDATE = 0x03;
+    public static final int GET = 0x04;
+
     public Context mContext;
 
     public BaseDatabaseModel() {

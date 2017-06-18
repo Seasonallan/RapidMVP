@@ -52,16 +52,17 @@ public class HomePresenter extends BasePresenter {
         BaseRecycleAdapter adapter = getView().getAdapter();
         if (callType == REFRESH) {
             if (adapter != null && adapter.getCount() > 0) {
-                maxId = ((VideoItem)adapter.getItem(0)).pub_id;
+                maxId = ((VideoItem)adapter.getRealItem(0)).pub_id;
             }
         }else if (callType == MORE) {
             if (adapter != null && adapter.getCount() > 0) {
                 action = 2;
-                maxId = ((VideoItem)adapter.getItem(adapter.getCount() - 1)).pub_id;
+                maxId = ((VideoItem)adapter.getRealItem(adapter.getCount() - 1)).pub_id;
             }
         }else{
             getView().getLoadingView().showLoadingView();
         }
+
         ModelFactory.net().kuaifang().video().getVideo(Configure.PAGE_SIZE, action, maxId, new HttpCallback<VideoList>(callType));
 
     }

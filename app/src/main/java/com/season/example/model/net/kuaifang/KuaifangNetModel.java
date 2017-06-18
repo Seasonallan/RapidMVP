@@ -96,6 +96,11 @@ public abstract class KuaifangNetModel extends BaseNetModel{
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request requestBeforeHeader = chain.request();
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             Request orgRequest = requestBeforeHeader.newBuilder().addHeader("User-Agent", "TTBaoXiao/" + PkgManagerUtil.getApkVersionName(mContext) + " Android/" + PkgManagerUtil.getSystemMessage()).build();
             if (orgRequest.method() == "POST") {
                 RequestBody requestBody = orgRequest.body();

@@ -17,6 +17,10 @@ public class DatabaseModel<T extends BaseDao> extends BaseDatabaseModel {
         database = new BaseDatabase(tClass);
     }
 
+    public boolean delete(T item){
+        return database.deleteItem(item) > 0;
+    }
+
     @Override
     public Object getDataImmediately(int flag) {
         return database.getAll();
@@ -24,6 +28,9 @@ public class DatabaseModel<T extends BaseDao> extends BaseDatabaseModel {
 
     @Override
     public boolean setDataImmediately(int flag, Object value) {
+        if (flag == 1){
+
+        }
         return database.insert((BaseDao) value) >= 0;
     }
 }

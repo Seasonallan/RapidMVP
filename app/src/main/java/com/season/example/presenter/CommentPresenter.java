@@ -66,7 +66,7 @@ public class CommentPresenter extends BasePresenter {
         BaseRecycleAdapter adapter = getView().getAdapter();
         if (callType == MORE) {
             if (adapter != null && adapter.getCount() > 0) {
-                maxId = ((CommentItem)adapter.getItem(adapter.getCount() - 1)).id;
+                maxId = ((CommentItem)adapter.getRealItem(adapter.getCount() - 1)).id;
             }
         }
         ModelFactory.net().kuaifang().video().getComment(Configure.PAGE_SIZE, maxId, vid, new HttpCallback<CommentList>(callType));

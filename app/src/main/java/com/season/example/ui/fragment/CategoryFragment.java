@@ -6,7 +6,7 @@ import com.season.rapiddevelopment.ui.BaseFragment;
 import com.season.rapiddevelopment.ui.view.ReboundScrollView;
 
 /**
- * Disc:
+ * Disc: drag to change scrollview text
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-10 15:27
  */
