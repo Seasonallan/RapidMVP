@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.season.example.ui.activity.MainActivity">
 
-    <FrameLayout
+    <android.support.v4.view.ViewPager
         android:id="@+id/main_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

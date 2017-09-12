@@ -15,8 +15,8 @@ import com.season.example.ui.dialog.CommentDialog;
 import com.season.rapiddevelopment.R;
 import com.season.rapiddevelopment.presenter.BasePresenter;
 import com.season.rapiddevelopment.tools.Console;
-import com.season.rapiddevelopment.ui.BaseActivity;
 import com.season.rapiddevelopment.ui.BaseRecycleAdapter;
+import com.season.rapiddevelopment.ui.BaseTLEActivity;
 import com.season.rapiddevelopment.ui.pulltorefresh.IPull2RefreshAction;
 import com.season.rapiddevelopment.ui.pulltorefresh.IPull2RefreshView;
 import com.season.rapiddevelopment.ui.pulltorefresh.Pull2RefreshImpl;
@@ -28,7 +28,7 @@ import java.util.List;
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-11 03:40
  */
-public class CommentActivity extends BaseActivity implements IPull2RefreshAction<CommentItem> {
+public class CommentActivity extends BaseTLEActivity implements IPull2RefreshAction<CommentItem> {
 
     public static void show(Context context, VideoItem item) {
         Intent intent = new Intent();

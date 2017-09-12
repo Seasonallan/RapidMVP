@@ -4,17 +4,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.season.rapiddevelopment.R;
 import com.season.example.entry.ClientKey;
 import com.season.example.presenter.HotPresenter;
-import com.season.rapiddevelopment.ui.BaseFragment;
+import com.season.rapiddevelopment.R;
+import com.season.rapiddevelopment.ui.BaseTLEFragment;
 
 /**
  * Disc:
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-10 15:27
  */
-public class HotFragment extends BaseFragment {
+public class HotFragment extends BaseTLEFragment {
 
     @Override
     protected int getLayoutId() {

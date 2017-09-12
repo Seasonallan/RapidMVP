@@ -4,14 +4,14 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.season.rapiddevelopment.R;
-import com.season.rapiddevelopment.ui.BaseActivity;
+import com.season.rapiddevelopment.ui.BaseTLEActivity;
 
 /**
  * Disc: 关于页面
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-10 16:00
  */
-public class AboutActivity extends BaseActivity {
+public class AboutActivity extends BaseTLEActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

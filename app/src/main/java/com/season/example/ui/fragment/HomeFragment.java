@@ -13,8 +13,8 @@ import com.season.example.ui.activity.CommentActivity;
 import com.season.example.ui.adapter.HomeAdapter;
 import com.season.rapiddevelopment.R;
 import com.season.rapiddevelopment.presenter.BasePresenter;
-import com.season.rapiddevelopment.ui.BaseFragment;
 import com.season.rapiddevelopment.ui.BaseRecycleAdapter;
+import com.season.rapiddevelopment.ui.BaseTLEFragment;
 import com.season.rapiddevelopment.ui.pulltorefresh.IPull2RefreshAction;
 import com.season.rapiddevelopment.ui.pulltorefresh.IPull2RefreshView;
 import com.season.rapiddevelopment.ui.pulltorefresh.Pull2RefreshImpl;
@@ -27,7 +27,7 @@ import java.util.List;
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-10 15:27
  */
-public class HomeFragment extends BaseFragment implements IPull2RefreshAction {
+public class HomeFragment extends BaseTLEFragment implements IPull2RefreshAction {
 
     @Override
     protected int getLayoutId() {
@@ -36,7 +36,6 @@ public class HomeFragment extends BaseFragment implements IPull2RefreshAction {
 
     IPull2RefreshView mPull2RefreshView;
     HomeAdapter mHomeAdapter;
-
     HomePresenter mHomePresenter;
 
     @Override

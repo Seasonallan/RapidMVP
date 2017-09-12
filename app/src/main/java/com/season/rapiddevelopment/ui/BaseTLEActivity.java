@@ -3,9 +3,15 @@ package com.season.rapiddevelopment.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.LinearLayout;
 
+import com.season.rapiddevelopment.R;
 import com.season.rapiddevelopment.ui.empty.EmptyImpl;
 import com.season.rapiddevelopment.ui.empty.IEmptyAction;
 import com.season.rapiddevelopment.ui.empty.IEmptyView;
@@ -21,7 +27,29 @@ import com.season.rapiddevelopment.ui.titlebar.TitleBarImpl;
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-10 14:37
  */
-public abstract class BaseActivity extends Activity implements ITitleBarAction, ILoadingAction, IEmptyAction, IView {
+public abstract class BaseTLEActivity extends Activity implements ITitleBarAction, ILoadingAction, IEmptyAction, IView {
+
+
+    private ViewGroup mContentView;
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        super.setContentView(R.layout.base_tle);
+        mContentView = (ViewGroup) findViewById(R.id.main_view);
+    }
+
+    @Override
+    public void setContentView(View view) {
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1);
+        mContentView.addView(view, lp);
+    }
+    @Override
+    public void setContentView(int layoutResID) {
+        View view = LayoutInflater.from(this).inflate(layoutResID, null);
+        setContentView(view);
+    }
+
 
     ITitleBar mTitleBar;
     ILoadingView mLoadingView;

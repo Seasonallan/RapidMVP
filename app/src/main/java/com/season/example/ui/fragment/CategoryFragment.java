@@ -2,7 +2,7 @@ package com.season.example.ui.fragment;
 
 import com.season.example.presenter.CategoryPresenter;
 import com.season.rapiddevelopment.R;
-import com.season.rapiddevelopment.ui.BaseFragment;
+import com.season.rapiddevelopment.ui.BaseTLEFragment;
 import com.season.rapiddevelopment.ui.view.ReboundScrollView;
 
 /**
@@ -10,7 +10,7 @@ import com.season.rapiddevelopment.ui.view.ReboundScrollView;
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-10 15:27
  */
-public class CategoryFragment extends BaseFragment {
+public class CategoryFragment extends BaseTLEFragment {
 
     @Override
     protected int getLayoutId() {

@@ -24,7 +24,7 @@ import com.season.rapiddevelopment.ui.titlebar.TitleBarImpl;
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-10 15:25
  */
-public abstract class BaseFragment extends Fragment implements ITitleBarAction, ILoadingAction, IEmptyAction, IView {
+public abstract class BaseTLEFragment extends Fragment implements ITitleBarAction, ILoadingAction, IEmptyAction, IView {
 
     // 设计模式 - 模板方法(Template Method)模式
     /**
@@ -88,7 +88,10 @@ public abstract class BaseFragment extends Fragment implements ITitleBarAction, 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (mView == null) {
-            mView = inflater.inflate(getLayoutId(), container, false);
+            mView = inflater.inflate(R.layout.base_tle, container, false);
+            ViewGroup contentView = (ViewGroup) mView.findViewById(R.id.main_view);
+            View mainView = inflater.inflate(getLayoutId(), container, false);
+            contentView.addView(mainView);
             onViewCreated();
         }
         return mView;

@@ -6,16 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.season.example.ui.fragment.HotFragment">
 
-
-    <include
-        android:id="@+id/common_top"
-        layout="@layout/inc_common_titlebar"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/common_top">
-
         <Button
             android:id="@+id/btn_set"
             android:layout_width="wrap_content"
@@ -32,8 +22,5 @@
             android:layout_above="@+id/btn_set"
             android:layout_centerHorizontal="true"/>
 
-    </RelativeLayout>
-
-    <include layout="@layout/inc_common_loading"/>
 
 </RelativeLayout>

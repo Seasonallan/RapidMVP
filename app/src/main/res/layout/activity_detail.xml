@@ -5,16 +5,11 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content">
 
-    <include
-        android:id="@+id/common_top"
-        layout="@layout/inc_common_titlebar"/>
-
     <com.season.rapiddevelopment.ui.view.refreshview.PullToRefreshListView
         android:id="@+id/pull_to_refresh_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/videodetail_bottombar"
-        android:layout_below="@+id/common_top"/>
+        android:layout_above="@+id/videodetail_bottombar" />
 
     <RelativeLayout
         android:id="@+id/videodetail_bottombar"
@@ -65,9 +60,5 @@
         </LinearLayout>
     </RelativeLayout>
 
-
-    <include layout="@layout/inc_common_loading"/>
-
-    <include layout="@layout/inc_common_empty"/>
 
 </RelativeLayout>

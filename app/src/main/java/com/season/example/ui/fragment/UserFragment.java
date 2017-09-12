@@ -3,16 +3,16 @@ package com.season.example.ui.fragment;
 import android.view.View;
 import android.widget.Button;
 
-import com.season.rapiddevelopment.R;
 import com.season.example.ui.activity.AboutActivity;
-import com.season.rapiddevelopment.ui.BaseFragment;
+import com.season.rapiddevelopment.R;
+import com.season.rapiddevelopment.ui.BaseTLEFragment;
 
 /**
  * Disc:
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-10 15:27
  */
-public class UserFragment extends BaseFragment {
+public class UserFragment extends BaseTLEFragment {
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_user;
