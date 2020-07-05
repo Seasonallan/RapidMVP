@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 
@@ -18,7 +19,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.season.example.ui.dagger.DaggerFragmentComponent;
+import com.season.example.ui.dagger.FragmentComponent;
+import com.season.example.ui.dagger.ViewModule;
 import com.season.rapiddevelopment.R;
+import com.season.rapiddevelopment.presenter.BasePresenter;
 import com.season.rapiddevelopment.ui.empty.EmptyImpl;
 import com.season.rapiddevelopment.ui.empty.IEmptyAction;
 import com.season.rapiddevelopment.ui.empty.IEmptyView;
@@ -29,6 +34,8 @@ import com.season.rapiddevelopment.ui.titlebar.ITitleBar;
 import com.season.rapiddevelopment.ui.titlebar.ITitleBarAction;
 import com.season.rapiddevelopment.ui.titlebar.TitleBarImpl;
 
+import javax.inject.Inject;
+
 import static com.season.rapiddevelopment.BaseApplication.showToast;
 
 /**
@@ -36,21 +43,47 @@ import static com.season.rapiddevelopment.BaseApplication.showToast;
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-10 14:37
  */
-public abstract class BaseTLEActivity extends AppCompatActivity implements ITitleBarAction, ILoadingAction, IEmptyAction, IView {
+public abstract class BaseTLEActivity<P extends BasePresenter> extends AppCompatActivity implements ITitleBarAction, ILoadingAction, IEmptyAction, IView {
 
+    /**
+     * 注入
+     * @param component
+     */
+    protected abstract void inject(FragmentComponent component);
 
+    @Inject
+    protected P mPresenter;
     private ViewGroup mContentView;
+
+    private ITitleBar mTitleBar;
+    private ILoadingView mLoadingView;
+    private IEmptyView mEmptyView;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.base_tle);
+
+        inject(DaggerFragmentComponent.builder()
+                .viewModule(new ViewModule(this))
+                .build());
+
+        mEmptyView = new EmptyImpl(this);
+        mLoadingView = new LoadingImpl(this);
+        if (isTopTileEnable()){
+            ViewStub viewStub = super.findViewById(R.id.common_top);
+            viewStub.inflate();
+            mTitleBar = new TitleBarImpl(this);
+        }
+
         mContentView = (ViewGroup) findViewById(R.id.main_view);
     }
 
-
-    @Override
-    public View findViewById(int id) {
-        return super.findViewById(id);
+    /**
+     * 顶部标题栏是否显示
+     * @return
+     */
+    protected boolean isTopTileEnable(){
+        return true;
     }
 
     @Override
@@ -59,6 +92,7 @@ public abstract class BaseTLEActivity extends AppCompatActivity implements ITitl
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1);
         mContentView.addView(view, lp);
     }
+
     @Override
     public void setContentView(int layoutResID) {
         View view = LayoutInflater.from(this).inflate(layoutResID, null);
@@ -66,26 +100,16 @@ public abstract class BaseTLEActivity extends AppCompatActivity implements ITitl
     }
 
 
-    ITitleBar mTitleBar;
-    ILoadingView mLoadingView;
-    IEmptyView mEmptyView;
-
     /**
      * 顶部标题控制栏
      * @return
      */
     public ITitleBar getTitleBar(){
-        if (mTitleBar == null){
-            mTitleBar = new TitleBarImpl(this);
-        }
         return mTitleBar;
     }
 
     @Override
     public IEmptyView getEmptyView() {
-        if (mEmptyView == null){
-            mEmptyView = new EmptyImpl(this);
-        }
         return mEmptyView;
     }
 
@@ -114,9 +138,6 @@ public abstract class BaseTLEActivity extends AppCompatActivity implements ITitl
      * @return
      */
     public ILoadingView getLoadingView(){
-        if (mLoadingView == null){
-            mLoadingView = new LoadingImpl(this);
-        }
         return mLoadingView;
     }
 

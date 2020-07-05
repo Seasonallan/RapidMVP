@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/titlebar_container"
                 android:layout_width="match_parent"
                 android:layout_height="48dp">
 
     <View
-        android:id="@+id/titlebar_container"
         android:layout_width="fill_parent"
         android:layout_height="48dp"
         android:background="@color/colorPrimary"/>
@@ -19,6 +19,7 @@
         android:layout_marginLeft="72dp"
         android:layout_marginRight="72dp"
         android:singleLine="true"
+        android:text="i m title"
         android:textColor="@color/white"
         android:textSize="18dp"/>
 
@@ -32,7 +33,7 @@
     <ImageView
         android:id="@+id/titlebar_iv_left"
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
+        android:layout_height="48dp"
         android:layout_centerVertical="true"
         android:paddingBottom="12dp"
         android:paddingLeft="12dp"
@@ -59,7 +60,7 @@
     <ImageView
         android:id="@+id/titlebar_iv_right"
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
+        android:layout_height="48dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:padding="12dp"

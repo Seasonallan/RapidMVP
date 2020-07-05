@@ -9,6 +9,9 @@ import com.season.rapiddevelopment.tools.Console;
 import com.season.rapiddevelopment.ui.BaseRecycleAdapter;
 import com.season.rapiddevelopment.ui.IView;
 
+import javax.inject.Inject;
+
+
 /**
  * Disc:
  * User: SeasonAllan(451360508@qq.com)
@@ -16,6 +19,7 @@ import com.season.rapiddevelopment.ui.IView;
  */
 public class HomePresenter extends BasePresenter {
 
+    @Inject
     public HomePresenter(IView view){
         super(view);
     }

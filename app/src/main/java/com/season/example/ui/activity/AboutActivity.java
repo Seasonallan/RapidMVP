@@ -1,8 +1,10 @@
 package com.season.example.ui.activity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
+import com.season.example.ui.dagger.FragmentComponent;
 import com.season.rapiddevelopment.R;
 import com.season.rapiddevelopment.ui.BaseTLEActivity;
 
@@ -14,9 +16,14 @@ import com.season.rapiddevelopment.ui.BaseTLEActivity;
 public class AboutActivity extends BaseTLEActivity {
 
     @Override
+    protected void inject(FragmentComponent component) {
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+
         getTitleBar().setTopTile("About");
         getTitleBar().enableLeftButton();
 

@@ -9,6 +9,8 @@ import com.season.rapiddevelopment.tools.Console;
 import com.season.rapiddevelopment.ui.BaseRecycleAdapter;
 import com.season.rapiddevelopment.ui.IView;
 
+import javax.inject.Inject;
+
 /**
  * Disc:
  * User: SeasonAllan(451360508@qq.com)
@@ -16,16 +18,15 @@ import com.season.rapiddevelopment.ui.IView;
  */
 public class CommentPresenter extends BasePresenter {
 
-    String vid;
-    public CommentPresenter(IView view, String vid){
+    @Inject
+    public CommentPresenter(IView view){
         super(view);
-        this.vid = vid;
     }
 
     protected <T> void onResponse2UI(int type, T result) {
         super.onResponse2UI(type, result);
         if (type == REFRESH){
-            ModelFactory.local().file().commcon().setValue("DetailView" + vid, result, null);
+            ModelFactory.local().file().commcon().setValue("DetailView", result, null);
         }
     }
 
@@ -33,7 +34,7 @@ public class CommentPresenter extends BasePresenter {
      * 发送评论
      * @param comment
      */
-    public void sendComment(String comment){
+    public void sendComment(String vid, String comment){
         ModelFactory.net().kuaifang().video().sentComment(vid, comment, new HttpCallback<String>(11));
     }
 
@@ -41,7 +42,7 @@ public class CommentPresenter extends BasePresenter {
      * 获取列表数据
      * @param callType
      */
-    public void loadList(int callType) {
+    public void loadList(final String vid, int callType) {
         if (callType == CREATE){
             getView().getLoadingView().showLoadingView();
             Console.logNetMessage("check local cache");
@@ -49,7 +50,7 @@ public class CommentPresenter extends BasePresenter {
                 @Override
                 public void onError(Throwable e) {
                     Console.logNetMessage("empty local cache, load from net");
-                    loadList(REFRESH);
+                    loadList(vid, REFRESH);
                 }
 
                 @Override

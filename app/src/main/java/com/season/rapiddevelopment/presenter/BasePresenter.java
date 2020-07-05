@@ -4,6 +4,8 @@ import com.season.rapiddevelopment.model.BaseEntry;
 import com.season.rapiddevelopment.tools.Console;
 import com.season.rapiddevelopment.ui.IView;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import retrofit2.Call;
@@ -23,7 +25,7 @@ public class BasePresenter {
     public static final int GET_KEY = 0x12;
 
     IView mView;
-
+    @Inject
     public BasePresenter(IView view) {
         this.mView = view;
     }

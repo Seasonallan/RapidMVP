@@ -5,6 +5,8 @@ import com.season.example.model.ModelFactory;
 import com.season.rapiddevelopment.presenter.BasePresenter;
 import com.season.rapiddevelopment.ui.IView;
 
+import javax.inject.Inject;
+
 /**
  * Disc:
  * User: SeasonAllan(451360508@qq.com)
@@ -12,6 +14,8 @@ import com.season.rapiddevelopment.ui.IView;
  */
 public class CategoryPresenter extends BasePresenter {
 
+
+    @Inject
     public CategoryPresenter(IView view) {
         super(view);
     }

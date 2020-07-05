@@ -1,8 +1,7 @@
 package com.season.rapiddevelopment.ui.pulltorefresh;
 
-import android.view.View;
-
 import com.season.rapiddevelopment.ui.BaseRecycleAdapter;
+import com.season.rapiddevelopment.ui.IFindView;
 import com.season.rapiddevelopment.ui.empty.IEmptyView;
 
 import java.util.List;
@@ -12,14 +11,7 @@ import java.util.List;
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-10 16:22
  */
-public interface IPull2RefreshAction<T> {
-
-    /**
-     * 查找资源
-     * @param id
-     * @return
-     */
-    View findViewById(int id);
+public interface IPull2RefreshAction<T> extends IFindView {
 
     /**
      * 获取加载错误或为空视图

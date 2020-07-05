@@ -12,6 +12,7 @@ import com.season.example.entry.VideoList;
 import com.season.example.presenter.HomePresenter;
 import com.season.example.ui.activity.CommentActivity;
 import com.season.example.ui.adapter.HomeAdapter;
+import com.season.example.ui.dagger.FragmentComponent;
 import com.season.rapiddevelopment.R;
 import com.season.rapiddevelopment.presenter.BasePresenter;
 import com.season.rapiddevelopment.ui.BaseRecycleAdapter;
@@ -23,12 +24,13 @@ import com.season.rapiddevelopment.ui.view.refreshview.HeadFootView;
 
 import java.util.List;
 
+
 /**
  * Disc:
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-10 15:27
  */
-public class HomeFragment extends BaseTLEFragment implements IPull2RefreshAction {
+public class HomeFragment extends BaseTLEFragment<HomePresenter> implements IPull2RefreshAction {
 
     @Override
     protected int getLayoutId() {
@@ -37,27 +39,32 @@ public class HomeFragment extends BaseTLEFragment implements IPull2RefreshAction
 
     IPull2RefreshView mPull2RefreshView;
     HomeAdapter mHomeAdapter;
-    HomePresenter mHomePresenter;
 
     @Override
     protected void onViewCreated() {
-        mHomePresenter = new HomePresenter(this);
+      //  mHomePresenter = new HomePresenter(this);
+
         getTitleBar().setTopTile("Home");
 
         mPull2RefreshView = new Pull2RefreshImpl(this) {
 
             @Override
             public void onRefresh() {
-                mHomePresenter.loadList(BasePresenter.REFRESH);
+                mPresenter.loadList(BasePresenter.REFRESH);
             }
 
             @Override
             public void onLoadingMore() {
-                mHomePresenter.loadList(BasePresenter.MORE);
+                mPresenter.loadList(BasePresenter.MORE);
             }
         };
 
-        mHomePresenter.loadList(BasePresenter.CREATE);
+        mPresenter.loadList(BasePresenter.CREATE);
+    }
+
+    @Override
+    protected void inject(FragmentComponent component) {
+        component.inject(this);
     }
 
     @Override
@@ -72,7 +79,7 @@ public class HomeFragment extends BaseTLEFragment implements IPull2RefreshAction
     @Override
     public void onEmptyViewClick() {
         getEmptyView().dismissEmptyView();
-        mHomePresenter.loadList(BasePresenter.CREATE);
+        mPresenter.loadList(BasePresenter.CREATE);
     }
 
     @Override
@@ -224,4 +231,5 @@ public class HomeFragment extends BaseTLEFragment implements IPull2RefreshAction
         super.onError(type, errorMessage);
         mPull2RefreshView.onError();
     }
+
 }

@@ -4,18 +4,29 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content">
 
-    <include
+    <ViewStub
         android:id="@+id/common_top"
-        layout="@layout/inc_common_titlebar"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout="@layout/inc_common_titlebar"/>
 
     <FrameLayout
         android:id="@+id/main_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/common_top"/>
+        android:layout_below="@+id/titlebar_container"/>
 
-    <include layout="@layout/inc_common_loading"/>
+    <ViewStub
+        android:id="@+id/common_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout="@layout/inc_common_loading"/>
 
-    <include layout="@layout/inc_common_empty"/>
+    <ViewStub
+        android:id="@+id/common_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout="@layout/inc_common_empty"/>
+
 
 </RelativeLayout>

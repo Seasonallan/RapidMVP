@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.season.example.entry.ClientKey;
 import com.season.example.presenter.HotPresenter;
+import com.season.example.ui.dagger.FragmentComponent;
 import com.season.rapiddevelopment.R;
 import com.season.rapiddevelopment.ui.BaseTLEFragment;
 
@@ -14,7 +15,7 @@ import com.season.rapiddevelopment.ui.BaseTLEFragment;
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-10 15:27
  */
-public class HotFragment extends BaseTLEFragment {
+public class HotFragment extends BaseTLEFragment<HotPresenter> {
 
     @Override
     protected int getLayoutId() {
@@ -23,17 +24,21 @@ public class HotFragment extends BaseTLEFragment {
 
     TextView mTextView;
 
-    HotPresenter mHotPresenter;
+
+    @Override
+    protected void inject(FragmentComponent component) {
+        component.inject(this);
+    }
+
     @Override
     protected void onViewCreated() {
-        mHotPresenter = new HotPresenter(this);
         getTitleBar().setTopTile("Set");
         Button btn = (Button) findViewById(R.id.btn_set);
         mTextView = (TextView) findViewById(R.id.tv_result);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mHotPresenter.getKey();
+                mPresenter.getKey();
             }
         });
     }

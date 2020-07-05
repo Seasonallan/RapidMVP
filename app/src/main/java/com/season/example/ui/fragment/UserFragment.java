@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.season.example.ui.activity.AboutActivity;
+import com.season.example.ui.dagger.FragmentComponent;
 import com.season.rapiddevelopment.R;
 import com.season.rapiddevelopment.ui.BaseTLEFragment;
 
@@ -16,6 +17,11 @@ public class UserFragment extends BaseTLEFragment {
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_user;
+    }
+
+
+    @Override
+    protected void inject(FragmentComponent component) {
     }
 
     @Override

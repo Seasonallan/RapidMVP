@@ -1,6 +1,7 @@
 package com.season.rapiddevelopment.ui.empty;
 
 import android.view.View;
+import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,33 +21,38 @@ public class EmptyImpl implements IEmptyView {
 
     public EmptyImpl(IEmptyAction action) {
         this.mAction = action;
-        mEmptyContainerView = mAction.findViewById(R.id.empty_container);
-        if (mEmptyContainerView != null) {
-            mEmptyIconView = (ImageView) mAction.findViewById(R.id.empty_iv);
-            mEmptyDescriptionView = (TextView) mAction.findViewById(R.id.empty_tv_desc);
-            mEmptyContainerView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mAction.onEmptyViewClick();
-                }
-            });
-        } else {
-            throw new RuntimeException("please add inc_common_empty.xml to your layout");
-        }
     }
 
     @Override
     public void showEmptyView() {
-        if (mEmptyContainerView.getVisibility() == View.GONE) {
-            mEmptyContainerView.setVisibility(View.VISIBLE);
+        checkNull();
+        mEmptyContainerView.setVisibility(View.VISIBLE);
+    }
+
+    void checkNull(){
+        if (mEmptyContainerView == null){
+            ViewStub viewStub = mAction.findViewById(R.id.common_empty);
+            viewStub.inflate();
+            mEmptyContainerView = mAction.findViewById(R.id.empty_container);
+            if (mEmptyContainerView != null) {
+                mEmptyIconView = (ImageView) mAction.findViewById(R.id.empty_iv);
+                mEmptyDescriptionView = (TextView) mAction.findViewById(R.id.empty_tv_desc);
+                mEmptyContainerView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mAction.onEmptyViewClick();
+                    }
+                });
+            } else {
+                throw new RuntimeException("please add inc_common_empty.xml to your layout");
+            }
         }
     }
 
     @Override
     public void dismissEmptyView() {
-        if (mEmptyContainerView.getVisibility() == View.VISIBLE) {
-            mEmptyContainerView.setVisibility(View.GONE);
-        }
+        checkNull();
+        mEmptyContainerView.setVisibility(View.GONE);
     }
 
     @Override
@@ -56,7 +62,7 @@ public class EmptyImpl implements IEmptyView {
 
     @Override
     public void showEmptyView(int id, String txt) {
-        mEmptyContainerView.setVisibility(View.VISIBLE);
+        showEmptyView();
         if (id > 0)
             mEmptyIconView.setImageResource(id);
         if (txt != null) {

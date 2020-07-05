@@ -11,6 +11,7 @@ import com.season.example.entry.CommentList;
 import com.season.example.entry.VideoItem;
 import com.season.example.presenter.CommentPresenter;
 import com.season.example.ui.adapter.CommentAdapter;
+import com.season.example.ui.dagger.FragmentComponent;
 import com.season.example.ui.dialog.CommentDialog;
 import com.season.rapiddevelopment.R;
 import com.season.rapiddevelopment.presenter.BasePresenter;
@@ -28,7 +29,7 @@ import java.util.List;
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-11 03:40
  */
-public class CommentActivity extends BaseTLEActivity implements IPull2RefreshAction<CommentItem> {
+public class CommentActivity extends BaseTLEActivity<CommentPresenter> implements IPull2RefreshAction<CommentItem> {
 
     public static void show(Context context, VideoItem item) {
         Intent intent = new Intent();
@@ -39,9 +40,13 @@ public class CommentActivity extends BaseTLEActivity implements IPull2RefreshAct
     }
 
     VideoItem mVideoItem;
-    CommentPresenter mPresenter;
     CommentAdapter mCommentAdapter;
     IPull2RefreshView mPull2RefreshView;
+
+    @Override
+    protected void inject(FragmentComponent component) {
+        component.inject(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,19 +55,18 @@ public class CommentActivity extends BaseTLEActivity implements IPull2RefreshAct
         getTitleBar().setTopTile("VideoDetail");
         getTitleBar().enableLeftButton();
 
+        mVideoItem = (VideoItem) getIntent().getSerializableExtra("VideoItem");
         mPull2RefreshView = new Pull2RefreshImpl(this){
             @Override
             public void onRefresh() {
-                mPresenter.loadList(BasePresenter.REFRESH);
+                mPresenter.loadList(mVideoItem.vid, BasePresenter.REFRESH);
             }
 
             @Override
             public void onLoadingMore() {
-                mPresenter.loadList(BasePresenter.MORE);
+                mPresenter.loadList(mVideoItem.vid, BasePresenter.MORE);
             }
         };
-        mVideoItem = (VideoItem) getIntent().getSerializableExtra("VideoItem");
-        mPresenter = new CommentPresenter(this, mVideoItem.vid);
 
         findViewById(R.id.videodetail_bottombar_comment).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +87,7 @@ public class CommentActivity extends BaseTLEActivity implements IPull2RefreshAct
             }
         });
 
-        mPresenter.loadList(BasePresenter.CREATE);
+        mPresenter.loadList(mVideoItem.vid, BasePresenter.CREATE);
     }
 
     @Override
@@ -100,7 +104,7 @@ public class CommentActivity extends BaseTLEActivity implements IPull2RefreshAct
     @Override
     public void onEmptyViewClick() {
         getEmptyView().dismissEmptyView();
-        mPresenter.loadList(BasePresenter.CREATE);
+        mPresenter.loadList(mVideoItem.vid, BasePresenter.CREATE);
     }
 
     @Override

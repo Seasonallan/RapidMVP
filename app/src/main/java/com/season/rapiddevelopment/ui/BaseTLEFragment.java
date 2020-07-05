@@ -5,11 +5,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 
 import androidx.fragment.app.Fragment;
 
+import com.season.example.ui.dagger.DaggerFragmentComponent;
+import com.season.example.ui.dagger.FragmentComponent;
+import com.season.example.ui.dagger.ViewModule;
 import com.season.rapiddevelopment.BaseApplication;
 import com.season.rapiddevelopment.R;
+import com.season.rapiddevelopment.presenter.BasePresenter;
 import com.season.rapiddevelopment.ui.empty.EmptyImpl;
 import com.season.rapiddevelopment.ui.empty.IEmptyAction;
 import com.season.rapiddevelopment.ui.empty.IEmptyView;
@@ -20,12 +25,15 @@ import com.season.rapiddevelopment.ui.titlebar.ITitleBar;
 import com.season.rapiddevelopment.ui.titlebar.ITitleBarAction;
 import com.season.rapiddevelopment.ui.titlebar.TitleBarImpl;
 
+import javax.inject.Inject;
+
+
 /**
  * Disc: Fragment基类
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-10 15:25
  */
-public abstract class BaseTLEFragment extends Fragment implements ITitleBarAction, ILoadingAction, IEmptyAction, IView {
+public abstract class BaseTLEFragment<P extends BasePresenter> extends Fragment implements ITitleBarAction, ILoadingAction, IEmptyAction, IView {
 
     // 设计模式 - 模板方法(Template Method)模式
     /**
@@ -39,7 +47,12 @@ public abstract class BaseTLEFragment extends Fragment implements ITitleBarActio
      */
     protected abstract void onViewCreated();
 
-    ITitleBar mTitleBar;
+    /**
+     * 注入
+     * @param component
+     */
+    protected abstract void inject(FragmentComponent component);
+
 
     /**
      * 顶部标题控制栏
@@ -47,14 +60,9 @@ public abstract class BaseTLEFragment extends Fragment implements ITitleBarActio
      */
     @Override
     public ITitleBar getTitleBar(){
-        if (mTitleBar == null){
-            mTitleBar = new TitleBarImpl(this);
-        }
         return mTitleBar;
     }
 
-
-    ILoadingView mLoadingView;
 
     /**
      * 控制加载中的显示与消失
@@ -62,13 +70,8 @@ public abstract class BaseTLEFragment extends Fragment implements ITitleBarActio
      */
     @Override
     public ILoadingView getLoadingView(){
-        if (mLoadingView == null){
-            mLoadingView = new LoadingImpl(this);
-        }
         return mLoadingView;
     }
-
-    IEmptyView mEmptyView;
 
     /**
      * 控制重新加载的显示与消失
@@ -76,31 +79,54 @@ public abstract class BaseTLEFragment extends Fragment implements ITitleBarActio
      */
     @Override
     public IEmptyView getEmptyView(){
-        if (mEmptyView == null){
-            mEmptyView = new EmptyImpl(this);
-        }
         return mEmptyView;
     }
 
 
+    ITitleBar mTitleBar;
+    ILoadingView mLoadingView;
+    IEmptyView mEmptyView;
 
+
+    @Inject
+    protected P mPresenter;
     private View mView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (mView == null) {
             mView = inflater.inflate(R.layout.base_tle, container, false);
+            mEmptyView = new EmptyImpl(this);
+            mLoadingView = new LoadingImpl(this);
+            if (isTopTileEnable()){
+                ViewStub viewStub = mView.findViewById(R.id.common_top);
+                viewStub.inflate();
+                mTitleBar = new TitleBarImpl(this);
+            }
             ViewGroup contentView = (ViewGroup) mView.findViewById(R.id.main_view);
             View mainView = inflater.inflate(getLayoutId(), container, false);
             contentView.addView(mainView);
+            inject(DaggerFragmentComponent.builder()
+                    .viewModule(new ViewModule(this))
+                    .build());
             onViewCreated();
         }
         return mView;
     }
 
-    public View findViewById(int id){
+    @Override
+    public <T extends View> T findViewById(int id) {
         return mView.findViewById(id);
     }
+
+    /**
+     * 顶部标题栏是否显示
+     * @return
+     */
+    protected boolean isTopTileEnable(){
+        return true;
+    }
+
 
     @Override
     public void finish() {
