@@ -1,11 +1,12 @@
 package com.season.example.ui.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.season.example.entry.CommentItem;
 import com.season.rapiddevelopment.R;
@@ -41,7 +42,7 @@ public class CommentAdapter extends BaseRecycleAdapter<CommentItem> {
         homeHolder.mTime.setText(TimeUtil.getCategoryTimeMDHM(item.create_time));
         homeHolder.mContent.setText(item.content);
 
-        ImageModel.bindCirclrImage2View(homeHolder.mImageView, item.avatar_url);
+        ImageModel.bindCircleImage2View(homeHolder.mImageView, item.avatar_url);
     }
 
     public class HomeViewHolder extends RecyclerView.ViewHolder {

@@ -42,7 +42,7 @@ public class ImageModel {
      * @param imageView
      * @param url
      */
-    public static void bindCirclrImage2View(ImageView imageView, String url) {
+    public static void bindCircleImage2View(ImageView imageView, String url) {
         Picasso.with(BaseApplication.sContext).load(url).transform(new CircleTransform()).into(imageView);
     }
 

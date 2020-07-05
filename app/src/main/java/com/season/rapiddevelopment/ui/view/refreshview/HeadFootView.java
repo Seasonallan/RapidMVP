@@ -1,7 +1,8 @@
 package com.season.rapiddevelopment.ui.view.refreshview;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by Season on 2017/6/18.

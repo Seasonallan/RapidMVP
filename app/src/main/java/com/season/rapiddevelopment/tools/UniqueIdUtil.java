@@ -1,12 +1,15 @@
 package com.season.rapiddevelopment.tools;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
-import java.security.MessageDigest;
+import androidx.core.app.ActivityCompat;
+
 import java.util.UUID;
 
 
@@ -18,11 +21,14 @@ import java.util.UUID;
 public class UniqueIdUtil {
 	/**
 	 * 获取唯一设备标识
-	 * 
+	 *
 	 * @param context
 	 * @return
 	 */
 	public static String getDeviceId(Context context) {
+		if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+			return UUID.randomUUID().toString();
+		}
 		StringBuffer result = new StringBuffer();
 		try {
 			TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
@@ -52,42 +58,17 @@ public class UniqueIdUtil {
 		return Crypto.MD5(result.toString());
 	}
 
-	/**
-	 * 获取唯一uuid
-	 * 
-	 * @param context
-	 * @return
-	 */
-	public static String getUUID(Context context) {
-		TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-		final String tmDevice, tmSerial, androidId;
-		tmDevice = "" + tm.getDeviceId();
-		tmSerial = "" + tm.getSimSerialNumber();
-		androidId = "" + android.provider.Settings.Secure.getString(context.getContentResolver(),
-				android.provider.Settings.Secure.ANDROID_ID);
-		UUID deviceUuid = new UUID(androidId.hashCode(), ((long) tmDevice.hashCode() << 32) | tmSerial.hashCode());
-		String uniqueId = deviceUuid.toString();
-		return uniqueId;
-	}
-
-	/**
-	 * 获取终端型号
-	 * 
-	 * @param context
-	 * @return
-	 */
-	public static String getTerminalBrand(Context context) {
-		TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-		return tm.getDeviceId();
-	}
 
 	/**
 	 * 获取设备信息
-	 * 
+	 *
 	 * @param context
 	 * @return
 	 */
 	public static String getDeviceInfo(Context context) {
+		if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+			return android.os.Build.BRAND;
+		}
 		TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
 		if (tm != null) {
 			String imei = tm.getDeviceId();

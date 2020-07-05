@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.season.example.ui.activity.MainActivity">
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/main_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,7 +18,7 @@
         android:layout_above="@+id/main_bottom_bar"
         android:background="@color/gray"/>
 
-    <android.support.v4.app.FragmentTabHost
+    <androidx.fragment.app.FragmentTabHost
         android:id="@+id/main_bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -29,7 +29,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"/>
 
-    </android.support.v4.app.FragmentTabHost>
+    </androidx.fragment.app.FragmentTabHost>
 
 
 </RelativeLayout>

@@ -23,4 +23,5 @@ public class AboutActivity extends BaseTLEActivity {
         TextView textView = (TextView) findViewById(R.id.about_tv_name);
         textView.setText("get=");
     }
+
 }
