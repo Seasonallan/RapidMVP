@@ -12,24 +12,10 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/main_bottom_bar"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_above="@+id/main_bottom_bar"
-        android:background="@color/gray"/>
-
-    <androidx.fragment.app.FragmentTabHost
+    <com.ashokvarma.bottomnavigation.BottomNavigationBar
         android:id="@+id/main_bottom_bar"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentBottom="true">
-
-        <FrameLayout
-            android:id="@android:id/tabcontent"
-            android:layout_width="0dp"
-            android:layout_height="0dp"/>
-
-    </androidx.fragment.app.FragmentTabHost>
-
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

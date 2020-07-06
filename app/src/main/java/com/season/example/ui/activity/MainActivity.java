@@ -2,17 +2,14 @@ package com.season.example.ui.activity;
 
 import android.Manifest;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TabHost;
-import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentTabHost;
 import androidx.viewpager.widget.ViewPager;
 
+import com.ashokvarma.bottomnavigation.BottomNavigationBar;
+import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.season.example.ui.dagger.FragmentComponent;
 import com.season.example.ui.fragment.CategoryFragment;
 import com.season.rapiddevelopment.R;
@@ -21,13 +18,15 @@ import com.season.example.ui.fragment.HotFragment;
 import com.season.example.ui.fragment.UserFragment;
 import com.season.rapiddevelopment.ui.BaseTLEActivity;
 
-public class MainActivity extends BaseTLEActivity implements TabHost.OnTabChangeListener, ViewPager.OnPageChangeListener {
+public class MainActivity extends BaseTLEActivity implements ViewPager.OnPageChangeListener, BottomNavigationBar.OnTabSelectedListener {
 
     private String mTabDescription[] = {"Home", "Category", "Hot", "User"};
-    private int mTabIcon[] = {R.drawable.icon_home, R.drawable.icon_category, R.drawable.icon_hot, R.drawable.icon_user};
+    private int mTabIcon[] = {R.mipmap.icon_home, R.mipmap.icon_category,
+            R.mipmap.icon_hot, R.mipmap.icon_user};
+    private int mTabIconSel[] = {R.mipmap.icon_home_pressed, R.mipmap.icon_category_pressed,
+            R.mipmap.icon_hot_pressed, R.mipmap.icon_user_pressed};
     private Class mTabFragment[] = {HomeFragment.class, CategoryFragment.class, HotFragment.class, UserFragment.class};
 
-    private FragmentTabHost mTabHost;
     private ViewPager viewPager;
 
     @Override
@@ -39,26 +38,32 @@ public class MainActivity extends BaseTLEActivity implements TabHost.OnTabChange
         return false;
     }
 
+    private BottomNavigationBar mBottomNavigationBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        viewPager = (ViewPager) findViewById(R.id.main_fragment);
+        viewPager = findViewById(R.id.main_fragment);
         viewPager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
-        mTabHost = (FragmentTabHost) findViewById(R.id.main_bottom_bar);
-        mTabHost.setup(this, getSupportFragmentManager(), R.id.main_fragment);
 
-        for (int i = 0; i < mTabDescription.length; i++) {
-            TabHost.TabSpec spec = mTabHost.newTabSpec(mTabDescription[i]).setIndicator(getView(i));
-            mTabHost.addTab(spec, mTabFragment[i], null);
+
+        mBottomNavigationBar = findViewById(R.id.main_bottom_bar);
+        mBottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED);
+        mBottomNavigationBar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC);
+        mBottomNavigationBar.setBarBackgroundColor(R.color.white);
+
+        for (int i = 0; i < mTabIcon.length; i++) {
+            mBottomNavigationBar
+                    .addItem(new BottomNavigationItem(mTabIconSel[i], mTabDescription[i])
+                            .setActiveColorResource(R.color.colorPrimary)
+                            .setInactiveIconResource(mTabIcon[i])
+                            .setInActiveColorResource(R.color.gray));
         }
-        mTabHost.getTabWidget().setDividerDrawable(null);
+        mBottomNavigationBar.setFirstSelectedPosition(0).initialise();
+        mBottomNavigationBar.setTabSelectedListener(this);
 
-        mTabHost.setOnTabChangedListener(this);
         viewPager.addOnPageChangeListener(this);
-
-        mTabHost.setCurrentTab(3);
 
         performCodeWithPermission("App请求访问权限",  new PermissionCallback() {
             @Override
@@ -73,21 +78,22 @@ public class MainActivity extends BaseTLEActivity implements TabHost.OnTabChange
 
     }
 
-    private View getView(int i) {
-        View view = View.inflate(MainActivity.this, R.layout.tab_bottom, null);
-        ImageView imageView = (ImageView) view.findViewById(R.id.image);
-        TextView textView = (TextView) view.findViewById(R.id.text);
-        imageView.setImageResource(mTabIcon[i]);
-        textView.setText(mTabDescription[i]);
-        return view;
+
+    @Override
+    public void onTabSelected(int position) {
+        viewPager.setCurrentItem(position);//把选中的Tab的位置赋给适配器，让它控制页面切换
+    }
+
+    @Override
+    public void onTabUnselected(int position) {
 
     }
 
     @Override
-    public void onTabChanged(String tabId) {
-        int position = mTabHost.getCurrentTab();
-        viewPager.setCurrentItem(position);//把选中的Tab的位置赋给适配器，让它控制页面切换
+    public void onTabReselected(int position) {
+
     }
+
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -96,7 +102,7 @@ public class MainActivity extends BaseTLEActivity implements TabHost.OnTabChange
 
     @Override
     public void onPageSelected(int position) {
-        mTabHost.setCurrentTab(position);
+        mBottomNavigationBar.selectTab(position);
     }
 
     @Override
