@@ -8,10 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.season.rapiddevelopment.R;
+import com.season.rapiddevelopment.tools.Console;
 import com.season.rapiddevelopment.ui.BaseRecycleAdapter;
 
 /**
@@ -68,11 +70,18 @@ public class PullToRefreshListView extends PullToRefreshBase<RecyclerView> {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if (mRecycleAdapter == null) {
-                    return;
-                }
-                if (mFooterLayout.canAutoLoadingMore()) {
-                    if (dy > 4) {
+
+            }
+
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE){
+                    if (mRecycleAdapter == null) {
+                        return;
+                    }
+
+                    if (mFooterLayout.canAutoLoadingMore()) {
                         if (layoutManager.findLastCompletelyVisibleItemPosition() >= layoutManager.getItemCount() - 3) {
                             startLoadingMore();
                         }
@@ -85,7 +94,7 @@ public class PullToRefreshListView extends PullToRefreshBase<RecyclerView> {
     private void startLoadingMore() {
         if (!mFooterLayout.isLoadingMore && onRefreshListener != null) {
             mFooterLayout.isLoadingMore = true;
-            mFooterLayout.normal();
+            mFooterLayout.normal(enableAutoLoading);
             mRecycleAdapter.notifyDataSetChanged();
             onRefreshListener.onLoadingMore();
         }
@@ -183,8 +192,12 @@ public class PullToRefreshListView extends PullToRefreshBase<RecyclerView> {
             }
         }
 
-        public void normal() {
-            mFooterStatus = NORMAL;
+        public void normal(boolean isAuto) {
+            if (isAuto) {
+                mFooterStatus = AUTO_LOADING;
+            } else {
+                mFooterStatus = NORMAL;
+            }
         }
 
         public void error() {

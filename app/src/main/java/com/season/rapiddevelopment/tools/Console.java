@@ -10,7 +10,7 @@ import android.util.Log;
 public class Console {
 
     public static void logNetMessage(Object log){
-        System.out.println(log.toString());
+        //System.out.println(log.toString());
         Log.e("NetLogCat", log.toString());
     }
 

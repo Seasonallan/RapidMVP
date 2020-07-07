@@ -24,7 +24,7 @@ public abstract class Pull2RefreshImpl<T> implements IPull2RefreshView<T> , Pull
         if (mPullToRefreshListView == null){
             throw new RuntimeException("please add PullToRefreshListView to your layout");
         }else{
-           // mPullToRefreshListView.enableAutoLoadingMore();
+            //mPullToRefreshListView.enableAutoLoadingMore();
             mPullToRefreshListView.setOnRefreshListener(this);
         }
     }

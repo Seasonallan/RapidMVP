@@ -42,7 +42,6 @@ public class HomeFragment extends BaseTLEFragment<HomePresenter> implements IPul
 
     @Override
     protected void onViewCreated() {
-      //  mHomePresenter = new HomePresenter(this);
 
         getTitleBar().setTopTile("Home");
 

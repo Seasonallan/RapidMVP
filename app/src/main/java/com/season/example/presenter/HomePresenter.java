@@ -9,6 +9,9 @@ import com.season.rapiddevelopment.tools.Console;
 import com.season.rapiddevelopment.ui.BaseRecycleAdapter;
 import com.season.rapiddevelopment.ui.IView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 
@@ -33,6 +36,7 @@ public class HomePresenter extends BasePresenter {
 
     public void loadList(int callType) {
         if (callType == CREATE){
+            getView().getLoadingView().showLoadingView();
             Console.logNetMessage("check local cache");
             ModelFactory.local().file().commcon().getValue("HomeVideo", new LocalObserver<VideoList>() {
                 @Override
@@ -64,10 +68,26 @@ public class HomePresenter extends BasePresenter {
                 maxId = ((VideoItem)adapter.getRealItem(adapter.getCount() - 1)).pub_id;
             }
         }else{
-            getView().getLoadingView().showLoadingView();
         }
 
-        ModelFactory.net().kuaifang().video().getVideo(Configure.PAGE_SIZE, action, maxId, new HttpCallback<VideoList>(callType));
+        if (true){
+            VideoList list = new VideoList();
+            ArrayList<VideoItem> videoList = new ArrayList<VideoItem>();
+            for (int i = 0; i < Configure.PAGE_SIZE; i++) {
+
+                VideoItem item = new VideoItem();
+                item.name = "name";
+                item.intro = "intro";
+                item.cover_url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1594035526874&di=3fdb235c72b928d264ca24b022f1ad9a&imgtype=0&src=http%3A%2F%2Fdmimg.5054399.com%2Fallimg%2Fpkm%2Fpk%2F13.jpg";
+
+                videoList.add(item);
+            }
+            list.movies = videoList;
+            onResponse2UI(callType, list);
+        }else{
+            ModelFactory.net().kuaifang().video().getVideo(Configure.PAGE_SIZE, action, maxId,
+                    new HttpCallback<VideoList>(callType));
+        }
 
     }
 
