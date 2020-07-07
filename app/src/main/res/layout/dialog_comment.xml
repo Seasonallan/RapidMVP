@@ -9,7 +9,7 @@
 
     <View style="@style/divider_horizontal" />
 
-    <com.season.rapiddevelopment.tools.emoji.view.EmojiconEditText
+    <com.season.lib.support.emoji.view.EmojiconEditText
         android:id="@+id/commentdialog_et_content"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
             android:layout_width="match_parent"
             android:layout_height="178dp" />
 
-        <com.season.rapiddevelopment.tools.emoji.view.EmojiDotView
+        <com.season.lib.support.emoji.view.EmojiDotView
             android:id="@+id/commentdialog_emojidot"
             android:layout_width="fill_parent"
             android:layout_height="18dp"

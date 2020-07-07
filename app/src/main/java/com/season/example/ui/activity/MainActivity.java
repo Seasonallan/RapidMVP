@@ -10,13 +10,12 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
-import com.season.example.ui.dagger.FragmentComponent;
 import com.season.example.ui.fragment.CategoryFragment;
 import com.season.rapiddevelopment.R;
 import com.season.example.ui.fragment.HomeFragment;
 import com.season.example.ui.fragment.HotFragment;
 import com.season.example.ui.fragment.UserFragment;
-import com.season.rapiddevelopment.ui.BaseTLEActivity;
+import com.season.lib.ui.BaseTLEActivity;
 
 public class MainActivity extends BaseTLEActivity implements ViewPager.OnPageChangeListener, BottomNavigationBar.OnTabSelectedListener {
 
@@ -28,10 +27,6 @@ public class MainActivity extends BaseTLEActivity implements ViewPager.OnPageCha
     private Class mTabFragment[] = {HomeFragment.class, CategoryFragment.class, HotFragment.class, UserFragment.class};
 
     private ViewPager viewPager;
-
-    @Override
-    protected void inject(FragmentComponent component) {
-    }
 
     @Override
     protected boolean isTopTileEnable(){

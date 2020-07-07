@@ -1,12 +1,10 @@
 package com.season.example.ui.activity;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
-import com.season.example.ui.dagger.FragmentComponent;
 import com.season.rapiddevelopment.R;
-import com.season.rapiddevelopment.ui.BaseTLEActivity;
+import com.season.lib.ui.BaseTLEActivity;
 
 /**
  * Disc: 关于页面
@@ -14,10 +12,6 @@ import com.season.rapiddevelopment.ui.BaseTLEActivity;
  * Time: 2017-06-10 16:00
  */
 public class AboutActivity extends BaseTLEActivity {
-
-    @Override
-    protected void inject(FragmentComponent component) {
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

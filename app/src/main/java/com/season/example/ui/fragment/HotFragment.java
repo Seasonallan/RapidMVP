@@ -4,11 +4,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.season.example.entry.BaseEntry;
 import com.season.example.entry.ClientKey;
 import com.season.example.presenter.HotPresenter;
-import com.season.example.ui.dagger.FragmentComponent;
+import com.season.lib.ui.IView;
 import com.season.rapiddevelopment.R;
-import com.season.rapiddevelopment.ui.BaseTLEFragment;
+import com.season.lib.ui.BaseTLEFragment;
 
 /**
  * Disc:
@@ -24,12 +25,6 @@ public class HotFragment extends BaseTLEFragment<HotPresenter> {
 
     TextView mTextView;
 
-
-    @Override
-    protected void inject(FragmentComponent component) {
-        component.inject(this);
-    }
-
     @Override
     protected void onViewCreated() {
         getTitleBar().setTopTile("Set");
@@ -44,10 +39,15 @@ public class HotFragment extends BaseTLEFragment<HotPresenter> {
     }
 
     @Override
+    protected HotPresenter attachPresenter(IView view) {
+        return new HotPresenter(view);
+    }
+
+    @Override
     public <T> void onResponse(int type, T result) {
         super.onResponse(type, result);
-        if (result instanceof ClientKey){
-            ClientKey clientKey = (ClientKey) result;
+        if (result instanceof BaseEntry){
+            ClientKey clientKey = (ClientKey) (((BaseEntry) result).data);
             mTextView.setText(clientKey.toString());
         }
     }

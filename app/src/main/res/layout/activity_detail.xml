@@ -5,7 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content">
 
-    <com.season.rapiddevelopment.ui.view.refreshview.PullToRefreshListView
+    <com.season.lib.ui.view.refreshview.PullToRefreshListView
         android:id="@+id/pull_to_refresh_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

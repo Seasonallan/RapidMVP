@@ -3,7 +3,7 @@ package com.season.example.model.local.preference;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.season.rapiddevelopment.model.BaseLocalModel;
+import com.season.lib.model.BaseLocalModel;
 
 
 /**

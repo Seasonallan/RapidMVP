@@ -1,6 +1,6 @@
 package com.season.example.model.local.preference;
 
-import com.season.rapiddevelopment.model.BaseLocalModel;
+import com.season.lib.model.BaseLocalModel;
 
 /**
  * Disc: SharedPreferences工厂

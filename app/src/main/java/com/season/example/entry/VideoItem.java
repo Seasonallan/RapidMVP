@@ -3,11 +3,12 @@ package com.season.example.entry;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 
-import com.season.rapiddevelopment.model.database.BaseDao;
-import com.season.rapiddevelopment.model.database.BaseSQLiteOpenHelper;
-import com.season.rapiddevelopment.model.database.iterface.IDbHelper;
-import com.season.rapiddevelopment.model.database.iterface.Column;
-import com.season.rapiddevelopment.model.database.iterface.Table;
+
+import com.season.lib.support.dbase.BaseSQLiteOpenHelper;
+import com.season.lib.support.dbase.base.BaseDao;
+import com.season.lib.support.dbase.base.IDbHelper;
+import com.season.lib.support.dbase.base.iterface.Column;
+import com.season.lib.support.dbase.base.iterface.Table;
 
 import java.io.Serializable;
 

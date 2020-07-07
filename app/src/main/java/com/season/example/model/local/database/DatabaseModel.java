@@ -1,8 +1,8 @@
 package com.season.example.model.local.database;
 
-import com.season.rapiddevelopment.model.BaseDatabaseModel;
-import com.season.rapiddevelopment.model.database.BaseDao;
-import com.season.rapiddevelopment.model.database.BaseDatabase;
+import com.season.lib.model.BaseDatabaseModel;
+import com.season.lib.support.dbase.base.BaseDao;
+import com.season.lib.support.dbase.base.BaseDatabase;
 
 /**
  * 数据库model

@@ -1,15 +1,14 @@
 package com.season.example.presenter;
 
+import com.season.example.entry.BaseEntry;
 import com.season.example.entry.CommentItem;
 import com.season.example.entry.CommentList;
 import com.season.example.model.ModelFactory;
-import com.season.rapiddevelopment.Configure;
-import com.season.rapiddevelopment.presenter.BasePresenter;
-import com.season.rapiddevelopment.tools.Console;
-import com.season.rapiddevelopment.ui.BaseRecycleAdapter;
-import com.season.rapiddevelopment.ui.IView;
-
-import javax.inject.Inject;
+import com.season.example.entry.Configure;
+import com.season.lib.presenter.BasePresenter;
+import com.season.example.util.Console;
+import com.season.lib.ui.BaseRecycleAdapter;
+import com.season.lib.ui.IView;
 
 /**
  * Disc:
@@ -18,7 +17,6 @@ import javax.inject.Inject;
  */
 public class CommentPresenter extends BasePresenter {
 
-    @Inject
     public CommentPresenter(IView view){
         super(view);
     }
@@ -35,7 +33,8 @@ public class CommentPresenter extends BasePresenter {
      * @param comment
      */
     public void sendComment(String vid, String comment){
-        ModelFactory.net().kuaifang().video().sentComment(vid, comment, new HttpCallback<String>(11));
+        ModelFactory.net().kuaifang().video().sentComment(vid, comment,
+                new HttpCallback<BaseEntry<String>>(11));
     }
 
     /**
@@ -70,7 +69,8 @@ public class CommentPresenter extends BasePresenter {
                 maxId = ((CommentItem)adapter.getRealItem(adapter.getCount() - 1)).id;
             }
         }
-        ModelFactory.net().kuaifang().video().getComment(Configure.PAGE_SIZE, maxId, vid, new HttpCallback<CommentList>(callType));
+        ModelFactory.net().kuaifang().video().getComment(Configure.PAGE_SIZE, maxId, vid,
+                new HttpCallback<BaseEntry<CommentList>>(callType));
 
     }
 

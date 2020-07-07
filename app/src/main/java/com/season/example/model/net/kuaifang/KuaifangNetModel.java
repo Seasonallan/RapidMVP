@@ -4,11 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.season.example.entry.ClientKey;
-import com.season.example.model.DNS;
-import com.season.rapiddevelopment.model.BaseNetModel;
-import com.season.rapiddevelopment.tools.Console;
-import com.season.rapiddevelopment.tools.Crypto;
-import com.season.rapiddevelopment.tools.PkgManagerUtil;
+import com.season.example.model.net.DNS;
+import com.season.lib.model.BaseNetModel;
+import com.season.example.util.Console;
+import com.season.example.util.Crypto;
+import com.season.example.util.PkgManagerUtil;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;

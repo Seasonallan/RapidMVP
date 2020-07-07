@@ -1,6 +1,6 @@
 package com.season.example.model.local.file;
 
-import com.season.rapiddevelopment.model.BaseLocalModel;
+import com.season.lib.model.BaseLocalModel;
 
 /**
  * Disc: 文件工厂

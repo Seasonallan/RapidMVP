@@ -1,10 +1,10 @@
 package com.season.example.ui.fragment;
 
 import com.season.example.presenter.CategoryPresenter;
-import com.season.example.ui.dagger.FragmentComponent;
+import com.season.lib.ui.IView;
 import com.season.rapiddevelopment.R;
-import com.season.rapiddevelopment.ui.BaseTLEFragment;
-import com.season.rapiddevelopment.ui.view.ReboundScrollView;
+import com.season.lib.ui.BaseTLEFragment;
+import com.season.lib.ui.view.ReboundScrollView;
 
 /**
  * Disc: drag to change scrollview text
@@ -22,9 +22,10 @@ public class CategoryFragment extends BaseTLEFragment<CategoryPresenter> {
     ReboundScrollView scrollViewBottom;
 
 
+
     @Override
-    protected void inject(FragmentComponent component) {
-        component.inject(this);
+    protected CategoryPresenter attachPresenter(IView view) {
+        return new CategoryPresenter(view);
     }
 
     @Override

@@ -1,0 +1,24 @@
+<resources>
+
+    <!-- 升级框顶部的蓝色线-->
+    <style name="divider_horizontal_dialog_top">
+        <item name="android:background">@color/blue</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">6dip</item>
+    </style>
+
+    <!-- Dialog的弹出动画 -->
+    <style name="dialogWindowAnim" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/push_up_in</item>
+        <item name="android:windowExitAnimation">@anim/push_down_out</item>
+    </style>
+
+    <declare-styleable name="LoadingView">
+        <attr name="loadingText" format="string|reference"/>
+        <attr name="delay" format="integer|reference"/>
+    </declare-styleable>
+
+    <item type="id" name="statusbarutil_fake_status_bar_view" />
+    <item type="id" name="statusbarutil_translucent_view" />
+
+</resources>

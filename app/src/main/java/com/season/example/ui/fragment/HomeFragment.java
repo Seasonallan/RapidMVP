@@ -7,20 +7,22 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.season.example.entry.BaseEntry;
 import com.season.example.entry.VideoItem;
 import com.season.example.entry.VideoList;
 import com.season.example.presenter.HomePresenter;
 import com.season.example.ui.activity.CommentActivity;
 import com.season.example.ui.adapter.HomeAdapter;
-import com.season.example.ui.dagger.FragmentComponent;
+import com.season.example.entry.Configure;
+import com.season.lib.ui.IView;
 import com.season.rapiddevelopment.R;
-import com.season.rapiddevelopment.presenter.BasePresenter;
-import com.season.rapiddevelopment.ui.BaseRecycleAdapter;
-import com.season.rapiddevelopment.ui.BaseTLEFragment;
-import com.season.rapiddevelopment.ui.pulltorefresh.IPull2RefreshAction;
-import com.season.rapiddevelopment.ui.pulltorefresh.IPull2RefreshView;
-import com.season.rapiddevelopment.ui.pulltorefresh.Pull2RefreshImpl;
-import com.season.rapiddevelopment.ui.view.refreshview.HeadFootView;
+import com.season.lib.presenter.BasePresenter;
+import com.season.lib.ui.BaseRecycleAdapter;
+import com.season.lib.ui.BaseTLEFragment;
+import com.season.lib.ui.pulltorefresh.IPull2RefreshAction;
+import com.season.lib.ui.pulltorefresh.IPull2RefreshView;
+import com.season.lib.ui.pulltorefresh.Pull2RefreshImpl;
+import com.season.lib.ui.view.refreshview.HeadFootView;
 
 import java.util.List;
 
@@ -62,15 +64,15 @@ public class HomeFragment extends BaseTLEFragment<HomePresenter> implements IPul
     }
 
     @Override
-    protected void inject(FragmentComponent component) {
-        component.inject(this);
+    protected HomePresenter attachPresenter(IView view) {
+        return new HomePresenter(view);
     }
 
     @Override
     public <T> void onResponse(int type, T result) {
-        if (result instanceof VideoList) {
-            VideoList videoLists = (VideoList) result;
-            mPull2RefreshView.onSuccess(type, videoLists.movies);
+        if (result instanceof BaseEntry) {
+            VideoList videoLists = (VideoList) (((BaseEntry) result).data);
+            mPull2RefreshView.onSuccess(type, videoLists.movies, Configure.PAGE_SIZE);
         }
     }
 

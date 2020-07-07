@@ -2,10 +2,9 @@ package com.season.example.presenter;
 
 import com.season.example.entry.ClientKey;
 import com.season.example.model.ModelFactory;
-import com.season.rapiddevelopment.presenter.BasePresenter;
-import com.season.rapiddevelopment.ui.IView;
+import com.season.lib.presenter.BasePresenter;
+import com.season.lib.ui.IView;
 
-import javax.inject.Inject;
 
 /**
  * Disc:
@@ -14,14 +13,13 @@ import javax.inject.Inject;
  */
 public class CategoryPresenter extends BasePresenter {
 
-
-    @Inject
     public CategoryPresenter(IView view) {
         super(view);
     }
 
     public void getKey() {
-        ModelFactory.local().file().key().getValue("keyData", new LocalObserver<ClientKey>());
+        ModelFactory.local().file().key().getValue("keyData",
+                new LocalObserver<ClientKey>());
     }
 
 }

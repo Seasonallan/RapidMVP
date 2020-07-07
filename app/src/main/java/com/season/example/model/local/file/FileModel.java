@@ -1,7 +1,7 @@
 package com.season.example.model.local.file;
 
-import com.season.rapiddevelopment.model.BaseLocalModel;
-import com.season.rapiddevelopment.tools.FileUtil;
+import com.season.lib.model.BaseLocalModel;
+import com.season.example.util.FileUtil;
 
 import java.io.File;
 

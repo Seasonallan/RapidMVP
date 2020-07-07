@@ -6,7 +6,7 @@
               android:orientation="vertical"
     tools:context="com.season.example.ui.fragment.HotFragment">
 
-        <com.season.rapiddevelopment.ui.view.ReboundScrollView
+        <com.season.lib.ui.view.ReboundScrollView
             android:id="@+id/sv_top"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -46,7 +46,7 @@
 
             </LinearLayout>
 
-        </com.season.rapiddevelopment.ui.view.ReboundScrollView>
+        </com.season.lib.ui.view.ReboundScrollView>
 
 
         <TextView
@@ -59,7 +59,7 @@
             android:text="center"
             android:textColor="@color/white" />
 
-        <com.season.rapiddevelopment.ui.view.ReboundScrollView
+        <com.season.lib.ui.view.ReboundScrollView
             android:id="@+id/sv_bottom"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -96,6 +96,6 @@
 
             </LinearLayout>
 
-        </com.season.rapiddevelopment.ui.view.ReboundScrollView>
+        </com.season.lib.ui.view.ReboundScrollView>
 
 </LinearLayout>

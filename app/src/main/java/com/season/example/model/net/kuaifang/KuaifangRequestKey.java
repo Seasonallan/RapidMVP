@@ -1,10 +1,10 @@
 package com.season.example.model.net.kuaifang;
 
 import com.season.example.entry.ClientKey;
-import com.season.rapiddevelopment.BaseApplication;
-import com.season.rapiddevelopment.model.BaseEntry;
-import com.season.rapiddevelopment.tools.PkgManagerUtil;
-import com.season.rapiddevelopment.tools.UniqueIdUtil;
+import com.season.lib.BaseContext;
+import com.season.example.entry.BaseEntry;
+import com.season.example.util.PkgManagerUtil;
+import com.season.example.util.UniqueIdUtil;
 
 import retrofit2.Callback;
 
@@ -23,8 +23,9 @@ public class KuaifangRequestKey extends KuaifangNetModel {
     private INetRequestKey mApi;
 
     public void getClientKey(Callback<BaseEntry<ClientKey>> callback) {
-        mApi.getClientKey(UniqueIdUtil.getDeviceId(BaseApplication.sContext),
-                UniqueIdUtil.getDeviceInfo(BaseApplication.sContext), PkgManagerUtil.getApkVersionName(BaseApplication.sContext))
+        mApi.getClientKey(UniqueIdUtil.getDeviceId(BaseContext.sContext),
+                UniqueIdUtil.getDeviceInfo(BaseContext.sContext),
+                PkgManagerUtil.getApkVersionName(BaseContext.sContext))
                 .enqueue(callback);
     }
 

@@ -24,12 +24,12 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.season.rapiddevelopment.R;
-import com.season.rapiddevelopment.tools.emoji.Emojicon;
-import com.season.rapiddevelopment.tools.emoji.EmojiconHandler;
-import com.season.rapiddevelopment.tools.emoji.People;
-import com.season.rapiddevelopment.tools.emoji.view.EmojiDotView;
-import com.season.rapiddevelopment.tools.emoji.view.EmojiconTextView;
-import com.season.rapiddevelopment.ui.view.FullGridView;
+import com.season.lib.support.emoji.Emojicon;
+import com.season.lib.support.emoji.EmojiconHandler;
+import com.season.lib.support.emoji.People;
+import com.season.lib.support.emoji.view.EmojiDotView;
+import com.season.lib.support.emoji.view.EmojiconTextView;
+import com.season.lib.ui.view.FullGridView;
 
 /**
  * Disc:

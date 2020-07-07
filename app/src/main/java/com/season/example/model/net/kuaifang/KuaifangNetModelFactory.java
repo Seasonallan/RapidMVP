@@ -1,6 +1,6 @@
 package com.season.example.model.net.kuaifang;
 
-import com.season.rapiddevelopment.model.BaseNetModel;
+import com.season.lib.model.BaseNetModel;
 
 /**
  * Disc: 快放视频数据工厂

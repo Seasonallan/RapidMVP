@@ -46,7 +46,6 @@
             tools:ignore="HardcodedText"/>
 
         <ImageView
-            android:id="@+id/comment_iv_praise"
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:layout_alignParentRight="true"
@@ -57,7 +56,7 @@
             tools:ignore="ContentDescription"/>
     </RelativeLayout>
 
-    <com.season.rapiddevelopment.tools.emoji.view.EmojiconTextView
+    <com.season.lib.support.emoji.view.EmojiconTextView
         android:id="@+id/comment_tv_content"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

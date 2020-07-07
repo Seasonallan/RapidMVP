@@ -2,7 +2,7 @@ package com.season.example.model.net.kuaifang;
 
 import com.season.example.entry.CommentList;
 import com.season.example.entry.VideoList;
-import com.season.rapiddevelopment.model.BaseEntry;
+import com.season.example.entry.BaseEntry;
 
 import retrofit2.Call;
 import retrofit2.http.Field;

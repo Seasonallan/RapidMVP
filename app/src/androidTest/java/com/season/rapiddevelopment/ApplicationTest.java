@@ -1,7 +1,8 @@
 package com.season.rapiddevelopment;
 
 import com.season.example.model.ModelFactory;
-import com.season.rapiddevelopment.tools.Console;
+import com.season.example.entry.Configure;
+import com.season.example.util.Console;
 
 import junit.framework.TestCase;
 

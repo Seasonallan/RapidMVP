@@ -1,18 +1,16 @@
 package com.season.example.presenter;
 
+import com.season.example.entry.BaseEntry;
 import com.season.example.entry.VideoItem;
 import com.season.example.entry.VideoList;
 import com.season.example.model.ModelFactory;
-import com.season.rapiddevelopment.Configure;
-import com.season.rapiddevelopment.presenter.BasePresenter;
-import com.season.rapiddevelopment.tools.Console;
-import com.season.rapiddevelopment.ui.BaseRecycleAdapter;
-import com.season.rapiddevelopment.ui.IView;
+import com.season.example.entry.Configure;
+import com.season.lib.presenter.BasePresenter;
+import com.season.example.util.Console;
+import com.season.lib.ui.BaseRecycleAdapter;
+import com.season.lib.ui.IView;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
 
 
 /**
@@ -22,7 +20,6 @@ import javax.inject.Inject;
  */
 public class HomePresenter extends BasePresenter {
 
-    @Inject
     public HomePresenter(IView view){
         super(view);
     }
@@ -71,6 +68,7 @@ public class HomePresenter extends BasePresenter {
         }
 
         if (true){
+            BaseEntry<VideoList> entry = new BaseEntry<>();
             VideoList list = new VideoList();
             ArrayList<VideoItem> videoList = new ArrayList<VideoItem>();
             for (int i = 0; i < Configure.PAGE_SIZE; i++) {
@@ -83,10 +81,11 @@ public class HomePresenter extends BasePresenter {
                 videoList.add(item);
             }
             list.movies = videoList;
-            onResponse2UI(callType, list);
+            entry.data = list;
+            onResponse2UI(callType, entry);
         }else{
             ModelFactory.net().kuaifang().video().getVideo(Configure.PAGE_SIZE, action, maxId,
-                    new HttpCallback<VideoList>(callType));
+                    new HttpCallback<BaseEntry<VideoList>>(callType));
         }
 
     }

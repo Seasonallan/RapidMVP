@@ -10,11 +10,11 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.season.example.entry.VideoItem;
-import com.season.rapiddevelopment.Configure;
+import com.season.lib.support.dimen.ScreenUtils;
 import com.season.rapiddevelopment.R;
-import com.season.rapiddevelopment.model.ImageModel;
-import com.season.rapiddevelopment.ui.BaseRecycleAdapter;
-import com.season.rapiddevelopment.ui.view.AlignTextView;
+import com.season.lib.model.ImageModel;
+import com.season.lib.ui.BaseRecycleAdapter;
+import com.season.lib.ui.view.AlignTextView;
 
 import java.util.List;
 
@@ -60,8 +60,8 @@ public class HomeAdapter extends BaseRecycleAdapter<VideoItem> {
             mContentView.setMaxLine(4);
             View imageContainerView = view.findViewById(R.id.video_image_cont);
             LinearLayout.LayoutParams param = (LinearLayout.LayoutParams) imageContainerView.getLayoutParams();
-            param.width = (int) (Configure.getScreenWidth()/3.1f * 1);
-            param.height = (int) (Configure.getScreenWidth()/3.1f * 3/2);
+            param.width = (int) (ScreenUtils.getScreenWidth() /3.1f * 1);
+            param.height = (int) (ScreenUtils.getScreenWidth()/3.1f * 3/2);
             imageContainerView.requestLayout();
         }
 

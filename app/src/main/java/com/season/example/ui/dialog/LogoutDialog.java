@@ -3,7 +3,7 @@ package com.season.example.ui.dialog;
 import android.content.Context;
 import android.view.Gravity;
 
-import com.season.rapiddevelopment.ui.BaseDialog;
+import com.season.lib.ui.BaseDialog;
 
 /**
  * Disc:

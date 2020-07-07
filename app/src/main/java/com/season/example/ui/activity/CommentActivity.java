@@ -5,22 +5,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.season.example.ExampleApplication;
+import com.season.example.entry.BaseEntry;
 import com.season.example.entry.CommentItem;
 import com.season.example.entry.CommentList;
 import com.season.example.entry.VideoItem;
 import com.season.example.presenter.CommentPresenter;
 import com.season.example.ui.adapter.CommentAdapter;
-import com.season.example.ui.dagger.FragmentComponent;
 import com.season.example.ui.dialog.CommentDialog;
+import com.season.lib.BaseContext;
+import com.season.example.entry.Configure;
+import com.season.lib.ui.IView;
 import com.season.rapiddevelopment.R;
-import com.season.rapiddevelopment.presenter.BasePresenter;
-import com.season.rapiddevelopment.tools.Console;
-import com.season.rapiddevelopment.ui.BaseRecycleAdapter;
-import com.season.rapiddevelopment.ui.BaseTLEActivity;
-import com.season.rapiddevelopment.ui.pulltorefresh.IPull2RefreshAction;
-import com.season.rapiddevelopment.ui.pulltorefresh.IPull2RefreshView;
-import com.season.rapiddevelopment.ui.pulltorefresh.Pull2RefreshImpl;
+import com.season.lib.presenter.BasePresenter;
+import com.season.example.util.Console;
+import com.season.lib.ui.BaseRecycleAdapter;
+import com.season.lib.ui.BaseTLEActivity;
+import com.season.lib.ui.pulltorefresh.IPull2RefreshAction;
+import com.season.lib.ui.pulltorefresh.IPull2RefreshView;
+import com.season.lib.ui.pulltorefresh.Pull2RefreshImpl;
 
 import java.util.List;
 
@@ -44,8 +46,8 @@ public class CommentActivity extends BaseTLEActivity<CommentPresenter> implement
     IPull2RefreshView mPull2RefreshView;
 
     @Override
-    protected void inject(FragmentComponent component) {
-        component.inject(this);
+    protected CommentPresenter attachPresenter(IView view) {
+        return new CommentPresenter(view);
     }
 
     @Override
@@ -75,7 +77,7 @@ public class CommentActivity extends BaseTLEActivity<CommentPresenter> implement
                     @Override
                     public void onCommit(String str) {
                         super.onCommit(str);
-                        ExampleApplication.showToast(str);
+                        BaseContext.showToast(str);
                     }
                 }.show();
             }
@@ -83,7 +85,7 @@ public class CommentActivity extends BaseTLEActivity<CommentPresenter> implement
         findViewById(R.id.videodetail_bottombar_share).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ExampleApplication.showToast("on Share Button Clicked");
+                BaseContext.showToast("on Share Button Clicked");
             }
         });
 
@@ -94,9 +96,9 @@ public class CommentActivity extends BaseTLEActivity<CommentPresenter> implement
     public <T> void onResponse(int type, T result) {
         Console.logNetMessage(Thread.currentThread().getName() + " onResponseUI result=" + result);
         super.onResponse(type, result);
-        if (result instanceof CommentList){
-            CommentList commentList = (CommentList) result;
-            mPull2RefreshView.onSuccess(type,commentList.comments);
+        if (result instanceof BaseEntry){
+            CommentList commentList = (CommentList) (((BaseEntry) result).data);
+            mPull2RefreshView.onSuccess(type,commentList.comments, Configure.PAGE_SIZE);
         }
     }
 

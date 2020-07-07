@@ -32,10 +32,4 @@
     </style>
 
 
-    <!-- Dialog的弹出动画 -->
-    <style name="dialogWindowAnim" mce_bogus="1" parent="android:Animation">
-        <item name="android:windowEnterAnimation">@anim/push_up_in</item>
-        <item name="android:windowExitAnimation">@anim/push_down_out</item>
-    </style>
-
 </resources>

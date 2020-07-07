@@ -1,11 +1,10 @@
 package com.season.example.presenter;
 
+import com.season.example.entry.BaseEntry;
 import com.season.example.entry.ClientKey;
 import com.season.example.model.ModelFactory;
-import com.season.rapiddevelopment.presenter.BasePresenter;
-import com.season.rapiddevelopment.ui.IView;
-
-import javax.inject.Inject;
+import com.season.lib.presenter.BasePresenter;
+import com.season.lib.ui.IView;
 
 /**
  * Disc:
@@ -14,7 +13,6 @@ import javax.inject.Inject;
  */
 public class HotPresenter extends BasePresenter {
 
-    @Inject
     public HotPresenter(IView view) {
         super(view);
     }
@@ -22,11 +20,13 @@ public class HotPresenter extends BasePresenter {
     public void getKey() {
         getView().getLoadingView().showLoadingView();
         ClientKey.resetClientKey();
-        ModelFactory.net().kuaifang().key().getClientKey(new HttpCallback<ClientKey>(BasePresenter.GET_KEY) {
-            protected void afterResponse(ClientKey result) {
-                ClientKey.saveKeyData(result);
-                onResponse2UI(result);
-                ModelFactory.local().file().key().setValue("keyData", result, new LocalObserver<Boolean>());
+        ModelFactory.net().kuaifang().key().getClientKey(
+                new HttpCallback<BaseEntry<ClientKey>>(BasePresenter.GET_KEY) {
+            protected void afterResponse(BaseEntry<ClientKey> result) {
+                ClientKey.saveKeyData(result.data);
+                onResponse2UI(result.data);
+                ModelFactory.local().file().key().setValue("keyData", result.data,
+                        new LocalObserver<Boolean>());
             }
         });
     }
