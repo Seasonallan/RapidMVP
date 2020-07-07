@@ -35,7 +35,8 @@ public class HomePresenter extends BasePresenter {
         if (callType == CREATE){
             getView().getLoadingView().showLoadingView();
             Console.logNetMessage("check local cache");
-            ModelFactory.local().file().commcon().getValue("HomeVideo", new LocalObserver<VideoList>() {
+            ModelFactory.local().file().commcon().getValue("HomeVideo",
+                    new LocalObserver<BaseEntry<VideoList>>() {
                 @Override
                 public void onError(Throwable e) {
                     Console.logNetMessage("empty local cache, load from net");
@@ -43,7 +44,7 @@ public class HomePresenter extends BasePresenter {
                 }
 
                 @Override
-                public void onNext(VideoList o) {
+                public void onNext(BaseEntry<VideoList> o) {
                     Console.logNetMessage("local cache");
                     super.onNext(o);
                 }

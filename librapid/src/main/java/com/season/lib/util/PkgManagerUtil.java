@@ -1,4 +1,4 @@
-package com.season.example.util;
+package com.season.lib.util;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;

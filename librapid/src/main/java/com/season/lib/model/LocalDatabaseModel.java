@@ -1,6 +1,6 @@
-package com.season.example.model.local.database;
+package com.season.lib.model;
 
-import com.season.lib.model.BaseDatabaseModel;
+import com.season.lib.model.base.BaseDatabaseModel;
 import com.season.lib.support.dbase.base.BaseDao;
 import com.season.lib.support.dbase.base.BaseDatabase;
 
@@ -9,11 +9,11 @@ import com.season.lib.support.dbase.base.BaseDatabase;
  * Created by Season on 2017/6/12.
  */
 
-public class DatabaseModel<T extends BaseDao> extends BaseDatabaseModel {
+public class LocalDatabaseModel<T extends BaseDao> extends BaseDatabaseModel {
 
     BaseDatabase database;
 
-    DatabaseModel(Class<T> tClass) {
+    public LocalDatabaseModel(Class<T> tClass) {
         database = new BaseDatabase(tClass);
     }
 

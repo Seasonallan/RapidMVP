@@ -2,7 +2,8 @@ package com.season.example.model.local.database;
 
 import com.season.example.entry.ClientKey;
 import com.season.example.entry.VideoItem;
-import com.season.lib.model.BaseDatabaseModel;
+import com.season.lib.model.LocalDatabaseModel;
+import com.season.lib.model.base.BaseDatabaseModel;
 
 /**
  * Disc: 数据库工厂
@@ -13,11 +14,11 @@ public class DBLocalModelFactory {
 
 
     public BaseDatabaseModel video() {
-        return new DatabaseModel(VideoItem.class);
+        return new LocalDatabaseModel(VideoItem.class);
     }
 
     public BaseDatabaseModel key() {
-        return new DatabaseModel(ClientKey.class);
+        return new LocalDatabaseModel(ClientKey.class);
     }
 
 }

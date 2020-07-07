@@ -1,6 +1,8 @@
 package com.season.example.model.local.preference;
 
-import com.season.lib.model.BaseLocalModel;
+
+import com.season.lib.model.LocalSPresModel;
+import com.season.lib.model.base.BaseLocalModel;
 
 /**
  * Disc: SharedPreferences工厂
@@ -11,11 +13,11 @@ public class SPLocalModelFactory {
 
 
     public BaseLocalModel key() {
-        return new SharedPreferencesModel("key");
+        return new LocalSPresModel("key");
     }
 
     public BaseLocalModel common() {
-        return new SharedPreferencesModel("userCache");
+        return new LocalSPresModel("userCache");
     }
 
 }

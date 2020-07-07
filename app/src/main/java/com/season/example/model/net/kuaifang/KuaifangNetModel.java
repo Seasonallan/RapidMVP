@@ -5,10 +5,10 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.season.example.entry.ClientKey;
 import com.season.example.model.net.DNS;
-import com.season.lib.model.BaseNetModel;
 import com.season.example.util.Console;
 import com.season.example.util.Crypto;
-import com.season.example.util.PkgManagerUtil;
+import com.season.lib.util.PkgManagerUtil;
+import com.season.lib.model.base.BaseNetModel;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -33,7 +33,7 @@ import retrofit2.Retrofit;
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-11 21:29
  */
-public abstract class KuaifangNetModel extends BaseNetModel{
+public abstract class KuaifangNetModel extends BaseNetModel {
 
 
     private Gson gson = new Gson();

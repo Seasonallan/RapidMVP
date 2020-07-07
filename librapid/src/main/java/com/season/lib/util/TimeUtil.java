@@ -1,4 +1,4 @@
-package com.season.example.util;
+package com.season.lib.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

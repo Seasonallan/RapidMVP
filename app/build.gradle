@@ -41,5 +41,7 @@ dependencies {
 
     implementation files('libs/sun.misc.BASE64Decoder.jar')
 
+    //implementation 'com.github.Seasonallan:RapidDevelopment:v1.0.0'
     implementation project(path: ':librapid')
+
 }

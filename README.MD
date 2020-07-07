@@ -2,6 +2,22 @@ Android基于自身习惯的一个快速开发框架<br>
 ====
 使用MVP模式，让View专注于处理数据的可视化以及与用户的交互，同时让Model只关系数据的处理<br>
 
+Add it in your root build.gradle at the end of repositories:
+```
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+```
+Step 2. Add the dependency
+```
+	dependencies {
+	        implementation 'com.github.Seasonallan:RapidDevelopment:v1.0.0'
+	}
+```
+
 引用到的技术：<br>
 -------
 

@@ -1,4 +1,4 @@
-package com.season.lib.model;
+package com.season.lib.model.base;
 
 import android.content.Context;
 

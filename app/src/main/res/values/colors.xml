@@ -8,4 +8,7 @@
     <color name="item_video_title">#4c4c4c</color>
     <color name="item_video_content">#c9c9c9</color>
 
+
+    <color name="grayHit">#88c9c9c9</color>
+    <color name="blue">#ff12a0ea</color>
 </resources>

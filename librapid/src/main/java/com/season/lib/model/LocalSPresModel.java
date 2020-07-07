@@ -1,9 +1,9 @@
-package com.season.example.model.local.preference;
+package com.season.lib.model;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.season.lib.model.BaseLocalModel;
+import com.season.lib.model.base.BaseLocalModel;
 
 
 /**
@@ -11,11 +11,11 @@ import com.season.lib.model.BaseLocalModel;
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-11 17:38
  */
-public class SharedPreferencesModel extends BaseLocalModel {
+public class LocalSPresModel extends BaseLocalModel {
 
     private SharedPreferences mSharedPreferences;
 
-    public SharedPreferencesModel(String spName) {
+    public LocalSPresModel(String spName) {
         super();
         mSharedPreferences = mContext.getSharedPreferences(spName, Context.MODE_PRIVATE);
     }
