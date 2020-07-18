@@ -10,6 +10,8 @@ import com.season.example.util.Console;
 import com.season.lib.ui.BaseRecycleAdapter;
 import com.season.lib.ui.IView;
 
+import java.util.ArrayList;
+
 /**
  * Disc:
  * User: SeasonAllan(451360508@qq.com)
@@ -69,6 +71,32 @@ public class CommentPresenter extends BasePresenter {
                 maxId = ((CommentItem)adapter.getRealItem(adapter.getCount() - 1)).id;
             }
         }
+
+        if (true){
+            BaseEntry<CommentList> entry = new BaseEntry<>();
+            CommentList list = new CommentList();
+            ArrayList<CommentItem> videoList = new ArrayList<CommentItem>();
+
+            int count = Configure.PAGE_SIZE;
+            if (adapter != null && adapter.getCount() > 21){
+                count = 5;
+            }
+
+            for (int i = 0; i < count; i++) {
+
+                CommentItem item = new CommentItem();
+                item.nickname = "name";
+                item.content = "intro";
+                item.avatar_url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1594035526874&di=3fdb235c72b928d264ca24b022f1ad9a&imgtype=0&src=http%3A%2F%2Fdmimg.5054399.com%2Fallimg%2Fpkm%2Fpk%2F13.jpg";
+
+                videoList.add(item);
+            }
+            list.comments = videoList;
+            entry.data = list;
+            onResponse2UI(callType, entry);
+            return;
+        }
+
         ModelFactory.net().kuaifang().video().getComment(Configure.PAGE_SIZE, maxId, vid,
                 new HttpCallback<BaseEntry<CommentList>>(callType));
 

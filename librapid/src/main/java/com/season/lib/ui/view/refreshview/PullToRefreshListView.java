@@ -258,17 +258,17 @@ public class PullToRefreshListView extends PullToRefreshBase<RecyclerView> {
             }
 
             public void loading() {
-                headerText.setText("加载更多中");
+                headerText.setText("加载中");
                 headerProgress.setVisibility(VISIBLE);
             }
 
             public void noMore() {
-                headerText.setText("没有数据");
+                headerText.setText("已经全部加载完毕");
                 headerProgress.setVisibility(GONE);
             }
 
             public void normal() {
-                headerText.setText("点击加载");
+                headerText.setText("点击加载更多");
                 headerProgress.setVisibility(GONE);
             }
 

@@ -4,6 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.season.example.entry.BaseEntry;
 import com.season.example.entry.CommentItem;
@@ -14,7 +21,11 @@ import com.season.example.ui.adapter.CommentAdapter;
 import com.season.example.ui.dialog.CommentDialog;
 import com.season.lib.BaseContext;
 import com.season.example.entry.Configure;
+import com.season.lib.model.ImageModel;
+import com.season.lib.support.dimen.ScreenUtils;
 import com.season.lib.ui.IView;
+import com.season.lib.ui.view.AlignTextView;
+import com.season.lib.ui.view.refreshview.HeadFootView;
 import com.season.rapiddevelopment.R;
 import com.season.lib.presenter.BasePresenter;
 import com.season.example.util.Console;
@@ -117,6 +128,44 @@ public class CommentActivity extends BaseTLEActivity<CommentPresenter> implement
                 //CommentActivity.show(getContext(), item);
             }
         };
+        mCommentAdapter.addHeadView(new HeadFootView() {
+            @Override
+            public void onBindHolder(RecyclerView.ViewHolder holder) {
+                TopHolder homeHolder = (TopHolder) holder;
+
+                homeHolder.mTitleView.setText(mVideoItem.name);
+                homeHolder.mContentView.setText(mVideoItem.intro);
+                homeHolder.mContentView.recalculate();
+
+                ImageModel.bindImage2View(homeHolder.mImageView, mVideoItem.cover_url);
+            }
+
+            @Override
+            public RecyclerView.ViewHolder onCreateHolder(ViewGroup parent, int viewType) {
+                return new TopHolder(mCommentAdapter.inflater.inflate(R.layout.item_home, null));
+            }
+
+            class TopHolder extends RecyclerView.ViewHolder{
+
+                public TopHolder(@NonNull View view) {
+                    super(view);
+                    mTitleView = view.findViewById(R.id.video_title);
+                    mImageView = view.findViewById(R.id.video_image);
+                    mContentView = view.findViewById(R.id.video_content);
+
+                    mContentView.setMaxLine(4);
+                    View imageContainerView = view.findViewById(R.id.video_image_cont);
+                    LinearLayout.LayoutParams param = (LinearLayout.LayoutParams) imageContainerView.getLayoutParams();
+                    param.width = (int) (ScreenUtils.getScreenWidth() /3.1f * 1);
+                    param.height = (int) (ScreenUtils.getScreenWidth()/3.1f * 3/2);
+                    imageContainerView.requestLayout();
+                }
+                private TextView mTitleView;
+                private AlignTextView mContentView;
+                public ImageView mImageView;
+
+            }
+        });
         return mCommentAdapter;
     }
 

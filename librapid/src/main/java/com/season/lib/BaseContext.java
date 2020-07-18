@@ -8,7 +8,7 @@ import com.season.lib.ui.view.ToastView;
 
 /**
  *
- * library 基于的上下文，applicatoin基类，或初始化一次
+ * library 基于的上下文，初始化一次
  *
  * */
 public class BaseContext {
