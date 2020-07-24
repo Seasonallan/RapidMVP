@@ -2,8 +2,8 @@ package com.season.example.model.local.database;
 
 import com.season.example.entry.ClientKey;
 import com.season.example.entry.VideoItem;
-import com.season.lib.model.LocalDatabaseModel;
-import com.season.lib.model.base.BaseDatabaseModel;
+import com.season.mvp.model.LocalDatabaseModel;
+import com.season.mvp.model.base.BaseDatabaseModel;
 
 /**
  * Disc: 数据库工厂

@@ -4,6 +4,9 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
+    dataBinding {
+        enabled = true
+    }
     defaultConfig {
         applicationId "com.season.rapiddevelopment"
         minSdkVersion 16
@@ -41,7 +44,8 @@ dependencies {
 
     implementation files('libs/sun.misc.BASE64Decoder.jar')
 
-    implementation 'com.github.Seasonallan:RapidDevelopment:1.0.2'
-    //implementation project(path: ':librapid')
+    //implementation 'com.github.Seasonallan:RapidDevelopment:1.0.2'
+    implementation 'com.github.Seasonallan:BaseLib:1.0'
+    implementation project(path: ':librapid')
 
 }

@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.season.rapiddevelopment.R;
-import com.season.lib.ui.BaseTLEActivity;
+import com.season.mvp.ui.BaseTLEActivity;
 
 /**
  * Disc: 关于页面

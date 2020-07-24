@@ -1,8 +1,8 @@
 package com.season.example.model.local.preference;
 
 
-import com.season.lib.model.LocalSPresModel;
-import com.season.lib.model.base.BaseLocalModel;
+import com.season.mvp.model.LocalSPresModel;
+import com.season.mvp.model.base.BaseLocalModel;
 
 /**
  * Disc: SharedPreferences工厂

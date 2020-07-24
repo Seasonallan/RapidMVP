@@ -1,9 +1,9 @@
 package com.season.example.ui.fragment;
 
 import com.season.example.presenter.CategoryPresenter;
-import com.season.lib.ui.IView;
+import com.season.mvp.ui.IView;
 import com.season.rapiddevelopment.R;
-import com.season.lib.ui.BaseTLEFragment;
+import com.season.mvp.ui.BaseTLEFragment;
 import com.season.lib.ui.view.ReboundScrollView;
 
 /**

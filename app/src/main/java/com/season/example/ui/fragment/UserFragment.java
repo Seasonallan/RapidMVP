@@ -5,7 +5,7 @@ import android.widget.Button;
 
 import com.season.example.ui.activity.AboutActivity;
 import com.season.rapiddevelopment.R;
-import com.season.lib.ui.BaseTLEFragment;
+import com.season.mvp.ui.BaseTLEFragment;
 
 /**
  * Disc:

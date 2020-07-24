@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.season.example.entry.VideoItem;
 import com.season.lib.support.dimen.ScreenUtils;
-import com.season.rapiddevelopment.R;
-import com.season.lib.model.ImageModel;
 import com.season.lib.ui.BaseRecycleAdapter;
+import com.season.rapiddevelopment.R;
+import com.season.mvp.model.ImageModel;
 import com.season.lib.ui.view.AlignTextView;
 
 import java.util.List;

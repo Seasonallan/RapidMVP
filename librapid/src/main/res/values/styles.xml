@@ -13,12 +13,5 @@
         <item name="android:windowExitAnimation">@anim/push_down_out</item>
     </style>
 
-    <declare-styleable name="LoadingView">
-        <attr name="loadingText" format="string|reference"/>
-        <attr name="delay" format="integer|reference"/>
-    </declare-styleable>
-
-    <item type="id" name="statusbarutil_fake_status_bar_view" />
-    <item type="id" name="statusbarutil_translucent_view" />
 
 </resources>

@@ -1,8 +1,8 @@
 package com.season.example.model.net.kuaifang;
 
 import com.season.example.entry.ClientKey;
-import com.season.lib.BaseContext;
 import com.season.example.entry.BaseEntry;
+import com.season.lib.BaseContext;
 import com.season.lib.util.PkgManagerUtil;
 import com.season.example.util.UniqueIdUtil;
 

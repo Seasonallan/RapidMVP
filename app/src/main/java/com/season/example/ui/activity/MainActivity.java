@@ -15,7 +15,7 @@ import com.season.rapiddevelopment.R;
 import com.season.example.ui.fragment.HomeFragment;
 import com.season.example.ui.fragment.HotFragment;
 import com.season.example.ui.fragment.UserFragment;
-import com.season.lib.ui.BaseTLEActivity;
+import com.season.mvp.ui.BaseTLEActivity;
 
 public class MainActivity extends BaseTLEActivity implements ViewPager.OnPageChangeListener, BottomNavigationBar.OnTabSelectedListener {
 

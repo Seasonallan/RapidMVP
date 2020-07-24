@@ -2,8 +2,8 @@ package com.season.example.presenter;
 
 import com.season.example.entry.ClientKey;
 import com.season.example.model.ModelFactory;
-import com.season.lib.presenter.BasePresenter;
-import com.season.lib.ui.IView;
+import com.season.mvp.presenter.BasePresenter;
+import com.season.mvp.ui.IView;
 
 
 /**

@@ -7,9 +7,9 @@ import android.widget.TextView;
 import com.season.example.entry.BaseEntry;
 import com.season.example.entry.ClientKey;
 import com.season.example.presenter.HotPresenter;
-import com.season.lib.ui.IView;
+import com.season.mvp.ui.IView;
 import com.season.rapiddevelopment.R;
-import com.season.lib.ui.BaseTLEFragment;
+import com.season.mvp.ui.BaseTLEFragment;
 
 /**
  * Disc:

@@ -9,10 +9,10 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.season.example.entry.CommentItem;
-import com.season.rapiddevelopment.R;
-import com.season.lib.model.ImageModel;
-import com.season.lib.util.TimeUtil;
 import com.season.lib.ui.BaseRecycleAdapter;
+import com.season.rapiddevelopment.R;
+import com.season.mvp.model.ImageModel;
+import com.season.lib.util.TimeUtil;
 
 import java.util.List;
 

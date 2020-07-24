@@ -8,7 +8,7 @@ import com.season.example.model.net.DNS;
 import com.season.example.util.Console;
 import com.season.example.util.Crypto;
 import com.season.lib.util.PkgManagerUtil;
-import com.season.lib.model.base.BaseNetModel;
+import com.season.mvp.model.base.BaseNetModel;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
