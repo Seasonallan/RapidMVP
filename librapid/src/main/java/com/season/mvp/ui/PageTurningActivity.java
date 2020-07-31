@@ -86,16 +86,21 @@ public abstract class PageTurningActivity extends BaseTLEActivity {
                 relativeLayout.addView(contentView, params);
                 relativeLayout.addView(startPageView, params);
                 overridePendingTransition(0, 0);
-                startPageView.post(new Runnable() {
+
+                startPageView.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         startPageView.start();
                     }
-                });
+                }, getDelay());
                 return;
             }
         }
         setContentView(getLayoutId());
+    }
+
+    protected int getDelay(){
+        return 0;
     }
 
     protected abstract int getLayoutId();
