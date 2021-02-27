@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="page_padding">27dp</dimen>
+    <dimen name="content_padding">15dp</dimen>
+    <dimen name="menu_width">56dp</dimen>
+
+
+    <dimen name="edit_width">1.0dp</dimen>
+</resources>

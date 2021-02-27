@@ -1,11 +1,10 @@
 package com.season.example.ui.fragment;
 
-import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
 
-import com.season.example.ui.activity.AboutActivity;
-import com.season.rapiddevelopment.R;
+import com.season.example.model.ModelFactory;
 import com.season.mvp.ui.BaseTLEFragment;
+import com.season.rapiddevelopment.R;
 
 /**
  * Disc:
@@ -20,13 +19,9 @@ public class UserFragment extends BaseTLEFragment {
 
     @Override
     protected void onViewCreated() {
-        getTitleBar().setTopTile("User");
-        Button btn = (Button) findViewById(R.id.btn_set);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(AboutActivity.class);
-            }
-        });
+        getTitleBar().setTopTile("用户中心");
+
+        ((TextView) findViewById(R.id.tv_name)).setText(ModelFactory.local().sharedPreferences().common().getValueImmediately("user").toString());
+
     }
 }

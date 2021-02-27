@@ -19,7 +19,6 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_gravity="center"
-            android:background="@color/item_video_image"
             android:scaleType="centerCrop"
             android:visibility="visible"
             tools:ignore="ContentDescription"/>
@@ -42,7 +41,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingTop="14dp"
-            android:textColor="@color/item_video_title"
+            android:textColor="@color/white"
             android:textSize="16sp"/>
 
         <com.season.lib.ui.view.AlignTextView
@@ -55,7 +54,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="8dp"
             android:paddingTop="6dp"
-            android:textColor="@color/item_video_content"
+            android:textColor="@color/white"
             android:textSize="14sp"/>
 
     </RelativeLayout>

@@ -23,7 +23,7 @@ public class LocalSPresModel extends BaseLocalModel {
 
     @Override
     public String getValueImmediately(String key) {
-        return mSharedPreferences.getString(key, null);
+        return mSharedPreferences.getString(key, "");
     }
 
     @Override

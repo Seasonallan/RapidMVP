@@ -1,16 +1,22 @@
 package com.season.example.presenter;
 
 import com.season.example.entry.BaseEntry;
+import com.season.example.entry.Configure;
 import com.season.example.entry.VideoItem;
 import com.season.example.entry.VideoList;
 import com.season.example.model.ModelFactory;
-import com.season.example.entry.Configure;
-import com.season.mvp.presenter.BasePresenter;
 import com.season.example.util.Console;
 import com.season.lib.ui.BaseRecycleAdapter;
+import com.season.mvp.presenter.BasePresenter;
 import com.season.mvp.ui.IView;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import cn.leancloud.AVObject;
+import cn.leancloud.AVQuery;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 
 /**
@@ -20,35 +26,38 @@ import java.util.ArrayList;
  */
 public class HomePresenter extends BasePresenter {
 
-    public HomePresenter(IView view){
+    public HomePresenter(IView view) {
         super(view);
     }
 
     protected <T> void onResponse2UI(int type, T result) {
         super.onResponse2UI(type, result);
-        if (type == REFRESH){
+        if (type == REFRESH) {
             ModelFactory.local().file().commcon().setValue("HomeVideo", result, null);
         }
     }
 
-    public void loadList(int callType) {
-        if (callType == CREATE){
+
+    int skip = 0;
+
+    public void loadList(final int callType) {
+        if (callType == CREATE && false) {
             getView().getLoadingView().showLoadingView();
             Console.logNetMessage("check local cache");
             ModelFactory.local().file().commcon().getValue("HomeVideo",
                     new LocalObserver<BaseEntry<VideoList>>() {
-                @Override
-                public void onError(Throwable e) {
-                    Console.logNetMessage("empty local cache, load from net");
-                    loadList(REFRESH);
-                }
+                        @Override
+                        public void onError(Throwable e) {
+                            Console.logNetMessage("empty local cache, load from net");
+                            loadList(REFRESH);
+                        }
 
-                @Override
-                public void onNext(BaseEntry<VideoList> o) {
-                    Console.logNetMessage("local cache");
-                    super.onNext(o);
-                }
-            });
+                        @Override
+                        public void onNext(BaseEntry<VideoList> o) {
+                            Console.logNetMessage("local cache");
+                            super.onNext(o);
+                        }
+                    });
             return;
         }
 
@@ -58,17 +67,53 @@ public class HomePresenter extends BasePresenter {
         BaseRecycleAdapter adapter = getView().getAdapter();
         if (callType == REFRESH) {
             if (adapter != null && adapter.getCount() > 0) {
-                maxId = ((VideoItem)adapter.getRealItem(0)).pub_id;
+                maxId = ((VideoItem) adapter.getRealItem(0)).pub_id;
             }
-        }else if (callType == MORE) {
+        } else if (callType == MORE) {
             if (adapter != null && adapter.getCount() > 0) {
                 action = 2;
-                maxId = ((VideoItem)adapter.getRealItem(adapter.getCount() - 1)).pub_id;
+                maxId = ((VideoItem) adapter.getRealItem(adapter.getCount() - 1)).pub_id;
             }
-        }else{
+        } else {
         }
 
-        if (true){
+        if (true) {
+            AVQuery<AVObject> query = new AVQuery<>("userAction");
+            query.limit(Configure.PAGE_SIZE);
+            query.skip(skip);
+            query.orderByDescending("createdAt");
+            query.findInBackground().subscribe(new Observer<List<AVObject>>() {
+                public void onSubscribe(Disposable disposable) {
+                }
+
+                public void onNext(List<AVObject> comments) {
+                    BaseEntry<VideoList> entry = new BaseEntry<>();
+                    VideoList list = new VideoList();
+                    ArrayList<VideoItem> videoList = new ArrayList<VideoItem>();
+                    for (AVObject comment : comments) {
+                        VideoItem item = new VideoItem();
+                        item.name = comment.getString("desc");
+                        item.intro = comment.getString("agent");
+                        videoList.add(item);
+                    }
+                    if (callType == REFRESH) {
+                        skip = 0;
+                    }
+                    skip += comments.size();
+                    list.movies = videoList;
+                    entry.data = list;
+                    onResponse2UI(callType, entry);
+                }
+
+                public void onError(Throwable throwable) {
+                }
+
+                public void onComplete() {
+                }
+            });
+            return;
+        }
+        if (true) {
             BaseEntry<VideoList> entry = new BaseEntry<>();
             VideoList list = new VideoList();
             ArrayList<VideoItem> videoList = new ArrayList<VideoItem>();
@@ -84,7 +129,7 @@ public class HomePresenter extends BasePresenter {
             list.movies = videoList;
             entry.data = list;
             onResponse2UI(callType, entry);
-        }else{
+        } else {
             ModelFactory.net().kuaifang().video().getVideo(Configure.PAGE_SIZE, action, maxId,
                     new HttpCallback<BaseEntry<VideoList>>(callType));
         }

@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -48,6 +50,16 @@ public abstract class BaseTLEActivity<P extends BasePresenter> extends AppCompat
     private ILoadingView mLoadingView;
     private IEmptyView mEmptyView;
 
+    protected boolean isEmpty(int... ids) {
+        for (int id : ids) {
+            EditText editText = findViewById(id);
+            if (TextUtils.isEmpty(editText.getText())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +69,8 @@ public abstract class BaseTLEActivity<P extends BasePresenter> extends AppCompat
 
         mEmptyView = new EmptyImpl(this);
         mLoadingView = new LoadingImpl(this);
-        if (isTopTileEnable()){
+
+        if (isTopTileEnable()) {
             ViewStub viewStub = super.findViewById(R.id.common_top);
             viewStub.inflate();
             mTitleBar = new TitleBarImpl(this);
@@ -68,6 +81,7 @@ public abstract class BaseTLEActivity<P extends BasePresenter> extends AppCompat
 
     /**
      * 绑定P
+     *
      * @param view
      * @return
      */
@@ -79,16 +93,17 @@ public abstract class BaseTLEActivity<P extends BasePresenter> extends AppCompat
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mPresenter != null){
+        if (mPresenter != null) {
             mPresenter.release();
         }
     }
 
     /**
      * 顶部标题栏是否显示
+     *
      * @return
      */
-    protected boolean isTopTileEnable(){
+    protected boolean isTopTileEnable() {
         return true;
     }
 
@@ -108,9 +123,10 @@ public abstract class BaseTLEActivity<P extends BasePresenter> extends AppCompat
 
     /**
      * 顶部标题控制栏
+     *
      * @return
      */
-    public ITitleBar getTitleBar(){
+    public ITitleBar getTitleBar() {
         return mTitleBar;
     }
 
@@ -141,21 +157,24 @@ public abstract class BaseTLEActivity<P extends BasePresenter> extends AppCompat
 
     /**
      * 控制加载中的显示与消失
+     *
      * @return
      */
-    public ILoadingView getLoadingView(){
+    public ILoadingView getLoadingView() {
         return mLoadingView;
     }
 
     //---------------------------键盘控制start---------------------------------------
+
     /**
      * 弹出输入框键盘
+     *
      * @param view
      */
     protected void showSoftInputFromWindow(View view) {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         // 接受软键盘输入的编辑文本或其它视图
-        inputMethodManager.showSoftInput(view,InputMethodManager.SHOW_FORCED);
+        inputMethodManager.showSoftInput(view, InputMethodManager.SHOW_FORCED);
     }
 
     /**
@@ -170,54 +189,59 @@ public abstract class BaseTLEActivity<P extends BasePresenter> extends AppCompat
     }
 
 
-    protected Intent getIntent(Class cls){
+    protected Intent getIntent(Class cls) {
         Intent intent = new Intent();
         intent.setClass(this, cls);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         return intent;
     }
 
-//**************** Android M Permission (Android 6.0权限控制代码封装)
+    //**************** Android M Permission (Android 6.0权限控制代码封装)
     private int permissionRequestCode = 88;
-    private PermissionCallback permissionRunnable ;
-    public interface PermissionCallback{
+    private PermissionCallback permissionRunnable;
+
+    public interface PermissionCallback {
         void hasPermission();
+
         void noPermission();
     }
 
     /**
      * Android M运行时权限请求封装
+     *
      * @param permissionDes 权限描述
-     * @param runnable 请求权限回调
-     * @param permissions 请求的权限（数组类型），直接从Manifest中读取相应的值，比如Manifest.permission.WRITE_CONTACTS
+     * @param runnable      请求权限回调
+     * @param permissions   请求的权限（数组类型），直接从Manifest中读取相应的值，比如Manifest.permission.WRITE_CONTACTS
      */
-    public void performCodeWithPermission(@NonNull String permissionDes,PermissionCallback runnable,@NonNull String... permissions){
-        if(permissions == null || permissions.length == 0)return;
+    public void performCodeWithPermission(@NonNull String permissionDes, PermissionCallback runnable, @NonNull String... permissions) {
+        if (permissions == null || permissions.length == 0) return;
 //        this.permissionrequestCode = requestCode;
         this.permissionRunnable = runnable;
-        if((Build.VERSION.SDK_INT < Build.VERSION_CODES.M) || checkPermissionGranted(permissions)){
-            if(permissionRunnable!=null){
+        if ((Build.VERSION.SDK_INT < Build.VERSION_CODES.M) || checkPermissionGranted(permissions)) {
+            if (permissionRunnable != null) {
                 permissionRunnable.hasPermission();
                 permissionRunnable = null;
             }
-        }else{
+        } else {
             //permission has not been granted.
-            requestPermission(permissionDes,permissionRequestCode,permissions);
+            requestPermission(permissionDes, permissionRequestCode, permissions);
         }
 
     }
-    private boolean checkPermissionGranted(String[] permissions){
+
+    private boolean checkPermissionGranted(String[] permissions) {
         boolean flag = true;
-        for(String p:permissions){
-            if(ActivityCompat.checkSelfPermission(this, p) != PackageManager.PERMISSION_GRANTED){
+        for (String p : permissions) {
+            if (ActivityCompat.checkSelfPermission(this, p) != PackageManager.PERMISSION_GRANTED) {
                 flag = false;
                 break;
             }
         }
         return flag;
     }
-    private void requestPermission(String permissionDes,final int requestCode,final String[] permissions){
-        if(shouldShowRequestPermissionRationale(permissions)){
+
+    private void requestPermission(String permissionDes, final int requestCode, final String[] permissions) {
+        if (shouldShowRequestPermissionRationale(permissions)) {
             //如果用户之前拒绝过此权限，再提示一次准备授权相关权限
             new AlertDialog.Builder(this)
                     .setTitle("提示")
@@ -229,15 +253,16 @@ public abstract class BaseTLEActivity<P extends BasePresenter> extends AppCompat
                         }
                     }).show();
 
-        }else{
+        } else {
             // Contact permissions have not been granted yet. Request them directly.
             ActivityCompat.requestPermissions(BaseTLEActivity.this, permissions, requestCode);
         }
     }
-    private boolean shouldShowRequestPermissionRationale(String[] permissions){
+
+    private boolean shouldShowRequestPermissionRationale(String[] permissions) {
         boolean flag = false;
-        for(String p:permissions){
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,p)){
+        for (String p : permissions) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, p)) {
                 flag = true;
                 break;
             }
@@ -251,27 +276,28 @@ public abstract class BaseTLEActivity<P extends BasePresenter> extends AppCompat
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
-        if(requestCode == permissionRequestCode){
-            if(verifyPermissions(grantResults)){
-                if(permissionRunnable!=null) {
+        if (requestCode == permissionRequestCode) {
+            if (verifyPermissions(grantResults)) {
+                if (permissionRunnable != null) {
                     permissionRunnable.hasPermission();
                     permissionRunnable = null;
                 }
-            }else{
+            } else {
                 showToast("暂无权限执行相关操作！");
-                if(permissionRunnable!=null) {
+                if (permissionRunnable != null) {
                     permissionRunnable.noPermission();
                     permissionRunnable = null;
                 }
             }
-        }else{
+        } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
     }
+
     public boolean verifyPermissions(int[] grantResults) {
         // At least one result must be checked.
-        if(grantResults.length < 1){
+        if (grantResults.length < 1) {
             return false;
         }
 

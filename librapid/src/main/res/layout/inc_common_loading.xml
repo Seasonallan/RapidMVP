@@ -1,27 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/loading_container"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loading_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="vertical">
 
-    <ProgressBar
-        android:id="@+id/pull_to_refresh_progress"
-        style="?android:attr/progressBarStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"/>
+    <LinearLayout
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:background="@drawable/dialog_circle_bg"
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/pull_to_refresh_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="8dp"
-        android:text="加载中..."
-        android:textColor="#b6b8b9"
-        android:textSize="18dp"
-        tools:ignore="HardcodedText"/>
+        <ProgressBar
+            android:id="@+id/pull_to_refresh_progress"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="12dp"
+            android:indeterminate="false"
+            android:indeterminateDrawable="@drawable/loading_white" />
 
+        <TextView
+            android:id="@+id/pull_to_refresh_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="4dp"
+            android:paddingTop="18dp"
+            android:text="加载中..."
+            android:textColor="#ffffff"
+            android:textSize="12sp"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
 </LinearLayout>

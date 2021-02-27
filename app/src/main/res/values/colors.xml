@@ -1,14 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ff11aaff</color>
-    <color name="colorPrimaryDark">#ff12a0ea</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#0F153A</color>
+    <color name="colorPrimaryDark">#0F153A</color>
+    <color name="colorAccent">#0F153A</color>
 
-    <color name="item_video_image">#ffe3e3e3</color>
-    <color name="item_video_title">#4c4c4c</color>
-    <color name="item_video_content">#c9c9c9</color>
+    <color name="transparent">#00000000</color>
+    <color name="gray">#9F9F9F</color>
+    <color name="grayC9">#c9c9c9</color>
+    <color name="grayCC">#CCCCCC</color>
 
 
-    <color name="grayHit">#88c9c9c9</color>
-    <color name="blue">#ff12a0ea</color>
+    <color name="navigation_main_tab_select">#0178FF</color>
+    <color name="navigation_main_tab">#666666</color>
+    <color name="navigation_main">#131736</color>
+    <color name="navigation_splash">#07122D</color>
+    <color name="navigation_universe_bottom">#252428</color>
+    <color name="navigation_universe_top">#1b1e21</color>
+    <color name="navigation_hunt_top">#101628</color>
+    <color name="navigation_hunt_bottom">#1c1d1f</color>
+    <color name="navigation_arena_bottom">#080F23</color>
+
+
+    <color name="navigation_invite_top">#2C369C</color>
+    <color name="navigation_invite">#495DD6</color>
+
+    <color name="navigation">#1D1D1D</color>
+    <color name="deep">#1D1D1D</color>
+    <color name="dark">#313131</color>
+    <color name="dialog_bg">#242529</color>
+    <color name="time">#888888</color>
+    <color name="line">#88707070</color>
+    <color name="line_light">#0178FF</color>
+    <color name="line_active">#0178FF</color>
+    <color name="tips">#8A8A8A</color>
+    <color name="disable">#474747</color>
+    <color name="shadow">#23000000</color>
+    <color name="red">#DF575A</color>
+    <color name="red_tip">#FF6464</color>
+    <color name="detail_background">#1D1D1D</color>
+    <color name="black">#000000</color>
+
+
+    <color name="white">#ffffff</color>
+    <color name="white_alpha60">#98ffffff</color>
+    <color name="white_light">#EBEBEB</color>
+    <color name="detail">#A2A2A2</color>
+    <color name="white_easy">#B1B1B1</color>
+    <color name="white_alpha">#16ffffff</color>
+    <color name="white_alpha_sel">#32ffffff</color>
+    <color name="white_alpha_6">#80ffffff</color>
+    <color name="white_B6">#B6CFFF</color>
+
+    <color name="green">#3ECC5F</color>
+    <color name="green_dark">#1EB737</color>
+
+
+    <color name="yellow_password">#D99B30</color>
+    <color name="origin">#FF9023</color>
+    <color name="critical">#FEA629</color>
+    <color name="yellow">#FFE71F</color>
+    <color name="yellow_sel">#88FFE71F</color>
+
+    <!--  默认蓝色按钮，字体色值 -->
+    <color name="btn_disable">#666666</color>
+    <color name="btn_blue">#0178FF</color>
+    <color name="btn_blue_sel">#CC242C55</color>
+    <color name="blue">#0178FF</color>
+    <!--  由于新旧版本的蓝色不同，开发区分之后，进行合并，弃用该色值  <color name="blue">#4A5ED7</color>-->
+
+    <color name="blue_deep">#242C55</color>  <!--  资产顶部块状背景 -->
+    <color name="blue_deep_deep">#1F8EFF</color>  <!--  用于空心线 按钮 -->
+    <color name="blue_deep_deep_sel">#aa1F8EFF</color>  <!--  用于空心线 按钮 -->
+    <color name="blue_black">#0F153A</color>  <!--  黑蓝色背景，质押周期使用 -->
+    <color name="blue_black_alpha">#800C1529</color>  <!--  黑蓝色背景，质押周期使用 -->
+
+    <color name="blue_dark">#111D37</color>
+    <color name="blue_dark_sel">#CC111D37</color>
+
+    <color name="blue_bg">#0C1529</color>
+    <color name="splash">#07122D</color>
+    <color name="wallet_bottom">#10163B</color>
+
 </resources>

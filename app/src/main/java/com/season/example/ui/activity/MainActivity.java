@@ -11,15 +11,15 @@ import androidx.viewpager.widget.ViewPager;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.season.example.ui.fragment.CategoryFragment;
-import com.season.rapiddevelopment.R;
 import com.season.example.ui.fragment.HomeFragment;
 import com.season.example.ui.fragment.HotFragment;
 import com.season.example.ui.fragment.UserFragment;
 import com.season.mvp.ui.BaseTLEActivity;
+import com.season.rapiddevelopment.R;
 
 public class MainActivity extends BaseTLEActivity implements ViewPager.OnPageChangeListener, BottomNavigationBar.OnTabSelectedListener {
 
-    private String mTabDescription[] = {"Home", "Category", "Hot", "User"};
+    private String mTabDescription[] = {"商品", "订单", "统计", "用户"};
     private int mTabIcon[] = {R.mipmap.icon_home, R.mipmap.icon_category,
             R.mipmap.icon_hot, R.mipmap.icon_user};
     private int mTabIconSel[] = {R.mipmap.icon_home_pressed, R.mipmap.icon_category_pressed,
@@ -29,11 +29,12 @@ public class MainActivity extends BaseTLEActivity implements ViewPager.OnPageCha
     private ViewPager viewPager;
 
     @Override
-    protected boolean isTopTileEnable(){
+    protected boolean isTopTileEnable() {
         return false;
     }
 
     private BottomNavigationBar mBottomNavigationBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,12 +47,12 @@ public class MainActivity extends BaseTLEActivity implements ViewPager.OnPageCha
         mBottomNavigationBar = findViewById(R.id.main_bottom_bar);
         mBottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED);
         mBottomNavigationBar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC);
-        mBottomNavigationBar.setBarBackgroundColor(R.color.white);
+        mBottomNavigationBar.setBarBackgroundColor(R.color.blue_black);
 
         for (int i = 0; i < mTabIcon.length; i++) {
             mBottomNavigationBar
                     .addItem(new BottomNavigationItem(mTabIconSel[i], mTabDescription[i])
-                            .setActiveColorResource(R.color.colorPrimary)
+                            .setActiveColorResource(R.color.blue)
                             .setInactiveIconResource(mTabIcon[i])
                             .setInActiveColorResource(R.color.gray));
         }
@@ -60,15 +61,16 @@ public class MainActivity extends BaseTLEActivity implements ViewPager.OnPageCha
 
         viewPager.addOnPageChangeListener(this);
 
-        performCodeWithPermission("App请求访问权限",  new PermissionCallback() {
-            @Override
-            public void hasPermission() {
-            }
-            @Override
-            public void noPermission() {
-            }
+        performCodeWithPermission("App请求访问权限", new PermissionCallback() {
+                    @Override
+                    public void hasPermission() {
+                    }
 
-        }, Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_EXTERNAL_STORAGE,
+                    @Override
+                    public void noPermission() {
+                    }
+
+                }, Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
     }

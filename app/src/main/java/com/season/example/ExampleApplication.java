@@ -2,12 +2,9 @@ package com.season.example;
 
 import android.app.Application;
 
-import com.season.example.entry.ClientKey;
-import com.season.example.model.ModelFactory;
 import com.season.lib.BaseContext;
 
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
+import cn.leancloud.AVOSCloud;
 
 /**
  * Disc:
@@ -21,27 +18,9 @@ public class ExampleApplication extends Application {
         super.onCreate();
         BaseContext.init(this);
 
-        ModelFactory.local().file().key().getValue("keyData", new Observer<ClientKey>() {
-            @Override
-            public void onSubscribe(Disposable d) {
 
-            }
-
-            @Override
-            public void onNext(ClientKey clientKey) {
-                ClientKey.saveKeyData(clientKey);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });
+        AVOSCloud.initialize(this, "9ubm89lLXP6z7qWSneSPq3VA-gzGzoHsz",
+                "L1tIEyrmFs728x8GYMjG0aFy", "https://9ubm89ll.lc-cn-n1-shared.com");
 
     }
 }
