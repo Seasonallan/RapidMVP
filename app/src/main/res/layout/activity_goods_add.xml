@@ -1,0 +1,128 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dip">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle_blue_dark8"
+            android:orientation="vertical"
+            android:padding="6dip">
+
+            <ImageView
+                android:id="@+id/iv_picture"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/main_btn_add"
+                style="@style/ButtonFillBig"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:background="@null"
+                android:gravity="center"
+                android:text="添加轮播图"
+                android:textColor="@color/tv_select_white"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/circle_blue_dark8"
+            android:orientation="vertical"
+            android:padding="6dip">
+
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:background="#00000000"
+                android:hint="产品标题"
+                android:padding="8dip"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gray"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/circle_blue_dark8"
+            android:orientation="vertical"
+            android:padding="6dip">
+
+            <EditText
+                android:id="@+id/et_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:background="#00000000"
+                android:hint="产品原价"
+                android:padding="8dip"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gray"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/circle_blue_dark8"
+            android:orientation="vertical"
+            android:padding="6dip">
+
+            <LinearLayout
+                android:id="@+id/main_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/main_btn_add2"
+                style="@style/ButtonFillBig"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:background="@null"
+                android:gravity="center"
+                android:text="添加内容图片"
+                android:textColor="@color/tv_select_white"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/main_btn_submit"
+            style="@style/ButtonFillBig"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:text="发布"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+</ScrollView>

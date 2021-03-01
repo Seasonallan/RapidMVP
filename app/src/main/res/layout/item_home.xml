@@ -1,34 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:orientation="horizontal"
-              android:paddingBottom="6dp"
-              android:paddingLeft="8dp"
-              android:paddingRight="8dp"
-              android:paddingTop="8dp">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:background="@drawable/btn_circle_blue_dark_center"
+    android:orientation="horizontal">
 
     <RelativeLayout
         android:id="@+id/video_image_cont"
-        android:layout_width="fill_parent"
-        android:layout_height="62dp">
+        android:layout_width="128dp"
+        android:layout_height="168dp">
 
         <ImageView
             android:id="@+id/video_image"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:background="@mipmap/pic_fire"
             android:scaleType="centerCrop"
             android:visibility="visible"
-            tools:ignore="ContentDescription"/>
+            tools:ignore="ContentDescription" />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="@color/white">
+        android:layout_height="fill_parent">
 
         <TextView
             android:id="@+id/video_title"
@@ -39,23 +38,43 @@
             android:lineSpacingExtra="4dp"
             android:maxLines="2"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp"
             android:paddingTop="14dp"
+            android:paddingRight="10dp"
             android:textColor="@color/white"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
 
-        <com.season.lib.ui.view.AlignTextView
+        <TextView
             android:id="@+id/video_content"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/video_title"
             android:lineSpacingExtra="4dp"
-            android:paddingBottom="8dp"
             android:paddingLeft="10dp"
-            android:paddingRight="8dp"
             android:paddingTop="6dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp"
             android:textColor="@color/white"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/main_btn_preview"
+            style="@style/ButtonLine"
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:text="预览" />
+
+        <Button
+            android:id="@+id/main_btn_edit"
+            style="@style/ButtonFill"
+            android:layout_width="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="8dp"
+            android:layout_toLeftOf="@+id/main_btn_preview"
+            android:gravity="center"
+            android:text="编辑" />
 
     </RelativeLayout>
 

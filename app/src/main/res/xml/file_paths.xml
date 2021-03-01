@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!--"."表示所有路径-->
+    <files-path path="." name="base_camera_photos" />
+    <cache-path name="base_image" path="." />
+    <external-path name="base_name" path="." />
+    <external-files-path name="base_image_name" path="." />
+    <external-cache-path name="base_camera_image" path="." />
+</paths>

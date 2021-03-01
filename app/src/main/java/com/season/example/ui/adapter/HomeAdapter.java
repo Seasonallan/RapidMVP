@@ -4,28 +4,28 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.season.example.entry.VideoItem;
-import com.season.lib.support.dimen.ScreenUtils;
+import com.season.example.ui.activity.WebActivity;
 import com.season.lib.ui.BaseRecycleAdapter;
-import com.season.rapiddevelopment.R;
 import com.season.mvp.model.ImageModel;
-import com.season.lib.ui.view.AlignTextView;
+import com.season.rapiddevelopment.R;
 
 import java.util.List;
+
+import cn.leancloud.AVObject;
 
 /**
  * Disc:
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-10 17:14
  */
-public class HomeAdapter extends BaseRecycleAdapter<VideoItem> {
+public class HomeAdapter extends BaseRecycleAdapter<AVObject> {
 
-    public HomeAdapter(Context context, List<VideoItem> lists) {
+    public HomeAdapter(Context context, List<AVObject> lists) {
         super(context, lists);
     }
 
@@ -38,31 +38,34 @@ public class HomeAdapter extends BaseRecycleAdapter<VideoItem> {
     @Override
     public void onBindHolder(RecyclerView.ViewHolder holder, int position) {
         HomeViewHolder homeHolder = (HomeViewHolder) holder;
-        VideoItem item = getItem(position);
-        homeHolder.mTitleView.setText(item.name);
-        homeHolder.mContentView.setText(item.intro);
-        homeHolder.mContentView.recalculate();
+        final AVObject item = getItem(position);
+        homeHolder.mTitleView.setText(item.getString("title"));
+        homeHolder.mContentView.setText(item.getString("price") + "元");
 
-        ImageModel.bindImage2View(homeHolder.mImageView, item.cover_url);
+        ImageModel.bindImage2View(homeHolder.mImageView, item.getString("image"));
+
+        homeHolder.preViewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                WebActivity.open(mContext, "https://vlifer.applinzi.com/qing/mall/home.php?id=" + item.getObjectId());
+            }
+        });
     }
 
     public class HomeViewHolder extends RecyclerView.ViewHolder {
-        private TextView  mTitleView;
-        private AlignTextView mContentView;
+        private TextView mTitleView;
+        private TextView mContentView;
         public ImageView mImageView;
+        public View preViewButton, editButton;
 
         public HomeViewHolder(View view) {
             super(view);
-            mTitleView = (TextView) view.findViewById(R.id.video_title);
-            mImageView = (ImageView) view.findViewById(R.id.video_image);
-            mContentView = (AlignTextView) view.findViewById(R.id.video_content);
+            mTitleView = view.findViewById(R.id.video_title);
+            mImageView = view.findViewById(R.id.video_image);
+            mContentView = view.findViewById(R.id.video_content);
+            preViewButton = view.findViewById(R.id.main_btn_preview);
+            editButton = view.findViewById(R.id.main_btn_edit);
 
-            mContentView.setMaxLine(4);
-            View imageContainerView = view.findViewById(R.id.video_image_cont);
-            LinearLayout.LayoutParams param = (LinearLayout.LayoutParams) imageContainerView.getLayoutParams();
-            param.width = (int) (ScreenUtils.getScreenWidth() /3.1f * 1);
-            param.height = (int) (ScreenUtils.getScreenWidth()/3.1f * 3/2);
-            imageContainerView.requestLayout();
         }
 
     }

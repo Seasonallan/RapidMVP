@@ -1,30 +1,26 @@
 package com.season.example.ui.fragment;
 
+import android.content.Intent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.season.example.entry.BaseEntry;
+import com.season.example.entry.Configure;
 import com.season.example.entry.VideoItem;
-import com.season.example.entry.VideoList;
 import com.season.example.presenter.HomePresenter;
 import com.season.example.ui.activity.CommentActivity;
+import com.season.example.ui.activity.GoodsAddActivity;
 import com.season.example.ui.adapter.HomeAdapter;
-import com.season.example.entry.Configure;
 import com.season.lib.ui.BaseRecycleAdapter;
-import com.season.mvp.ui.IView;
-import com.season.rapiddevelopment.R;
 import com.season.mvp.presenter.BasePresenter;
 import com.season.mvp.ui.BaseTLEFragment;
+import com.season.mvp.ui.IView;
 import com.season.mvp.ui.pulltorefresh.IPull2RefreshAction;
 import com.season.mvp.ui.pulltorefresh.IPull2RefreshView;
 import com.season.mvp.ui.pulltorefresh.Pull2RefreshImpl;
-import com.season.lib.ui.view.refreshview.HeadFootView;
+import com.season.rapiddevelopment.R;
 
 import java.util.List;
+
+import cn.leancloud.AVObject;
 
 
 /**
@@ -46,6 +42,12 @@ public class HomeFragment extends BaseTLEFragment<HomePresenter> implements IPul
     protected void onViewCreated() {
 
         getTitleBar().setTopTile("商品管理");
+        getTitleBar().setTopRightView("添加", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), GoodsAddActivity.class));
+            }
+        });
 
         mPull2RefreshView = new Pull2RefreshImpl(this) {
 
@@ -70,9 +72,9 @@ public class HomeFragment extends BaseTLEFragment<HomePresenter> implements IPul
 
     @Override
     public <T> void onResponse(int type, T result) {
-        if (result instanceof BaseEntry) {
-            VideoList videoLists = (VideoList) (((BaseEntry) result).data);
-            mPull2RefreshView.onSuccess(type, videoLists.movies, Configure.PAGE_SIZE);
+        if (result instanceof List) {
+            List<AVObject> videoLists = (List<AVObject>) result;
+            mPull2RefreshView.onSuccess(type, videoLists, Configure.PAGE_SIZE);
         }
     }
 

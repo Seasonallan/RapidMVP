@@ -161,7 +161,7 @@
     <!-- 统一 按钮填充样式 小-->
     <style name="ButtonFill">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">43dp</item>
+        <item name="android:layout_height">32dp</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/tv_select_white</item>
@@ -176,7 +176,7 @@
     <!-- 统一 按钮线框样式 小-->
     <style name="ButtonLine">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">43dp</item>
+        <item name="android:layout_height">32dp</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/tv_select_white</item>

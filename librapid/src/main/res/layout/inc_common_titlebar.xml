@@ -53,7 +53,7 @@
         android:paddingLeft="16dp"
         android:paddingRight="12dp"
         android:paddingTop="2dp"
-        android:textColor="@color/white"
+        android:textColor="@color/tv_select_white"
         android:textSize="16dp"
         android:visibility="gone"/>
 

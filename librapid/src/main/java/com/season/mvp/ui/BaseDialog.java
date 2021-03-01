@@ -39,6 +39,7 @@ public abstract class BaseDialog extends Dialog {
 
     /**
      * 返回弹窗提示内容
+     *
      * @return
      */
     protected abstract String getTip();
@@ -46,7 +47,7 @@ public abstract class BaseDialog extends Dialog {
     /**
      * 点击取消按钮事件， 默认直接dismiss
      */
-    protected void onCancel(){
+    protected void onCancel() {
         dismiss();
     }
 

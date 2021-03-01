@@ -14,6 +14,8 @@ import com.season.example.ui.fragment.CategoryFragment;
 import com.season.example.ui.fragment.HomeFragment;
 import com.season.example.ui.fragment.HotFragment;
 import com.season.example.ui.fragment.UserFragment;
+import com.season.example.util.FastPermissions;
+import com.season.lib.util.ToastUtil;
 import com.season.mvp.ui.BaseTLEActivity;
 import com.season.rapiddevelopment.R;
 
@@ -73,6 +75,17 @@ public class MainActivity extends BaseTLEActivity implements ViewPager.OnPageCha
                 }, Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
+
+        new FastPermissions(this).need(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA).subscribe(new FastPermissions.Subscribe() {
+            @Override
+            public void onResult(int requestCode, boolean allGranted, String[] permissions) {
+                if (allGranted) {
+                } else {
+                    ToastUtil.showToast("权限不足");
+                }
+            }
+        }).request(100);
     }
 
 
