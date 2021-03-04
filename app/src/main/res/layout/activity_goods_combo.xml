@@ -29,7 +29,7 @@
                 android:layout_height="38dp"
                 android:background="@null"
                 android:gravity="center"
-                android:text="添加轮播图"
+                android:text="添加套餐插图"
                 android:textColor="@color/tv_select_white"
                 android:textSize="13sp" />
 
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dip"
                 android:background="#00000000"
-                android:hint="产品标题"
+                android:hint="套餐标题"
                 android:padding="8dip"
                 android:singleLine="true"
                 android:textColor="@color/white"
@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dip"
                 android:background="#00000000"
-                android:hint="产品原价"
+                android:hint="产品定价"
                 android:padding="8dip"
                 android:singleLine="true"
                 android:textColor="@color/white"
@@ -84,73 +84,12 @@
         </LinearLayout>
 
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/circle_blue_dark8"
-            android:orientation="vertical"
-            android:padding="6dip">
-
-            <LinearLayout
-                android:id="@+id/main_ll_sc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/main_btn_add3"
-                style="@style/ButtonFillBig"
-                android:layout_width="match_parent"
-                android:layout_height="38dp"
-                android:background="@null"
-                android:gravity="center"
-                android:text="添加套餐"
-                android:textColor="@color/tv_select_white"
-                android:textSize="13sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/circle_blue_dark8"
-            android:orientation="vertical"
-            android:padding="6dip">
-
-            <LinearLayout
-                android:id="@+id/main_ll"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/main_btn_add2"
-                style="@style/ButtonFillBig"
-                android:layout_width="match_parent"
-                android:layout_height="38dp"
-                android:background="@null"
-                android:gravity="center"
-                android:text="添加内容图片"
-                android:textColor="@color/tv_select_white"
-                android:textSize="13sp" />
-
-        </LinearLayout>
-
         <Button
             android:id="@+id/main_btn_submit"
             style="@style/ButtonFillBig"
             android:layout_marginTop="24dp"
             android:gravity="center"
-            android:text="发布"
+            android:text="添加"
             android:textColor="#ffffff"
             android:textSize="20sp" />
 

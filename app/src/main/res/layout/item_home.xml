@@ -10,7 +10,8 @@
     <RelativeLayout
         android:id="@+id/video_image_cont"
         android:layout_width="128dp"
-        android:layout_height="168dp">
+        android:minHeight="128dp"
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/video_image"

@@ -39,7 +39,10 @@
 
         <activity android:name="com.season.example.ui.activity.RegisterActivity" />
         <activity android:name="com.season.example.ui.activity.WebActivity" />
-        <activity android:name="com.season.example.ui.activity.GoodsAddActivity" />
+        <activity android:name="com.season.example.ui.activity.GoodsAddActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name="com.season.example.ui.activity.GoodsComboActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name="com.season.example.ui.activity.MainActivity" />
 
         <activity android:name="com.season.example.ui.activity.AboutActivity" />

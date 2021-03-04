@@ -1,6 +1,7 @@
 package com.season.example.ui.activity;
 
 import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -10,20 +11,28 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
 
+import com.season.example.ui.adapter.HomeAdapter;
 import com.season.example.ui.dialog.PicChooseDialog;
-import com.season.example.util.ScreenTool;
 import com.season.example.util.SystemIntentUtils;
+import com.season.lib.support.dimen.ScreenUtils;
 import com.season.lib.util.ToastUtil;
+import com.season.mvp.model.ImageModel;
+import com.season.mvp.ui.BaseDialog;
 import com.season.mvp.ui.BaseTLEActivity;
 import com.season.rapiddevelopment.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -40,14 +49,21 @@ import io.reactivex.disposables.Disposable;
 
 public class GoodsAddActivity extends BaseTLEActivity {
 
-    private String url;
+
+    public static void open(Context context, AVObject object) {
+        Intent intent = new Intent(context, GoodsAddActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("item", object.toJSONString());
+        context.startActivity(intent);
+    }
 
     private String imagePath;
     private File file;
-    private Uri imageUri;
     private ImageView imageView;
-    private LinearLayout contentView;
+    private LinearLayout contentView, comboView;
     private boolean top = true;
+
+    AVObject item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +72,53 @@ public class GoodsAddActivity extends BaseTLEActivity {
         //设置顶部底部菜单透明
         //ScreenTool.setTransparent(this, true, R.color.blue_bg);
 
-        getTitleBar().setTopTile("添加商品");
+        String json = getIntent().getStringExtra("item");
+        if (!TextUtils.isEmpty(json)) {
+            item = AVObject.parseAVObject(json);
+        }
+
+        getTitleBar().setTopTile(item == null ? "添加商品" : "编辑商品");
         getTitleBar().enableLeftButton();
 
-
+        comboView = findViewById(R.id.main_ll_sc);
         contentView = findViewById(R.id.main_ll);
         imageView = findViewById(R.id.iv_picture);
+
+        if (item != null) {
+            ((EditText) findViewById(R.id.et_name)).setText(item.getString("title"));
+            ((EditText) findViewById(R.id.et_price)).setText(item.getString("price"));
+
+            topImageUrl = item.getString("image");
+            ImageModel.bindImage2View(imageView, topImageUrl);
+            imageView.setTag(R.id.tag_url, topImageUrl);
+
+            List<String> contentImageUrls = item.getList("content");
+            if (contentImageUrls != null && contentImageUrls.size() > 0) {
+                for (String image : contentImageUrls) {
+                    final ImageView imageView = new ImageView(this);
+                    imageView.setTag(R.id.tag_url, image);
+                    ImageModel.bindImage2View(imageView, image);
+                    imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            new BaseDialog(GoodsAddActivity.this) {
+                                @Override
+                                protected void onConfirm() {
+                                    dismiss();
+                                    contentView.removeView(imageView);
+                                }
+
+                                @Override
+                                protected String getTip() {
+                                    return "是否删除该图片";
+                                }
+                            }.show();
+                        }
+                    });
+                    contentView.addView(imageView);
+                }
+            }
+        }
         findViewById(R.id.main_btn_add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,7 +129,7 @@ public class GoodsAddActivity extends BaseTLEActivity {
                         super.onConfirm();
                         file = new File(Environment.getExternalStorageDirectory(), System.currentTimeMillis() + ".jpg");
                         imagePath = file.toString();
-                        imageUri = SystemIntentUtils.openCamera(GoodsAddActivity.this, file);
+                        SystemIntentUtils.openCamera(GoodsAddActivity.this, file);
                     }
 
                     @Override
@@ -81,6 +138,12 @@ public class GoodsAddActivity extends BaseTLEActivity {
                         SystemIntentUtils.openPhoto(GoodsAddActivity.this);
                     }
                 }.show();
+            }
+        });
+        findViewById(R.id.main_btn_add3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(new Intent(GoodsAddActivity.this, GoodsComboActivity.class), 11211);
             }
         });
         findViewById(R.id.main_btn_add2).setOnClickListener(new View.OnClickListener() {
@@ -93,7 +156,7 @@ public class GoodsAddActivity extends BaseTLEActivity {
                         super.onConfirm();
                         file = new File(Environment.getExternalStorageDirectory(), System.currentTimeMillis() + ".jpg");
                         imagePath = file.toString();
-                        imageUri = SystemIntentUtils.openCamera(GoodsAddActivity.this, file);
+                        SystemIntentUtils.openCamera(GoodsAddActivity.this, file);
                     }
 
                     @Override
@@ -112,18 +175,12 @@ public class GoodsAddActivity extends BaseTLEActivity {
                     ToastUtil.showToast("输入不完整");
                     return;
                 }
-                if (imageView.getTag() == null) {
+                if (imageView.getTag(R.id.tag_file) == null && imageView.getTag(R.id.tag_url) == null) {
                     ToastUtil.showToast("请选择轮播图片");
                     return;
                 }
 
                 getLoadingView().showLoadingView();
-                topImageFile = imageView.getTag().toString();
-                fileLists = new ArrayList<>();
-                for (int i = 0; i < contentView.getChildCount(); i++) {
-                    ImageView imageView = (ImageView) contentView.getChildAt(i);
-                    fileLists.add(imageView.getTag().toString());
-                }
                 upload();
 
             }
@@ -132,8 +189,12 @@ public class GoodsAddActivity extends BaseTLEActivity {
 
     private void onSubmit() {
         System.out.println("onSubmit");
-        // 构建对象
-        AVObject todo = new AVObject("QingGoods");
+        AVObject todo;
+        if (item != null) {
+            todo = AVObject.createWithoutData("QingGoods", item.getObjectId());
+        } else {
+            todo = new AVObject("QingGoods");
+        }
         todo.put("title", ((EditText) findViewById(R.id.et_name)).getText().toString());
         todo.put("price", ((EditText) findViewById(R.id.et_price)).getText().toString());
         todo.put("image", topImageUrl);
@@ -164,31 +225,51 @@ public class GoodsAddActivity extends BaseTLEActivity {
     List<String> contentImageUrls;
 
     private void upload() {
-        try {
-            AVFile file = AVFile.withAbsoluteLocalPath("title" + topImageFile.substring(topImageFile.lastIndexOf(".")), topImageFile);
-            file.saveInBackground().subscribe(new Observer<AVFile>() {
-                public void onSubscribe(Disposable disposable) {
-                }
+        if (imageView.getTag(R.id.tag_file) != null) {
+            topImageFile = imageView.getTag(R.id.tag_file).toString();
+            try {
+                AVFile file = AVFile.withAbsoluteLocalPath("title" + topImageFile.substring(topImageFile.lastIndexOf(".")), topImageFile);
+                file.saveInBackground().subscribe(new Observer<AVFile>() {
+                    public void onSubscribe(Disposable disposable) {
+                    }
 
-                public void onNext(AVFile file) {
-                    System.out.println("文件保存完成。objectId：" + file.getObjectId());
-                    System.out.println("文件保存完成。url：" + file.getUrl());
-                    topImageUrl = file.getUrl();
-                    contentImageUrls = new ArrayList<>();
-                    uploadFile();
-                }
+                    public void onNext(AVFile file) {
+                        System.out.println("文件保存完成。objectId：" + file.getObjectId());
+                        System.out.println("文件保存完成。url：" + file.getUrl());
+                        topImageUrl = file.getUrl();
+                        uploadContentFile();
+                    }
 
-                public void onError(Throwable throwable) {
-                    getLoadingView().dismissLoadingView();
-                    ToastUtil.showToast("图片上传失败");
-                }
+                    public void onError(Throwable throwable) {
+                        getLoadingView().dismissLoadingView();
+                        ToastUtil.showToast("图片上传失败");
+                    }
 
-                public void onComplete() {
-                }
-            });
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+                    public void onComplete() {
+                    }
+                });
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        } else {
+            uploadContentFile();
         }
+    }
+
+    private void uploadContentFile() {
+        fileLists = new ArrayList<>();
+        contentImageUrls = new ArrayList<>();
+        for (int i = 0; i < contentView.getChildCount(); i++) {
+            ImageView imageView = (ImageView) contentView.getChildAt(i);
+            if (imageView.getTag(R.id.tag_url) != null) {
+                contentImageUrls.add(imageView.getTag(R.id.tag_url).toString());
+            } else {
+                if (imageView.getTag(R.id.tag_file) != null) {
+                    fileLists.add(imageView.getTag(R.id.tag_file).toString());
+                }
+            }
+        }
+        uploadFile();
     }
 
     String topImageFile;
@@ -228,8 +309,7 @@ public class GoodsAddActivity extends BaseTLEActivity {
     }
 
 
-
-    private void getPhoto(Intent data){
+    private void getPhoto(Intent data) {
         Uri imageUri = data.getData();
         String[] projection = {MediaStore.Images.Media.DATA};
         Cursor cursor = getContentResolver().query(imageUri, projection, null, null, null);
@@ -245,9 +325,53 @@ public class GoodsAddActivity extends BaseTLEActivity {
             e.printStackTrace();
         }
     }
+
+    private void addCombo(String result) {
+        try {
+            JSONObject jsonObject = new JSONObject(result);
+            View view = LayoutInflater.from(this).inflate(R.layout.item_home, null);
+            HomeAdapter.HomeViewHolder homeHolder = new HomeAdapter.HomeViewHolder(view);
+            homeHolder.mTitleView.setText(jsonObject.getString("title"));
+            homeHolder.mContentView.setText(jsonObject.getString("price") + "元");
+
+            View imageContainerView = homeHolder.mImageView;
+            RelativeLayout.LayoutParams param = (RelativeLayout.LayoutParams) imageContainerView.getLayoutParams();
+            param.width = (int) (ScreenUtils.getScreenWidth() / 4.1f * 2.5f / 2);
+            param.height = (int) (ScreenUtils.getScreenWidth() / 4.1f * 3 / 2);
+            imageContainerView.requestLayout();
+            if (jsonObject.has("image")){
+                ImageModel.bindImage2View(homeHolder.mImageView, jsonObject.getString("image"));
+            }
+
+            homeHolder.preViewButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // WebActivity.open(mContext, "https://vlifer.applinzi.com/qing/mall/home.php?id=" + item.getObjectId());
+                }
+            });
+
+            homeHolder.editButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //GoodsAddActivity.open(mContext, item);
+                }
+            });
+            view.setTag(result);
+            comboView.addView(view);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (resultCode == RESULT_OK) {
+            if (requestCode == 11211) {
+                if (data != null) {
+                    addCombo(data.getExtras().getString("combo"));
+                }
+                return;
+            }
             switch (requestCode) {
                 case SystemIntentUtils.SystemRequestCodePhoto:
                     //相册
@@ -256,11 +380,11 @@ public class GoodsAddActivity extends BaseTLEActivity {
                     } else {
                         try {
                             ClipData clipdata = data.getClipData();
-                            if (clipdata == null){
+                            if (clipdata == null) {
                                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
                                 String imageFile = saveImage(bitmap);
                                 showImageView(imageFile, bitmap);
-                            }else{
+                            } else {
                                 for (int i = 0; i < clipdata.getItemCount(); i++) {
                                     try {
                                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), clipdata.getItemAt(i).getUri());
@@ -271,7 +395,7 @@ public class GoodsAddActivity extends BaseTLEActivity {
                                     }
                                 }
                             }
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -326,12 +450,28 @@ public class GoodsAddActivity extends BaseTLEActivity {
     private void showImageView(String path, Bitmap photo) {
         if (top) {
             imageView.setImageBitmap(photo);
-            imageView.setTag(path);
+            imageView.setTag(R.id.tag_file, path);
             ((Button) findViewById(R.id.main_btn_add)).setText("替换");
         } else {
-            ImageView imageView = new ImageView(this);
+            final ImageView imageView = new ImageView(this);
             imageView.setImageBitmap(photo);
-            imageView.setTag(path);
+            imageView.setTag(R.id.tag_file, path);
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    new BaseDialog(GoodsAddActivity.this) {
+                        @Override
+                        protected void onConfirm() {
+                            contentView.removeView(imageView);
+                        }
+
+                        @Override
+                        protected String getTip() {
+                            return "是否删除该图片";
+                        }
+                    }.show();
+                }
+            });
             contentView.addView(imageView);
         }
     }

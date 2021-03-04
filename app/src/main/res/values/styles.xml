@@ -239,4 +239,8 @@
         <item name="android:windowExitAnimation">@anim/pop_out</item>
     </style>
 
+
+    <item name="tag_file" type="id" />
+    <item name="tag_url" type="id" />
+
 </resources>

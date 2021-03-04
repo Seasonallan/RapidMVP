@@ -4,12 +4,16 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.season.example.entry.VideoItem;
+import com.season.example.ui.activity.GoodsAddActivity;
 import com.season.example.ui.activity.WebActivity;
+import com.season.lib.support.dimen.ScreenUtils;
 import com.season.lib.ui.BaseRecycleAdapter;
 import com.season.mvp.model.ImageModel;
 import com.season.rapiddevelopment.R;
@@ -42,6 +46,11 @@ public class HomeAdapter extends BaseRecycleAdapter<AVObject> {
         homeHolder.mTitleView.setText(item.getString("title"));
         homeHolder.mContentView.setText(item.getString("price") + "元");
 
+        View imageContainerView = homeHolder.mImageView;
+        RelativeLayout.LayoutParams param = (RelativeLayout.LayoutParams) imageContainerView.getLayoutParams();
+        //param.width = (int) (ScreenUtils.getScreenWidth() /4.1f * 2.5f/2);
+        param.height = (int) (ScreenUtils.getScreenWidth()/4.1f * 3/2);
+        imageContainerView.requestLayout();
         ImageModel.bindImage2View(homeHolder.mImageView, item.getString("image"));
 
         homeHolder.preViewButton.setOnClickListener(new View.OnClickListener() {
@@ -50,11 +59,20 @@ public class HomeAdapter extends BaseRecycleAdapter<AVObject> {
                 WebActivity.open(mContext, "https://vlifer.applinzi.com/qing/mall/home.php?id=" + item.getObjectId());
             }
         });
+
+        homeHolder.editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GoodsAddActivity.open(mContext, item);
+            }
+        });
     }
 
-    public class HomeViewHolder extends RecyclerView.ViewHolder {
-        private TextView mTitleView;
-        private TextView mContentView;
+
+
+    public static class HomeViewHolder extends RecyclerView.ViewHolder {
+        public TextView mTitleView;
+        public TextView mContentView;
         public ImageView mImageView;
         public View preViewButton, editButton;
 
