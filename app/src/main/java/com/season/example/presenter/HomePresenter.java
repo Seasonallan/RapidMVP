@@ -3,10 +3,8 @@ package com.season.example.presenter;
 import com.season.example.entry.Configure;
 import com.season.example.model.ModelFactory;
 import com.season.example.util.Console;
-import com.season.mvp.presenter.BasePresenter;
 import com.season.mvp.ui.IView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cn.leancloud.AVObject;
@@ -20,7 +18,7 @@ import io.reactivex.disposables.Disposable;
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-11 00:28
  */
-public class HomePresenter extends BasePresenter {
+public class HomePresenter extends SubPresenter {
 
     public HomePresenter(IView view) {
         super(view);

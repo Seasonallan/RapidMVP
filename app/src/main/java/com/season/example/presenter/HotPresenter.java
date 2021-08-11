@@ -3,7 +3,6 @@ package com.season.example.presenter;
 import com.season.example.entry.BaseEntry;
 import com.season.example.entry.ClientKey;
 import com.season.example.model.ModelFactory;
-import com.season.mvp.presenter.BasePresenter;
 import com.season.mvp.ui.IView;
 
 /**
@@ -11,7 +10,7 @@ import com.season.mvp.ui.IView;
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-11 00:28
  */
-public class HotPresenter extends BasePresenter {
+public class HotPresenter extends SubPresenter {
 
     public HotPresenter(IView view) {
         super(view);
@@ -21,7 +20,7 @@ public class HotPresenter extends BasePresenter {
         getView().getLoadingView().showLoadingView();
         ClientKey.resetClientKey();
         ModelFactory.net().kuaifang().key().getClientKey(
-                new HttpCallback<BaseEntry<ClientKey>>(BasePresenter.GET_KEY) {
+                new HttpCallback<BaseEntry<ClientKey>>(SubPresenter.GET_KEY) {
             protected void afterResponse(BaseEntry<ClientKey> result) {
                 ClientKey.saveKeyData(result.data);
                 onResponse2UI(result.data);

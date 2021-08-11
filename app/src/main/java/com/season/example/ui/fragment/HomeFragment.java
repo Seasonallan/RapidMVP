@@ -10,7 +10,7 @@ import com.season.example.ui.activity.CommentActivity;
 import com.season.example.ui.activity.GoodsAddActivity;
 import com.season.example.ui.adapter.HomeAdapter;
 import com.season.lib.ui.BaseRecycleAdapter;
-import com.season.mvp.presenter.BasePresenter;
+import com.season.example.presenter.SubPresenter;
 import com.season.mvp.ui.BaseTLEFragment;
 import com.season.mvp.ui.IView;
 import com.season.mvp.ui.pulltorefresh.IPull2RefreshAction;
@@ -53,16 +53,16 @@ public class HomeFragment extends BaseTLEFragment<HomePresenter> implements IPul
 
             @Override
             public void onRefresh() {
-                mPresenter.loadList(BasePresenter.REFRESH);
+                mPresenter.loadList(SubPresenter.REFRESH);
             }
 
             @Override
             public void onLoadingMore() {
-                mPresenter.loadList(BasePresenter.MORE);
+                mPresenter.loadList(SubPresenter.MORE);
             }
         };
 
-        mPresenter.loadList(BasePresenter.CREATE);
+        mPresenter.loadList(SubPresenter.CREATE);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class HomeFragment extends BaseTLEFragment<HomePresenter> implements IPul
     @Override
     public void onEmptyViewClick() {
         getEmptyView().dismissEmptyView();
-        mPresenter.loadList(BasePresenter.CREATE);
+        mPresenter.loadList(SubPresenter.CREATE);
     }
 
     @Override

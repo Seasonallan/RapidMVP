@@ -1,8 +1,9 @@
 package com.season.mvp.model;
 
 import android.os.Environment;
-import com.season.mvp.model.base.BaseLocalModel;
+
 import com.season.lib.support.file.FileUtils;
+import com.season.mvp.model.base.BaseLocalModel;
 
 import java.io.File;
 

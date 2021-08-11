@@ -28,7 +28,7 @@ import com.season.mvp.ui.IView;
 import com.season.lib.ui.view.AlignTextView;
 import com.season.lib.ui.view.refreshview.HeadFootView;
 import com.season.rapiddevelopment.R;
-import com.season.mvp.presenter.BasePresenter;
+import com.season.example.presenter.SubPresenter;
 import com.season.example.util.Console;
 import com.season.mvp.ui.BaseTLEActivity;
 import com.season.mvp.ui.pulltorefresh.IPull2RefreshAction;
@@ -72,12 +72,12 @@ public class CommentActivity extends BaseTLEActivity<CommentPresenter> implement
         mPull2RefreshView = new Pull2RefreshImpl(this){
             @Override
             public void onRefresh() {
-                mPresenter.loadList(mVideoItem.vid, BasePresenter.REFRESH);
+                mPresenter.loadList(mVideoItem.vid, SubPresenter.REFRESH);
             }
 
             @Override
             public void onLoadingMore() {
-                mPresenter.loadList(mVideoItem.vid, BasePresenter.MORE);
+                mPresenter.loadList(mVideoItem.vid, SubPresenter.MORE);
             }
         };
 
@@ -100,7 +100,7 @@ public class CommentActivity extends BaseTLEActivity<CommentPresenter> implement
             }
         });
 
-        mPresenter.loadList(mVideoItem.vid, BasePresenter.CREATE);
+        mPresenter.loadList(mVideoItem.vid, SubPresenter.CREATE);
     }
 
     @Override
@@ -117,7 +117,7 @@ public class CommentActivity extends BaseTLEActivity<CommentPresenter> implement
     @Override
     public void onEmptyViewClick() {
         getEmptyView().dismissEmptyView();
-        mPresenter.loadList(mVideoItem.vid, BasePresenter.CREATE);
+        mPresenter.loadList(mVideoItem.vid, SubPresenter.CREATE);
     }
 
     @Override

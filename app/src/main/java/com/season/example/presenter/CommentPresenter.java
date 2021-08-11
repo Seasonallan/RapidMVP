@@ -5,7 +5,6 @@ import com.season.example.entry.CommentItem;
 import com.season.example.entry.CommentList;
 import com.season.example.model.ModelFactory;
 import com.season.example.entry.Configure;
-import com.season.mvp.presenter.BasePresenter;
 import com.season.example.util.Console;
 import com.season.lib.ui.BaseRecycleAdapter;
 import com.season.mvp.ui.IView;
@@ -17,7 +16,7 @@ import java.util.ArrayList;
  * User: SeasonAllan(451360508@qq.com)
  * Time: 2017-06-11 00:28
  */
-public class CommentPresenter extends BasePresenter {
+public class CommentPresenter extends SubPresenter {
 
     public CommentPresenter(IView view){
         super(view);

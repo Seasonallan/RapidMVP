@@ -2,8 +2,8 @@ package com.season.mvp.ui.pulltorefresh;
 
 import com.season.lib.ui.view.refreshview.PullToRefreshBase;
 import com.season.lib.ui.view.refreshview.PullToRefreshListView;
-import com.season.mvp.presenter.BasePresenter;
 import com.season.lib.R;
+import com.season.mvp.presenter.BasePresenter;
 
 import java.util.List;
 

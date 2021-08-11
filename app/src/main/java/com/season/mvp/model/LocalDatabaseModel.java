@@ -1,8 +1,8 @@
 package com.season.mvp.model;
 
-import com.season.mvp.model.base.BaseDatabaseModel;
 import com.season.lib.support.dbase.base.BaseDao;
 import com.season.lib.support.dbase.base.BaseDatabase;
+import com.season.mvp.model.base.BaseDatabaseModel;
 
 /**
  * 数据库model

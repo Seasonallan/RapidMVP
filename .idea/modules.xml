@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/RapidDevelopment.iml" filepath="$PROJECT_DIR$/RapidDevelopment.iml" group="RapidDevelopment" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RapidMVP2.0.iml" filepath="$PROJECT_DIR$/.idea/modules/RapidMVP2.0.iml" group="RapidMVP2.0" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/RapidMVP2.0-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/RapidMVP2.0-app.iml" group="RapidMVP2.0/app" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/librapid/RapidMVP2.0-librapid.iml" filepath="$PROJECT_DIR$/.idea/modules/librapid/RapidMVP2.0-librapid.iml" group="RapidMVP2.0/librapid" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="RapidDevelopment/app" />
-      <module fileurl="file://$PROJECT_DIR$/librapid/librapid.iml" filepath="$PROJECT_DIR$/librapid/librapid.iml" group="RapidDevelopment/librapid" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/RapidMVP.iml" filepath="$PROJECT_DIR$/.idea/RapidMVP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/RapidMVP.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/RapidMVP.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/librapid/RapidMVP.librapid.iml" filepath="$PROJECT_DIR$/.idea/modules/librapid/RapidMVP.librapid.iml" />
     </modules>
   </component>
 </project>
